@@ -1,0 +1,98 @@
+[gd_scene format=3 uid="uid://cbrve2j7ssaiq"]
+
+[ext_resource type="Script" uid="uid://bmwovm0td5cc5" path="res://player.gd" id="1_8w31r"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y4u2a"]
+size = Vector2(1152, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8w31r"]
+size = Vector2(10, 100)
+
+[node name="Pong" type="Node" unique_id=1319540647]
+
+[node name="CenterLine" type="Line2D" parent="." unique_id=2077497896]
+points = PackedVector2Array(576, 0, 576, 640)
+width = 5.0
+
+[node name="Wall1" type="StaticBody2D" parent="." unique_id=719159290]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall1" unique_id=2125521336]
+position = Vector2(576, 5)
+shape = SubResource("RectangleShape2D_y4u2a")
+
+[node name="ColorRect" type="ColorRect" parent="Wall1" unique_id=1779790030]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_right = 1152.0
+offset_bottom = 10.0
+grow_horizontal = 2
+
+[node name="Wall2" type="StaticBody2D" parent="." unique_id=1421403034]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall2" unique_id=1035571021]
+position = Vector2(576, 642)
+shape = SubResource("RectangleShape2D_y4u2a")
+
+[node name="ColorRect" type="ColorRect" parent="Wall2" unique_id=1634503861]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_top = 637.0
+offset_right = 1152.0
+offset_bottom = 647.0
+grow_horizontal = 2
+
+[node name="Player" type="Area2D" parent="." unique_id=1135307980]
+position = Vector2(1122, 276)
+script = ExtResource("1_8w31r")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player" unique_id=982517142]
+position = Vector2(6, 48)
+shape = SubResource("RectangleShape2D_8w31r")
+
+[node name="ColorRect" type="ColorRect" parent="Player" unique_id=689501202]
+custom_minimum_size = Vector2(10, 100)
+color = Color(0, 1, 1, 1)
+
+[node name="Other" type="Area2D" parent="." unique_id=2137774834]
+position = Vector2(20, 274)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Other" unique_id=181522251]
+position = Vector2(6, 48)
+shape = SubResource("RectangleShape2D_8w31r")
+
+[node name="ColorRect" type="ColorRect" parent="Other" unique_id=2014828058]
+custom_minimum_size = Vector2(10, 100)
+color = Color(1, 0, 1, 1)
+
+[node name="UI" type="Control" parent="." unique_id=838356933]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_lock_ = true
+
+[node name="ScoreLabel1" type="Label" parent="UI" unique_id=1797966227]
+layout_mode = 0
+offset_left = 864.0
+offset_top = 20.0
+offset_right = 904.0
+offset_bottom = 199.0
+theme_override_font_sizes/font_size = 64
+text = "0
+"
+horizontal_alignment = 1
+
+[node name="ScoreLabel2" type="Label" parent="UI" unique_id=269891092]
+layout_mode = 0
+offset_left = 288.0
+offset_top = 20.0
+offset_right = 325.0
+offset_bottom = 199.0
+theme_override_font_sizes/font_size = 64
+text = "0
+"
+horizontal_alignment = 1
