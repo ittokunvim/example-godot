@@ -1,50 +1,103 @@
 [gd_scene format=3 uid="uid://cbrve2j7ssaiq"]
 
 [ext_resource type="Script" uid="uid://bmwovm0td5cc5" path="res://player.gd" id="1_8w31r"]
+[ext_resource type="Script" uid="uid://nap0ewk3p621" path="res://ball.gd" id="2_4opyw"]
+
+[sub_resource type="GDScript" id="GDScript_4opyw"]
+script/source = "extends Node
+
+
+var wall_size # 壁のサイズ
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	wall_size = $Wall1/ColorRect.size
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(_delta: float) -> void:
+	pass
+
+
+func _on_player_body_entered(body: Node2D) -> void:
+	print(\"entered\")
+"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y4u2a"]
-size = Vector2(1152, 10)
+size = Vector2(800, 10)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8w31r"]
 size = Vector2(10, 100)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_8w31r"]
+radius = 15.0
+
+[sub_resource type="Gradient" id="Gradient_8w31r"]
+offsets = PackedFloat32Array(0.7, 0.7)
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_4opyw"]
+gradient = SubResource("Gradient_8w31r")
+width = 32
+height = 32
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
 [node name="Pong" type="Node" unique_id=1319540647]
+script = SubResource("GDScript_4opyw")
 
 [node name="CenterLine" type="Line2D" parent="." unique_id=2077497896]
-points = PackedVector2Array(576, 0, 576, 640)
+points = PackedVector2Array(400, 0, 400, 450)
 width = 5.0
 
-[node name="Wall1" type="StaticBody2D" parent="." unique_id=719159290]
+[node name="DeadLine1" type="ColorRect" parent="." unique_id=1255762095]
+z_index = -1
+offset_right = 5.0
+offset_bottom = 450.0
+color = Color(1, 0, 0, 1)
+
+[node name="Deadline2" type="ColorRect" parent="." unique_id=1851480973]
+z_index = -1
+offset_left = 800.0
+offset_right = 805.0
+offset_bottom = 450.0
+color = Color(1, 0, 0, 1)
+
+[node name="Wall1" type="Area2D" parent="." unique_id=440009453]
+unique_name_in_owner = true
+z_index = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Wall1" unique_id=2125521336]
-position = Vector2(576, 5)
+position = Vector2(400, 5)
 shape = SubResource("RectangleShape2D_y4u2a")
 
 [node name="ColorRect" type="ColorRect" parent="Wall1" unique_id=1779790030]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_right = 1152.0
+offset_right = 800.0
 offset_bottom = 10.0
 grow_horizontal = 2
 
-[node name="Wall2" type="StaticBody2D" parent="." unique_id=1421403034]
+[node name="Wall2" type="Area2D" parent="." unique_id=298025424]
+z_index = 1
+position = Vector2(0, 450)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Wall2" unique_id=1035571021]
-position = Vector2(576, 642)
+position = Vector2(400, -5)
 shape = SubResource("RectangleShape2D_y4u2a")
 
 [node name="ColorRect" type="ColorRect" parent="Wall2" unique_id=1634503861]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_top = 637.0
-offset_right = 1152.0
-offset_bottom = 647.0
+offset_top = -10.0
+offset_right = 800.0
 grow_horizontal = 2
 
 [node name="Player" type="Area2D" parent="." unique_id=1135307980]
-position = Vector2(1122, 276)
+position = Vector2(770, 175)
 script = ExtResource("1_8w31r")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player" unique_id=982517142]
@@ -55,16 +108,29 @@ shape = SubResource("RectangleShape2D_8w31r")
 custom_minimum_size = Vector2(10, 100)
 color = Color(0, 1, 1, 1)
 
-[node name="Other" type="Area2D" parent="." unique_id=2137774834]
-position = Vector2(20, 274)
+[node name="Enemy" type="Area2D" parent="." unique_id=2137774834]
+position = Vector2(30, 175)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Other" unique_id=181522251]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy" unique_id=181522251]
 position = Vector2(6, 48)
 shape = SubResource("RectangleShape2D_8w31r")
 
-[node name="ColorRect" type="ColorRect" parent="Other" unique_id=2014828058]
+[node name="ColorRect" type="ColorRect" parent="Enemy" unique_id=2014828058]
 custom_minimum_size = Vector2(10, 100)
+offset_right = 10.0
+offset_bottom = 100.0
 color = Color(1, 0, 1, 1)
+
+[node name="Ball" type="Area2D" parent="." unique_id=347078883]
+z_index = 1
+position = Vector2(400, 225)
+script = ExtResource("2_4opyw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ball" unique_id=1290111874]
+shape = SubResource("CircleShape2D_8w31r")
+
+[node name="Sprite2D" type="Sprite2D" parent="Ball" unique_id=881604433]
+texture = SubResource("GradientTexture2D_4opyw")
 
 [node name="UI" type="Control" parent="." unique_id=838356933]
 layout_mode = 3
@@ -77,10 +143,10 @@ metadata/_edit_lock_ = true
 
 [node name="ScoreLabel1" type="Label" parent="UI" unique_id=1797966227]
 layout_mode = 0
-offset_left = 864.0
-offset_top = 20.0
-offset_right = 904.0
-offset_bottom = 199.0
+offset_left = 400.0
+offset_top = -1.0
+offset_right = 800.0
+offset_bottom = 178.0
 theme_override_font_sizes/font_size = 64
 text = "0
 "
@@ -88,11 +154,11 @@ horizontal_alignment = 1
 
 [node name="ScoreLabel2" type="Label" parent="UI" unique_id=269891092]
 layout_mode = 0
-offset_left = 288.0
-offset_top = 20.0
-offset_right = 325.0
-offset_bottom = 199.0
+offset_right = 400.0
+offset_bottom = 180.0
 theme_override_font_sizes/font_size = 64
 text = "0
 "
 horizontal_alignment = 1
+
+[connection signal="body_entered" from="Ball" to="Ball" method="_on_body_entered"]
