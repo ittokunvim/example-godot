@@ -6,22 +6,11 @@
 [sub_resource type="GDScript" id="GDScript_4opyw"]
 script/source = "extends Node
 
-
-var wall_size # 壁のサイズ
-
-
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	wall_size = $Wall1/ColorRect.size
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta: float) -> void:
 	pass
 
-
-func _on_player_body_entered(body: Node2D) -> void:
-	print(\"entered\")
+func _process(_delta: float) -> void:
+	pass
 "
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y4u2a"]
@@ -65,7 +54,6 @@ offset_bottom = 450.0
 color = Color(1, 0, 0, 1)
 
 [node name="Wall1" type="Area2D" parent="." unique_id=440009453]
-unique_name_in_owner = true
 z_index = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Wall1" unique_id=2125521336]
@@ -96,7 +84,7 @@ offset_top = -10.0
 offset_right = 800.0
 grow_horizontal = 2
 
-[node name="Player" type="Area2D" parent="." unique_id=1135307980]
+[node name="Player" type="Area2D" parent="." unique_id=118967937]
 position = Vector2(770, 175)
 script = ExtResource("1_8w31r")
 
@@ -108,7 +96,7 @@ shape = SubResource("RectangleShape2D_8w31r")
 custom_minimum_size = Vector2(10, 100)
 color = Color(0, 1, 1, 1)
 
-[node name="Enemy" type="Area2D" parent="." unique_id=2137774834]
+[node name="Enemy" type="Area2D" parent="." unique_id=1126594641]
 position = Vector2(30, 175)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy" unique_id=181522251]
@@ -160,5 +148,3 @@ theme_override_font_sizes/font_size = 64
 text = "0
 "
 horizontal_alignment = 1
-
-[connection signal="body_entered" from="Ball" to="Ball" method="_on_body_entered"]

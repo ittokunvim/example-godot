@@ -1,29 +1,20 @@
 extends Area2D
 
+const MOVE_SPEED = 400
 
-@export var speed = 400 # プレイヤーの移動速度(pixels/sec).
-var screen_size # ゲームの画面サイズ
-var player_size # プレイヤーのサイズ
+var _up: String
+var _down: String
+var _player_size_y: float
 
+@onready var _screen_size_y := get_viewport_rect().size.y
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	screen_size = get_viewport_rect().size
-	player_size = $ColorRect.size
+	var n := String(name).to_lower()
+	_up = n + "_move_up"
+	_down = n + "_move_down"
+	_player_size_y = $ColorRect.size.y
 
 # プレイヤーを移動させる
 func _process(delta: float) -> void:
-	# 入力されたキーに対して移動する方向を定義
-	var velocity = Vector2.ZERO
-	if Input.is_action_pressed("player_down"):
-		velocity.y += 1
-	if Input.is_action_pressed("player_up"):
-		velocity.y -= 1
-
-	# キーが押されたら標準化を行う
-	if velocity.length() > 0:
-		velocity = velocity.normalized() * speed
-
-	# プレイヤーを動かす
-	position += velocity * delta
-	position = position.clamp(Vector2.ZERO, screen_size - player_size)
+	var input := Input.get_action_strength(_down) - Input.get_action_strength(_up)
+	position.y = clamp(position.y + input * MOVE_SPEED * delta, 0, _screen_size_y - _player_size_y)
