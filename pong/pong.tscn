@@ -14,9 +14,6 @@ func _process(_delta: float) -> void:
 	pass
 "
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_4opyw"]
-size = Vector2(5, 450)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pkvn5"]
 size = Vector2(800, 5)
 
@@ -52,30 +49,18 @@ color = Color(0.26666668, 0.26666668, 0.26666668, 1)
 points = PackedVector2Array(400, 0, 400, 450)
 width = 5.0
 
-[node name="Left" type="Area2D" parent="." unique_id=1021980848 groups=["x_walls"]]
-
-[node name="ColorRect" type="ColorRect" parent="Left" unique_id=718532210]
+[node name="Left" type="ColorRect" parent="." unique_id=718532210]
 offset_right = 5.0
 offset_bottom = 450.0
 color = Color(1, 0, 0, 1)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Left" unique_id=1363675435]
-position = Vector2(2.5, 225)
-shape = SubResource("RectangleShape2D_4opyw")
-
-[node name="Right" type="Area2D" parent="." unique_id=1147256582 groups=["x_walls"]]
-position = Vector2(795, 0)
-
-[node name="ColorRect" type="ColorRect" parent="Right" unique_id=223263848]
-offset_right = 5.0
+[node name="Right" type="ColorRect" parent="." unique_id=223263848]
+offset_left = 795.0
+offset_right = 800.0
 offset_bottom = 450.0
 color = Color(1, 0, 0, 1)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Right" unique_id=1948600677]
-position = Vector2(2.5, 225)
-shape = SubResource("RectangleShape2D_4opyw")
-
-[node name="Top" type="Area2D" parent="." unique_id=1564657917 groups=["y_walls"]]
+[node name="Top" type="Area2D" parent="." unique_id=1564657917 groups=["walls"]]
 
 [node name="ColorRect" type="ColorRect" parent="Top" unique_id=1717090120]
 offset_right = 800.0
@@ -85,7 +70,7 @@ offset_bottom = 5.0
 position = Vector2(400, 2.5)
 shape = SubResource("RectangleShape2D_pkvn5")
 
-[node name="Bottom" type="Area2D" parent="." unique_id=853928297 groups=["y_walls"]]
+[node name="Bottom" type="Area2D" parent="." unique_id=853928297 groups=["walls"]]
 position = Vector2(0, 445)
 
 [node name="ColorRect" type="ColorRect" parent="Bottom" unique_id=318144670]
@@ -133,6 +118,8 @@ shape = SubResource("CircleShape2D_8w31r")
 [node name="Sprite2D" type="Sprite2D" parent="Ball" unique_id=881604433]
 texture = SubResource("GradientTexture2D_4opyw")
 
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="Ball" unique_id=922514932]
+
 [node name="UI" type="Control" parent="." unique_id=838356933]
 layout_mode = 3
 anchors_preset = 15
@@ -163,3 +150,4 @@ text = "0
 horizontal_alignment = 1
 
 [connection signal="area_entered" from="Ball" to="Ball" method="_on_area_entered"]
+[connection signal="screen_exited" from="Ball/VisibleOnScreenNotifier2D" to="Ball" method="_on_visible_on_screen_notifier_2d_screen_exited"]

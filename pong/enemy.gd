@@ -13,5 +13,5 @@ func _ready() -> void:
 
 # 敵を移動させる
 func _process(delta: float) -> void:
-	var direction_y = 1.0 if position.y < _ball.position.y else -1.0
+	var direction_y = 1.0 if position.y + _enemy_size_y / 2.0 < _ball.position.y else -1.0
 	position.y = clamp(position.y + direction_y * MOVE_SPEED * delta, 0, _screen_size_y - _enemy_size_y)
