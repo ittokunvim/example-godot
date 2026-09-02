@@ -1,18 +1,9 @@
 [gd_scene format=3 uid="uid://cbrve2j7ssaiq"]
 
 [ext_resource type="Script" uid="uid://bmwovm0td5cc5" path="res://player.gd" id="1_8w31r"]
+[ext_resource type="Script" uid="uid://wq7fxodmvnmb" path="res://pong.gd" id="1_m5tya"]
 [ext_resource type="Script" uid="uid://nap0ewk3p621" path="res://ball.gd" id="2_4opyw"]
 [ext_resource type="Script" uid="uid://bypo01vebj3dq" path="res://enemy.gd" id="2_pkvn5"]
-
-[sub_resource type="GDScript" id="GDScript_4opyw"]
-script/source = "extends Node
-
-func _ready() -> void:
-	pass
-
-func _process(_delta: float) -> void:
-	pass
-"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pkvn5"]
 size = Vector2(800, 5)
@@ -35,7 +26,7 @@ fill = 1
 fill_from = Vector2(0.5, 0.5)
 
 [node name="Pong" type="Node" unique_id=1319540647]
-script = SubResource("GDScript_4opyw")
+script = ExtResource("1_m5tya")
 
 [node name="Background" type="ColorRect" parent="." unique_id=1402185621]
 anchors_preset = 15
@@ -150,4 +141,4 @@ text = "0
 horizontal_alignment = 1
 
 [connection signal="area_entered" from="Ball" to="Ball" method="_on_area_entered"]
-[connection signal="screen_exited" from="Ball/VisibleOnScreenNotifier2D" to="Ball" method="_on_visible_on_screen_notifier_2d_screen_exited"]
+[connection signal="screen_exited" from="Ball/VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
