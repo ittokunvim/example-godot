@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bmwovm0td5cc5" path="res://player.gd" id="1_8w31r"]
 [ext_resource type="Script" uid="uid://nap0ewk3p621" path="res://ball.gd" id="2_4opyw"]
+[ext_resource type="Script" uid="uid://bypo01vebj3dq" path="res://enemy.gd" id="2_pkvn5"]
 
 [sub_resource type="GDScript" id="GDScript_4opyw"]
 script/source = "extends Node
@@ -13,8 +14,11 @@ func _process(_delta: float) -> void:
 	pass
 "
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_y4u2a"]
-size = Vector2(800, 10)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4opyw"]
+size = Vector2(5, 450)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pkvn5"]
+size = Vector2(800, 5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8w31r"]
 size = Vector2(10, 100)
@@ -36,55 +40,63 @@ fill_from = Vector2(0.5, 0.5)
 [node name="Pong" type="Node" unique_id=1319540647]
 script = SubResource("GDScript_4opyw")
 
+[node name="Background" type="ColorRect" parent="." unique_id=1402185621]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.26666668, 0.26666668, 0.26666668, 1)
+
 [node name="CenterLine" type="Line2D" parent="." unique_id=2077497896]
 points = PackedVector2Array(400, 0, 400, 450)
 width = 5.0
 
-[node name="DeadLine1" type="ColorRect" parent="." unique_id=1255762095]
-z_index = -1
+[node name="Left" type="Area2D" parent="." unique_id=1021980848 groups=["x_walls"]]
+
+[node name="ColorRect" type="ColorRect" parent="Left" unique_id=718532210]
 offset_right = 5.0
 offset_bottom = 450.0
 color = Color(1, 0, 0, 1)
 
-[node name="Deadline2" type="ColorRect" parent="." unique_id=1851480973]
-z_index = -1
-offset_left = 800.0
-offset_right = 805.0
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Left" unique_id=1363675435]
+position = Vector2(2.5, 225)
+shape = SubResource("RectangleShape2D_4opyw")
+
+[node name="Right" type="Area2D" parent="." unique_id=1147256582 groups=["x_walls"]]
+position = Vector2(795, 0)
+
+[node name="ColorRect" type="ColorRect" parent="Right" unique_id=223263848]
+offset_right = 5.0
 offset_bottom = 450.0
 color = Color(1, 0, 0, 1)
 
-[node name="Wall1" type="Area2D" parent="." unique_id=440009453]
-z_index = 1
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Right" unique_id=1948600677]
+position = Vector2(2.5, 225)
+shape = SubResource("RectangleShape2D_4opyw")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall1" unique_id=2125521336]
-position = Vector2(400, 5)
-shape = SubResource("RectangleShape2D_y4u2a")
+[node name="Top" type="Area2D" parent="." unique_id=1564657917 groups=["y_walls"]]
 
-[node name="ColorRect" type="ColorRect" parent="Wall1" unique_id=1779790030]
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
+[node name="ColorRect" type="ColorRect" parent="Top" unique_id=1717090120]
 offset_right = 800.0
-offset_bottom = 10.0
-grow_horizontal = 2
+offset_bottom = 5.0
 
-[node name="Wall2" type="Area2D" parent="." unique_id=298025424]
-z_index = 1
-position = Vector2(0, 450)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Top" unique_id=769201681]
+position = Vector2(400, 2.5)
+shape = SubResource("RectangleShape2D_pkvn5")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall2" unique_id=1035571021]
-position = Vector2(400, -5)
-shape = SubResource("RectangleShape2D_y4u2a")
+[node name="Bottom" type="Area2D" parent="." unique_id=853928297 groups=["y_walls"]]
+position = Vector2(0, 445)
 
-[node name="ColorRect" type="ColorRect" parent="Wall2" unique_id=1634503861]
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_top = -10.0
+[node name="ColorRect" type="ColorRect" parent="Bottom" unique_id=318144670]
 offset_right = 800.0
-grow_horizontal = 2
+offset_bottom = 5.0
 
-[node name="Player" type="Area2D" parent="." unique_id=118967937]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bottom" unique_id=956833458]
+position = Vector2(400, 2.5)
+shape = SubResource("RectangleShape2D_pkvn5")
+
+[node name="Player" type="Area2D" parent="." unique_id=118967937 groups=["paddles"]]
 position = Vector2(770, 175)
 script = ExtResource("1_8w31r")
 
@@ -96,8 +108,9 @@ shape = SubResource("RectangleShape2D_8w31r")
 custom_minimum_size = Vector2(10, 100)
 color = Color(0, 1, 1, 1)
 
-[node name="Enemy" type="Area2D" parent="." unique_id=1126594641]
+[node name="Enemy" type="Area2D" parent="." unique_id=1126594641 groups=["paddles"]]
 position = Vector2(30, 175)
+script = ExtResource("2_pkvn5")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy" unique_id=181522251]
 position = Vector2(6, 48)
@@ -148,3 +161,5 @@ theme_override_font_sizes/font_size = 64
 text = "0
 "
 horizontal_alignment = 1
+
+[connection signal="area_entered" from="Ball" to="Ball" method="_on_area_entered"]
