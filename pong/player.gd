@@ -1,6 +1,8 @@
 extends Area2D
 
+
 const MOVE_SPEED = 400
+
 
 @onready var _screen_size_y := get_viewport_rect().size.y
 @onready var _player_size_y = $ColorRect.size.y

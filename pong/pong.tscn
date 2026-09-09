@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://wq7fxodmvnmb" path="res://pong.gd" id="1_m5tya"]
 [ext_resource type="Script" uid="uid://nap0ewk3p621" path="res://ball.gd" id="2_4opyw"]
 [ext_resource type="Script" uid="uid://bypo01vebj3dq" path="res://enemy.gd" id="2_pkvn5"]
+[ext_resource type="Script" uid="uid://cemlgw8gowk3r" path="res://ui.gd" id="5_eipaa"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pkvn5"]
 size = Vector2(800, 5)
@@ -118,9 +119,10 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("5_eipaa")
 metadata/_edit_lock_ = true
 
-[node name="ScoreLabel1" type="Label" parent="UI" unique_id=1797966227]
+[node name="PlayerScore" type="Label" parent="UI" unique_id=1797966227]
 layout_mode = 0
 offset_left = 400.0
 offset_top = -1.0
@@ -131,7 +133,7 @@ text = "0
 "
 horizontal_alignment = 1
 
-[node name="ScoreLabel2" type="Label" parent="UI" unique_id=269891092]
+[node name="EnemyScore" type="Label" parent="UI" unique_id=269891092]
 layout_mode = 0
 offset_right = 400.0
 offset_bottom = 180.0
@@ -141,4 +143,6 @@ text = "0
 horizontal_alignment = 1
 
 [connection signal="area_entered" from="Ball" to="Ball" method="_on_area_entered"]
-[connection signal="screen_exited" from="Ball/VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
+[connection signal="enemy_scored" from="Ball" to="." method="_on_ball_enemy_scored"]
+[connection signal="player_scored" from="Ball" to="." method="_on_ball_player_scored"]
+[connection signal="screen_exited" from="Ball/VisibleOnScreenNotifier2D" to="Ball" method="_on_visible_on_screen_notifier_2d_screen_exited"]
