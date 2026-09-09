@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://c4q4ggsh63ddm"
+path="res://.godot/imported/効果音ラボ - 決定ボタンを押す41.ogg-84bfc24cb2fc19c5c7eac9c416e7460c.oggvorbisstr"
+
+[deps]
+
+source_file="res://art/効果音ラボ - 決定ボタンを押す41.ogg"
+dest_files=["res://.godot/imported/効果音ラボ - 決定ボタンを押す41.ogg-84bfc24cb2fc19c5c7eac9c416e7460c.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0.0
+bpm=0.0
+beat_count=0
+bar_beats=4
