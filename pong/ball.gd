@@ -5,7 +5,7 @@ signal player_scored
 signal enemy_scored
 
 
-var _speed := 400.0
+var _speed := 450.0
 var _direction := Vector2.ZERO
 
 
@@ -18,7 +18,6 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	# ボールを動かす
-	_speed += delta * 2.0
 	position += _speed * delta * _direction
 
 
