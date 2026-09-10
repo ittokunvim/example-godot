@@ -5,6 +5,8 @@
 [ext_resource type="Script" uid="uid://nap0ewk3p621" path="res://ball.gd" id="2_4opyw"]
 [ext_resource type="Script" uid="uid://bypo01vebj3dq" path="res://enemy.gd" id="2_pkvn5"]
 [ext_resource type="Script" uid="uid://cemlgw8gowk3r" path="res://ui.gd" id="5_eipaa"]
+[ext_resource type="AudioStream" uid="uid://db75qudsw7s4q" path="res://art/効果音ラボ - 卓球のピンポンが跳ねる1.ogg" id="6_trlu6"]
+[ext_resource type="AudioStream" uid="uid://c4q4ggsh63ddm" path="res://art/効果音ラボ - 決定ボタンを押す41.ogg" id="7_a6iag"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pkvn5"]
 size = Vector2(800, 5)
@@ -112,6 +114,9 @@ texture = SubResource("GradientTexture2D_4opyw")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="Ball" unique_id=922514932]
 
+[node name="BounceSound" type="AudioStreamPlayer" parent="Ball" unique_id=372069384]
+stream = ExtResource("6_trlu6")
+
 [node name="UI" type="Control" parent="." unique_id=838356933]
 layout_mode = 3
 anchors_preset = 15
@@ -195,6 +200,9 @@ offset_bottom = 278.0
 theme_override_font_sizes/font_size = 32
 text = "Back To
 Title"
+
+[node name="PointGetSound" type="AudioStreamPlayer" parent="UI" unique_id=1883365593]
+stream = ExtResource("7_a6iag")
 
 [connection signal="area_entered" from="Ball" to="Ball" method="_on_area_entered"]
 [connection signal="enemy_scored" from="Ball" to="." method="_on_ball_enemy_scored"]

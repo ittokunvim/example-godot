@@ -8,12 +8,13 @@ extends Control
 func add_player_score() -> void:
 	player_score += 1
 	$PlayerScore.text = str(player_score)
+	$PointGetSound.play()
 
 
 func add_enemy_score() -> void:
 	enemy_score += 1
 	$EnemyScore.text = str(enemy_score)
-
+	$PointGetSound.play()
 
 func reset() -> void:
 	player_score = 0

@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://cgh3e4nb56xb8"]
+
+[ext_resource type="AudioStream" uid="uid://btkdatp4takti" path="res://art/蒲鉾さちこ - Lazy night Loop.ogg" id="1_fvyft"]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" unique_id=229193799]
+stream = ExtResource("1_fvyft")
+autoplay = true

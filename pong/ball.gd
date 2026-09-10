@@ -27,7 +27,8 @@ func _on_area_entered(area: Area2D) -> void:
 		_direction.y = -_direction.y
 	elif area.is_in_group("paddles"):
 		_direction = Vector2(_direction.x * -1, randf() * 2 - 1).normalized()
-
+	# ボールが跳ね返る音を再生
+	$BounceSound.play()
 
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 	if position.x <= 0.0:
