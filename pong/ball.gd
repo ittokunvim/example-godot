@@ -28,8 +28,8 @@ func _on_area_entered(area: Area2D) -> void:
 		_direction.y = -_direction.y
 	elif area.is_in_group("paddles"):
 		var paddle_visual := area.get_node("ColorRect") as ColorRect
-		var paddle_center := area.position.y + paddle_visual.size.y / 2.0
-		var hit_position := clamp((position.y - paddle_center) / (paddle_visual.size.y / 2.0), -1.0, 1.0)
+		var paddle_center: float = area.position.y + paddle_visual.size.y / 2.0
+		var hit_position: float = clampf((position.y - paddle_center) / (paddle_visual.size.y / 2.0), -1.0, 1.0)
 		var horizontal_direction := 1.0 if area.name == "Player" else -1.0
 		_direction = Vector2(horizontal_direction, hit_position * 1.25).normalized()
 		_speed = min(_speed * 1.04, MAX_SPEED)
