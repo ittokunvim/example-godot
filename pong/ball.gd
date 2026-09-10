@@ -34,13 +34,14 @@ func _on_area_entered(area: Area2D) -> void:
 		var paddle_center: float = area.position.y + paddle_visual.size.y / 2.0
 		# パドルの中心からどれだけ離れて当たったかを、-1から1に正規化する。
 		var hit_position: float = clampf((position.y - paddle_center) / (paddle_visual.size.y / 2.0), -1.0, 1.0)
-		var horizontal_direction := 1.0 if area.name == "Player" else -1.0
+		var horizontal_direction := -1.0 if area.name == "Player" else 1.0
 		# 中心に当たると水平に、端に当たるほど強く上下へ跳ね返す。
 		_direction = Vector2(horizontal_direction, hit_position * 1.25).normalized()
 		_speed = min(_speed * 1.04, MAX_SPEED)
 		# 同じパドルとの衝突を次のフレームで再検出しないよう少し押し出す。
 		position.x += horizontal_direction * 2.0
 	$BounceSound.play()
+
 
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 	if position.x <= 0.0:
