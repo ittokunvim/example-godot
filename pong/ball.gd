@@ -45,7 +45,8 @@ func _reflect_from_paddle(paddle: Area2D) -> void:
 		-1.0,
 		1.0
 	)
-	var horizontal_direction := 1.0 if paddle.name == "Player" else -1.0
+	# プレイヤーは右側なので左へ、敵は左側なので右へ打ち返す。
+	var horizontal_direction := -1.0 if paddle.name == "Player" else 1.0
 	# 中心に当たると水平に、端に当たるほど強く上下へ跳ね返す。
 	_direction = Vector2(horizontal_direction, hit_position * REFLECTION_ANGLE_FACTOR).normalized()
 	_speed = minf(_speed * 1.04, MAX_SPEED)
