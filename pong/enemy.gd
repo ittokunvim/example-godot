@@ -13,8 +13,10 @@ var _active := true
 @onready var _screen_size_y: float = get_viewport_rect().size.y
 @onready var _enemy_size_y: float = $ColorRect.size.y
 
+
 func _ready() -> void:
 	_ball = get_node("../Ball") as Area2D
+
 
 func _process(delta: float) -> void:
 	if not _active:

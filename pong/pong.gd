@@ -43,6 +43,8 @@ func _on_ball_player_scored() -> void:
 	_ui.add_player_score()
 	_finish_point(_ui.player_score >= WINNING_SCORE)
 
+
+# ボールが画面右端を越えたときの得点処理。
 func _on_ball_enemy_scored() -> void:
 	if not _round_active:
 		return
