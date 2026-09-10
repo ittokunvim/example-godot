@@ -16,7 +16,11 @@ func _process(delta: float) -> void:
 		return
 	# 上下入力を1つの値にまとめ、同時押しにも対応する。
 	var input := Input.get_action_strength("player_move_down") - Input.get_action_strength("player_move_up")
-	position.y = clamp(position.y + input * MOVE_SPEED * delta, 0, _screen_size_y - _player_size_y)
+	position.y = _clamp_position(position.y + input * MOVE_SPEED * delta, _player_size_y)
+
+
+func _clamp_position(next_y: float, paddle_height: float) -> float:
+	return clampf(next_y, 0.0, _screen_size_y - paddle_height)
 
 
 func reset() -> void:

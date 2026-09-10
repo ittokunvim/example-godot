@@ -21,7 +21,11 @@ func _process(delta: float) -> void:
 		return
 	# ボールの上下位置だけを追いかける簡易AI。
 	var direction_y := 1.0 if position.y + _enemy_size_y / 2.0 < _ball.position.y else -1.0
-	position.y = clamp(position.y + direction_y * MOVE_SPEED * delta, 0, _screen_size_y - _enemy_size_y)
+	position.y = _clamp_position(position.y + direction_y * MOVE_SPEED * delta, _enemy_size_y)
+
+
+func _clamp_position(next_y: float, paddle_height: float) -> float:
+	return clampf(next_y, 0.0, _screen_size_y - paddle_height)
 
 
 # 初期位置に戻す関数
