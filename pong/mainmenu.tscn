@@ -1,0 +1,56 @@
+[gd_scene format=3 uid="uid://ba7kja2xmkxth"]
+
+[ext_resource type="Script" uid="uid://fbun2xkqufeb" path="res://mainmenu.gd" id="1_cmhrf"]
+
+[node name="Mainmenu" type="Control" unique_id=947546643]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_cmhrf")
+
+[node name="Title" type="Label" parent="." unique_id=1859586680]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 200.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 64
+text = "PONG"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="Buttons" type="Control" parent="." unique_id=1515807069]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 175.0
+offset_top = -200.0
+offset_right = -175.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="StartButton" type="Button" parent="Buttons" unique_id=1290278907]
+layout_mode = 1
+offset_right = 120.0
+offset_bottom = 70.0
+theme_override_font_sizes/font_size = 32
+text = "Start"
+
+[node name="ExitButton" type="Button" parent="Buttons" unique_id=1042309060]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -120.0
+offset_bottom = 70.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 32
+text = "Exit"
+
+[connection signal="pressed" from="Buttons/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="Buttons/ExitButton" to="." method="_on_exit_button_pressed"]

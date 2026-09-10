@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://db75qudsw7s4q"
+path="res://.godot/imported/効果音ラボ - 卓球のピンポンが跳ねる1.ogg-122fd1f66832a4c0a1b9b804b6434cdb.oggvorbisstr"
+
+[deps]
+
+source_file="res://art/効果音ラボ - 卓球のピンポンが跳ねる1.ogg"
+dest_files=["res://.godot/imported/効果音ラボ - 卓球のピンポンが跳ねる1.ogg-122fd1f66832a4c0a1b9b804b6434cdb.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0.0
+bpm=0.0
+beat_count=0
+bar_beats=4
