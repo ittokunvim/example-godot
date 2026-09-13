@@ -1,0 +1,119 @@
+[gd_scene format=3 uid="uid://cw7t4ptd44nh7"]
+
+[ext_resource type="Script" uid="uid://dwee16f7divhb" path="res://game.gd" id="1_game"]
+[ext_resource type="Script" uid="uid://dbf3uf8r0w3y6" path="res://bird.gd" id="2_bird"]
+[ext_resource type="Texture2D" uid="uid://do0lhof80ft04" path="res://assets/background.png" id="3_background"]
+[ext_resource type="Texture2D" uid="uid://divhuk8t74ve0" path="res://assets/ground.png" id="4_ground"]
+[ext_resource type="Texture2D" uid="uid://foqcigmk6h38" path="res://assets/red-bird-1.png" id="5_bird1"]
+[ext_resource type="Texture2D" uid="uid://5tbrjuqy7o3n" path="res://assets/red-bird-2.png" id="6_bird2"]
+[ext_resource type="Texture2D" uid="uid://3oq1ryxvmh7t" path="res://assets/red-bird-3.png" id="7_bird3"]
+
+[sub_resource type="RectangleShape2D" id="GroundShape"]
+size = Vector2(800, 80)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bird"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_bird1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_bird2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_bird3")
+}],
+"loop": true,
+"name": &"flap",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="BirdShape"]
+size = Vector2(24, 24)
+
+[sub_resource type="StyleBoxFlat" id="PanelStyle"]
+bg_color = Color(0.08, 0.12, 0.18, 0.9)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[node name="FlappyBird" type="Node2D" unique_id=775247868]
+script = ExtResource("1_game")
+
+[node name="Background" type="Sprite2D" parent="." unique_id=1449646706]
+texture = ExtResource("3_background")
+centered = false
+
+[node name="Pipes" type="Node2D" parent="." unique_id=1873366900]
+
+[node name="Ground" type="StaticBody2D" parent="." unique_id=1123978104]
+position = Vector2(400, 410)
+collision_mask = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="Ground" unique_id=375333329]
+texture = ExtResource("4_ground")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground" unique_id=962173982]
+shape = SubResource("GroundShape")
+
+[node name="Bird" type="CharacterBody2D" parent="." unique_id=895364074]
+position = Vector2(180, 210)
+collision_layer = 2
+script = ExtResource("2_bird")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Bird" unique_id=2061897737]
+sprite_frames = SubResource("SpriteFrames_bird")
+animation = &"flap"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bird" unique_id=1676382211]
+shape = SubResource("BirdShape")
+
+[node name="PipeSpawner" type="Timer" parent="." unique_id=1864828437]
+wait_time = 1.6
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=414536970]
+
+[node name="Score" type="Label" parent="UI" unique_id=165924991]
+offset_left = 350.0
+offset_top = 25.0
+offset_right = 450.0
+offset_bottom = 100.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.7)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_font_sizes/font_size = 56
+text = "0"
+horizontal_alignment = 1
+
+[node name="Message" type="Label" parent="UI" unique_id=1364937283]
+offset_left = 100.0
+offset_top = 145.0
+offset_right = 700.0
+offset_bottom = 195.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.7)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_font_sizes/font_size = 24
+text = "Press SPACE or click to flap"
+horizontal_alignment = 1
+
+[node name="GameOver" type="PanelContainer" parent="UI" unique_id=704656055]
+visible = false
+offset_left = 260.0
+offset_top = 190.0
+offset_right = 540.0
+offset_bottom = 285.0
+theme_override_styles/panel = SubResource("PanelStyle")
+
+[node name="Hint" type="Label" parent="UI/GameOver" unique_id=1624050534]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 20
+text = "Press SPACE to retry"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="timeout" from="PipeSpawner" to="." method="_on_pipe_spawner_timeout"]
