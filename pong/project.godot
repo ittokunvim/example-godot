@@ -23,6 +23,7 @@ MusicPlayer="*uid://cgh3e4nb56xb8"
 
 window/size/viewport_width=800
 window/size/viewport_height=450
+window/stretch/mode="canvas_items"
 
 [input]
 
