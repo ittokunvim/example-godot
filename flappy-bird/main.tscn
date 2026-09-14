@@ -6,7 +6,9 @@
 [ext_resource type="Texture2D" uid="uid://divhuk8t74ve0" path="res://assets/ground.png" id="4_ground"]
 [ext_resource type="Texture2D" uid="uid://foqcigmk6h38" path="res://assets/red-bird-1.png" id="5_bird1"]
 [ext_resource type="Texture2D" uid="uid://5tbrjuqy7o3n" path="res://assets/red-bird-2.png" id="6_bird2"]
+[ext_resource type="Script" uid="uid://nftm4qnre0bd" path="res://background.gd" id="6_dg77c"]
 [ext_resource type="Texture2D" uid="uid://3oq1ryxvmh7t" path="res://assets/red-bird-3.png" id="7_bird3"]
+[ext_resource type="Script" uid="uid://o25f5qxxjlur" path="res://ground_loop.gd" id="7_ycdy4"]
 [ext_resource type="AudioStream" uid="uid://xpmbp4uwdls5" path="res://assets/shimtone-のほほん鳥.ogg" id="8_music"]
 [ext_resource type="AudioStream" uid="uid://da825lkkr5h6g" path="res://assets/効果音ラボ-ドラゴンの羽ばたき.ogg" id="9_flap"]
 [ext_resource type="AudioStream" uid="uid://43nsklye526v" path="res://assets/効果音ラボ-ボタン決定音35.ogg" id="10_score"]
@@ -58,17 +60,21 @@ stream = ExtResource("11_crash")
 [node name="Background" type="Sprite2D" parent="." unique_id=1449646706]
 texture = ExtResource("3_background")
 centered = false
+script = ExtResource("6_dg77c")
 
 [node name="Pipes" type="Node2D" parent="." unique_id=1873366900]
 
-[node name="Ground" type="StaticBody2D" parent="." unique_id=1123978104]
+[node name="GroundLoop" type="Node2D" parent="." unique_id=918938992]
+script = ExtResource("7_ycdy4")
+
+[node name="Ground" type="StaticBody2D" parent="GroundLoop" unique_id=1123978104]
 position = Vector2(400, 410)
 collision_mask = 2
 
-[node name="Sprite2D" type="Sprite2D" parent="Ground" unique_id=375333329]
+[node name="Sprite2D" type="Sprite2D" parent="GroundLoop/Ground" unique_id=375333329]
 texture = ExtResource("4_ground")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground" unique_id=962173982]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GroundLoop/Ground" unique_id=962173982]
 shape = SubResource("GroundShape")
 
 [node name="Bird" type="CharacterBody2D" parent="." unique_id=895364074]

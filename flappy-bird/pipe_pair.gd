@@ -2,7 +2,6 @@ extends Node2D
 
 signal passed
 
-const SPEED := 220.0
 const PIPE_SIZE := Vector2(64.0, 384.0)
 const GAP_SIZE := 145.0
 const GROUND_Y := 370.0
@@ -29,7 +28,7 @@ func setup(gap_center_y: float) -> void:
 
 
 func _process(delta: float) -> void:
-	position.x -= SPEED * delta
+	position.x -= Global.SPEED * delta
 	if position.x < -PIPE_SIZE.x:
 		queue_free()
 
