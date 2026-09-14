@@ -14,6 +14,8 @@ var game_over := false
 @onready var score_label: Label = $UI/Score
 @onready var message_label: Label = $UI/Message
 @onready var game_over_panel: Control = $UI/GameOver
+@onready var score_sound: AudioStreamPlayer = $ScoreSound
+@onready var crash_sound: AudioStreamPlayer = $CrashSound
 
 
 func _ready() -> void:
@@ -56,6 +58,7 @@ func _on_pipe_passed() -> void:
 		return
 	score += 1
 	_update_score()
+	score_sound.play()
 
 
 func _on_bird_crashed() -> void:
@@ -64,6 +67,7 @@ func _on_bird_crashed() -> void:
 	game_over = true
 	started = false
 	pipe_spawner.stop()
+	crash_sound.play()
 	message_label.text = "Game Over"
 	message_label.visible = true
 	game_over_panel.visible = true

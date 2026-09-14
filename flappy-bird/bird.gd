@@ -10,6 +10,7 @@ var active := false
 var dead := false
 
 @onready var animation: AnimatedSprite2D = $AnimatedSprite2D
+@onready var flap_sound: AudioStreamPlayer = $FlapSound
 
 
 func _ready() -> void:
@@ -22,6 +23,7 @@ func _physics_process(delta: float) -> void:
 
 	if Input.is_action_just_pressed("flap"):
 		velocity.y = FLAP_VELOCITY
+		flap_sound.play()
 
 	velocity.y = minf(velocity.y + GRAVITY * delta, MAX_FALL_SPEED)
 	move_and_slide()
