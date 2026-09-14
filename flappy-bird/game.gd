@@ -14,6 +14,7 @@ var game_over := false
 @onready var score_label: Label = $UI/Score
 @onready var message_label: Label = $UI/Message
 @onready var game_over_panel: Control = $UI/GameOver
+@onready var music_player: AudioStreamPlayer = $MusicPlayer
 @onready var score_sound: AudioStreamPlayer = $ScoreSound
 @onready var crash_sound: AudioStreamPlayer = $CrashSound
 
@@ -67,6 +68,7 @@ func _on_bird_crashed() -> void:
 	game_over = true
 	started = false
 	pipe_spawner.stop()
+	music_player.stop()
 	crash_sound.play()
 	message_label.text = "Game Over"
 	message_label.visible = true
@@ -80,6 +82,7 @@ func new_game() -> void:
 	game_over = false
 	started = false
 	game_over_panel.visible = false
+	music_player.play()
 	bird.position = BIRD_START
 	bird.reset()
 	_update_score()
