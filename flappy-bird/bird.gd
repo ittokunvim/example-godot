@@ -8,6 +8,7 @@ const MAX_FALL_SPEED := 700.0
 
 var active := false
 var dead := false
+var _initial_position: Vector2
 
 @onready var animation: AnimatedSprite2D = $AnimatedSprite2D
 @onready var flap_sound: AudioStreamPlayer = $FlapSound
@@ -15,6 +16,7 @@ var dead := false
 
 func _ready() -> void:
 	animation.play("flap")
+	_initial_position = position
 
 
 func _physics_process(delta: float) -> void:
@@ -45,7 +47,7 @@ func reset() -> void:
 	active = false
 	dead = false
 	velocity = Vector2.ZERO
-	position = Vector2(180.0, 210.0)
+	position = _initial_position
 	rotation = 0.0
 
 
