@@ -21,8 +21,8 @@ Global="*uid://ble67t3noe8lr"
 
 [display]
 
-window/size/viewport_width=800
-window/size/viewport_height=450
+window/size/viewport_width=1080
+window/size/viewport_height=1920
 window/stretch/mode="canvas_items"
 
 [input]
