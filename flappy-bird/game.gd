@@ -1,8 +1,7 @@
 extends Node2D
 
-const BIRD_START := Vector2(180.0, 210.0)
-const PIPE_START_X := 850.0
-const PIPE_INTERVAL := 1.6
+const PIPE_TEXTURE := preload("res://assets/pipe.png")
+const PIPE_PAIR_SCRIPT := preload("res://pipe_pair.gd")
 
 var score := 0
 var started := false
@@ -11,6 +10,7 @@ var game_over := false
 @onready var bird: CharacterBody2D = $Bird
 @onready var pipe_spawner: Timer = $PipeSpawner
 @onready var pipes: Node2D = $Pipes
+@onready var ground_loop: Node2D = $GroundLoop
 @onready var score_label: Label = $UI/Score
 @onready var message_label: Label = $UI/Message
 @onready var game_over_panel: Control = $UI/GameOver
@@ -20,7 +20,6 @@ var game_over := false
 
 
 func _ready() -> void:
-	pipe_spawner.wait_time = PIPE_INTERVAL
 	bird.crashed.connect(_on_bird_crashed)
 	bird.reset()
 	_update_score()
@@ -39,9 +38,16 @@ func _on_pipe_spawner_timeout() -> void:
 	if not started or game_over:
 		return
 
-	var pipe := preload("res://pipe_pair.gd").new()
-	pipe.position = Vector2(PIPE_START_X, 0.0)
-	pipe.setup(randf_range(155.0, 285.0))
+	var pipe := PIPE_PAIR_SCRIPT.new()
+	pipe.position = Vector2(
+		get_viewport_rect().size.x + PIPE_TEXTURE.get_width() / 2.0,
+		 0.0
+	)
+	var ground_y = ground_loop.get_ground_top_y()
+	var gap_margin := pipe.GAP_SIZE
+	pipe.setup(
+		randf_range(gap_margin, ground_y - gap_margin)
+	)
 	pipe.passed.connect(_on_pipe_passed)
 	pipes.add_child(pipe)
 
@@ -83,7 +89,6 @@ func new_game() -> void:
 	started = false
 	game_over_panel.visible = false
 	music_player.play()
-	bird.position = BIRD_START
 	bird.reset()
 	_update_score()
 	_show_ready()

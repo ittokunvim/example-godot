@@ -6,6 +6,7 @@ var _image_width: float
 
 @onready var ground: StaticBody2D = $Ground
 @onready var ground_sprite: Sprite2D = $Ground/Sprite2D
+@onready var collision_shape: CollisionShape2D = $Ground/CollisionShape2D
 
 func _ready() -> void:
 	# すでに複製済みなら、もう一度地面を作らない。
@@ -34,3 +35,8 @@ func _process(delta: float) -> void:
 	# 1枚分移動したら元の位置へ戻して、地面を繰り返す。
 	if position.x <= -_image_width:
 		position.x += _image_width
+
+
+func get_ground_top_y() -> float:
+	var shape := collision_shape.shape as RectangleShape2D
+	return collision_shape.global_position.y - shape.size.y / 2.0
