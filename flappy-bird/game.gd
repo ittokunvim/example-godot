@@ -7,6 +7,7 @@ var score := 0
 var started := false
 var game_over := false
 
+@onready var screen_size_x: float = get_viewport_rect().size.x
 @onready var bird: CharacterBody2D = $Bird
 @onready var pipe_spawner: Timer = $PipeSpawner
 @onready var pipes: Node2D = $Pipes
@@ -40,7 +41,7 @@ func _on_pipe_spawner_timeout() -> void:
 
 	var pipe := PIPE_PAIR_SCRIPT.new()
 	pipe.position = Vector2(
-		get_viewport_rect().size.x + PIPE_TEXTURE.get_width() / 2.0,
+		screen_size_x + PIPE_TEXTURE.get_width() / 2.0,
 		 0.0
 	)
 	var ground_y = ground_loop.get_ground_top_y()

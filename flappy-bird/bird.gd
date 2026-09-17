@@ -8,16 +8,16 @@ const MAX_FALL_SPEED := 1500.0
 
 var active := false
 var dead := false
-var _initial_position: Vector2
+var start_position: Vector2
 
 @onready var animation: AnimatedSprite2D = $AnimatedSprite2D
 @onready var flap_sound: AudioStreamPlayer = $FlapSound
-@onready var screen_size: Vector2 = get_viewport_rect().size
+@onready var screen_size_y: float = get_viewport_rect().size.y
 
 
 func _ready() -> void:
 	animation.play("flap")
-	_initial_position = position
+	start_position = position
 
 
 func _physics_process(delta: float) -> void:
@@ -32,7 +32,7 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	rotation = clampf(velocity.y / 900.0, -0.5, 1.2)
 
-	if get_slide_collision_count() > 0 or position.y < 0.0 or position.y > screen_size.y:
+	if get_slide_collision_count() > 0 or position.y < 0.0 or position.y > screen_size_y:
 		crash()
 
 
@@ -48,7 +48,7 @@ func reset() -> void:
 	active = false
 	dead = false
 	velocity = Vector2.ZERO
-	position = _initial_position
+	position = start_position
 	rotation = 0.0
 
 
