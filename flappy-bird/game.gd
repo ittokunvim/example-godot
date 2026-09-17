@@ -8,6 +8,7 @@ var started := false
 var game_over := false
 
 @onready var screen_size_x: float = get_viewport_rect().size.x
+@onready var background: Sprite2D = $Background
 @onready var bird: CharacterBody2D = $Bird
 @onready var pipe_spawner: Timer = $PipeSpawner
 @onready var pipes: Node2D = $Pipes
@@ -80,6 +81,9 @@ func _on_bird_crashed() -> void:
 	message_label.text = "Game Over"
 	message_label.visible = true
 	game_over_panel.visible = true
+	background.set_scrolling(false)
+	ground_loop.set_scrolling(false)
+	_set_pipes_scrolling(false)
 
 
 func new_game() -> void:
@@ -93,6 +97,9 @@ func new_game() -> void:
 	bird.reset()
 	_update_score()
 	_show_ready()
+	background.set_scrolling(true)
+	ground_loop.set_scrolling(true)
+	_set_pipes_scrolling(true)
 
 
 func _show_ready() -> void:
@@ -102,3 +109,8 @@ func _show_ready() -> void:
 
 func _update_score() -> void:
 	score_label.text = str(score)
+
+
+func _set_pipes_scrolling(value: bool) -> void:
+	for pipe in pipes.get_children():
+		pipe.set_scrolling(value)

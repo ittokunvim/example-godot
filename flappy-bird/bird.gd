@@ -12,6 +12,7 @@ var start_position: Vector2
 
 @onready var animation: AnimatedSprite2D = $AnimatedSprite2D
 @onready var flap_sound: AudioStreamPlayer = $FlapSound
+@onready var collision: CollisionShape2D = $CollisionShape2D
 @onready var screen_size_y: float = get_viewport_rect().size.y
 
 
@@ -21,7 +22,12 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	if not active or dead:
+	if dead:
+		velocity.y = velocity.y + GRAVITY * delta
+		move_and_slide()
+		return
+
+	if not active:
 		return
 
 	if Input.is_action_just_pressed("flap"):
@@ -50,6 +56,8 @@ func reset() -> void:
 	velocity = Vector2.ZERO
 	position = start_position
 	rotation = 0.0
+	collision.disabled = false
+	animation.play()
 
 
 func crash() -> void:
@@ -58,4 +66,6 @@ func crash() -> void:
 	dead = true
 	active = false
 	velocity = Vector2.ZERO
+	collision.disabled = true
+	animation.stop()
 	crashed.emit()

@@ -126,16 +126,20 @@ horizontal_alignment = 1
 
 [node name="GameOver" type="PanelContainer" parent="UI" unique_id=704656055]
 visible = false
-offset_left = 260.0
-offset_top = 190.0
-offset_right = 540.0
-offset_bottom = 285.0
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -256.0
+offset_top = 284.0
+offset_right = 256.0
+offset_bottom = 412.0
+grow_horizontal = 2
 theme_override_styles/panel = SubResource("PanelStyle")
 
 [node name="Hint" type="Label" parent="UI/GameOver" unique_id=1624050534]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 32
 text = "Press SPACE to retry"
 horizontal_alignment = 1
 vertical_alignment = 1

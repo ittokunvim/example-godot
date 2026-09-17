@@ -5,6 +5,7 @@ signal passed
 const PIPE_TEXTURE := preload("res://assets/pipe.png")
 const GAP_SIZE := 300.0
 
+var scrolling := true
 var pipe_size := Vector2(PIPE_TEXTURE.get_size())
 var has_passed := false
 
@@ -28,7 +29,10 @@ func setup(gap_center_y: float) -> void:
 
 
 func _process(delta: float) -> void:
-	position.x -= Global.SPEED * delta
+	if not scrolling:
+		return
+
+	position.x -= Global.SCROLL_SPEED * delta
 	if position.x < -pipe_size.x:
 		queue_free()
 
@@ -60,3 +64,7 @@ func _on_score_area_body_entered(body: Node2D) -> void:
 	if body.name == "Bird" and not has_passed:
 		has_passed = true
 		passed.emit()
+
+
+func set_scrolling(value: bool) -> void:
+	scrolling = value

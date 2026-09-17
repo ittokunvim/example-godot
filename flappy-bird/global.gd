@@ -1,3 +1,3 @@
 extends Node
 
-const SPEED := 350.0
+const SCROLL_SPEED := 350.0

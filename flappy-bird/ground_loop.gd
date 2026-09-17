@@ -2,6 +2,7 @@ extends Node2D
 
 const NEXT_GROUND := "NextGround"
 
+var scrolling := true
 var image_width: float
 
 @onready var ground: StaticBody2D = $Ground
@@ -28,8 +29,11 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
+	if not scrolling:
+		return
+
 	# 地面と衝突判定をまとめて左へ移動する。
-	position.x -= Global.SPEED * delta
+	position.x -= Global.SCROLL_SPEED * delta
 
 	# 1枚分移動したら元の位置へ戻して、地面を繰り返す。
 	if position.x <= -image_width:
@@ -41,3 +45,7 @@ func get_ground_top_y() -> float:
 	var collision_y := ground_collision.global_position.y
 	var collision_shape := ground_collision.shape as RectangleShape2D
 	return collision_y - collision_shape.size.y / 2.0
+
+
+func set_scrolling(value: bool) -> void:
+	scrolling = value

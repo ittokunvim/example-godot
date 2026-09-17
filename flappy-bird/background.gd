@@ -1,5 +1,6 @@
 extends Sprite2D
 
+var scrolling := true
 var image_width: float
 
 
@@ -20,10 +21,16 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
-	# 背景を左へ移動する。
+	if not scrolling:
+		return
 
-	position.x -= Global.SPEED * delta
+	# 背景を左へ移動する。
+	position.x -= Global.SCROLL_SPEED * delta
 
 	# 1枚分移動したら元の位置へ戻して、背景を繰り返す。
 	if position.x <= -image_width:
 		position.x += image_width
+
+
+func set_scrolling(value: bool) -> void:
+	scrolling = value
