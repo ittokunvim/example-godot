@@ -2,19 +2,22 @@ extends CharacterBody2D
 
 signal crashed
 
-const GRAVITY := 1200.0
-const FLAP_VELOCITY := -420.0
-const MAX_FALL_SPEED := 700.0
+const GRAVITY := 2750.0
+const FLAP_VELOCITY := -800.0
+const MAX_FALL_SPEED := 1500.0
 
 var active := false
 var dead := false
+var start_position: Vector2
 
 @onready var animation: AnimatedSprite2D = $AnimatedSprite2D
 @onready var flap_sound: AudioStreamPlayer = $FlapSound
+@onready var screen_size_y: float = get_viewport_rect().size.y
 
 
 func _ready() -> void:
 	animation.play("flap")
+	start_position = position
 
 
 func _physics_process(delta: float) -> void:
@@ -29,7 +32,7 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	rotation = clampf(velocity.y / 900.0, -0.5, 1.2)
 
-	if get_slide_collision_count() > 0 or position.y < 0.0 or position.y > 370.0:
+	if get_slide_collision_count() > 0 or position.y < 0.0 or position.y > screen_size_y:
 		crash()
 
 
@@ -45,7 +48,7 @@ func reset() -> void:
 	active = false
 	dead = false
 	velocity = Vector2.ZERO
-	position = Vector2(180.0, 210.0)
+	position = start_position
 	rotation = 0.0
 
 
