@@ -34,8 +34,9 @@ animations = [{
 "speed": 10.0
 }]
 
-[sub_resource type="RectangleShape2D" id="BirdShape"]
-size = Vector2(110, 80)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ycdy4"]
+radius = 50.0
+height = 100.0
 
 [sub_resource type="StyleBoxFlat" id="PanelStyle"]
 bg_color = Color(0.08, 0.12, 0.18, 0.9)
@@ -93,10 +94,10 @@ stream = ExtResource("9_flap")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Bird" unique_id=1676382211]
 position = Vector2(8, -12)
-shape = SubResource("BirdShape")
+shape = SubResource("CapsuleShape2D_ycdy4")
 
 [node name="PipeSpawner" type="Timer" parent="." unique_id=1864828437]
-wait_time = 1.6
+wait_time = 2.0
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=414536970]
 
