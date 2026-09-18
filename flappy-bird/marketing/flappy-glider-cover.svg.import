@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dgeeod1eyd71t"
-path="res://.godot/imported/red-bird-3.png-435919149ae7b1f728a6dc9c369c99d5.ctex"
+uid="uid://cdeq1fak8s3wr"
+path="res://.godot/imported/flappy-glider-cover.svg-5de44c0d6cb4af4cfd99e6383591e366.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/red-bird-3.png"
-dest_files=["res://.godot/imported/red-bird-3.png-435919149ae7b1f728a6dc9c369c99d5.ctex"]
+source_file="res://marketing/flappy-glider-cover.svg"
+dest_files=["res://.godot/imported/flappy-glider-cover.svg-5de44c0d6cb4af4cfd99e6383591e366.ctex"]
 
 [params]
 
@@ -38,3 +38,6 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
+svg/scale=1.0
+editor/scale_with_editor_scale=false
+editor/convert_colors_with_editor_theme=false

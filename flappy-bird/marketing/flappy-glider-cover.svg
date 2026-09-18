@@ -1,0 +1,34 @@
+<svg width="1260" height="1000" viewBox="0 0 1260 1000" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop stop-color="#33215f"/>
+      <stop offset=".56" stop-color="#a64e8d"/>
+      <stop offset="1" stop-color="#f3a45d"/>
+    </linearGradient>
+    <linearGradient id="gate" x1="0" y1="0" x2="1" y2="0">
+      <stop stop-color="#be5b8e"/>
+      <stop offset="1" stop-color="#572b63"/>
+    </linearGradient>
+  </defs>
+  <rect width="1260" height="1000" fill="url(#sky)"/>
+  <circle cx="984" cy="202" r="96" fill="#ffd783"/>
+  <path d="M0 670c205-128 373 63 622-76 207-116 379 5 638-111v517H0Z" fill="#3f426f"/>
+  <path d="M0 777c207-102 413-61 624 7 227 73 408 54 636-44v260H0Z" fill="#203f62"/>
+  <path d="M58 272h190l-37 30H21ZM514 200h160l-32 25H482Z" fill="#f7d6d2" opacity=".6"/>
+  <g fill="url(#gate)">
+    <rect x="100" y="263" width="112" height="406" rx="42"/>
+    <rect x="1034" y="421" width="112" height="420" rx="42"/>
+  </g>
+  <g stroke="#f2a65e" stroke-width="11" fill="none">
+    <path d="M103 338c40-34 66-31 106 0M103 482c40-34 66-31 106 0M103 626c40-34 66-31 106 0"/>
+    <path d="M1037 505c40-34 66-31 106 0M1037 649c40-34 66-31 106 0M1037 793c40-34 66-31 106 0"/>
+  </g>
+  <g transform="translate(456 374) rotate(-10)">
+    <path d="M0 101 270 0l-105 231-37-79Z" fill="#f7df8f"/>
+    <path d="m0 101 128 51 37 79Z" fill="#ed865d"/>
+    <path d="m128 152L270 0l-105 231Z" fill="#d34e68"/>
+    <circle cx="137" cy="141" r="11" fill="#33215f"/>
+  </g>
+  <text x="630" y="120" fill="#fff5d8" font-family="Arial, sans-serif" font-size="72" font-weight="700" text-anchor="middle">FLAPPY GLIDER</text>
+  <text x="630" y="182" fill="#fff5d8" font-family="Arial, sans-serif" font-size="28" letter-spacing="8" text-anchor="middle">A SKYLINE FLIGHT GAME</text>
+</svg>

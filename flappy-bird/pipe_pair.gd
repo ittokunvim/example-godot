@@ -2,7 +2,7 @@ extends Node2D
 
 signal passed
 
-const PIPE_TEXTURE := preload("res://assets/pipe.png")
+const PIPE_TEXTURE := preload("res://assets/coral-gate.svg")
 const GAP_SIZE := 300.0
 
 var scrolling := true

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cdstr5xwlmqdh"
-path="res://.godot/imported/red-bird-2.png-2fbf3cc307a395fb36232898648b62a6.ctex"
+uid="uid://cccnxe5rdmkgo"
+path="res://.godot/imported/coral-gate.svg-03542606a900aceead0f96e6143ea67d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/red-bird-2.png"
-dest_files=["res://.godot/imported/red-bird-2.png-2fbf3cc307a395fb36232898648b62a6.ctex"]
+source_file="res://assets/coral-gate.svg"
+dest_files=["res://.godot/imported/coral-gate.svg-03542606a900aceead0f96e6143ea67d.ctex"]
 
 [params]
 
@@ -38,3 +38,6 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
+svg/scale=1.0
+editor/scale_with_editor_scale=false
+editor/convert_colors_with_editor_theme=false

@@ -9,7 +9,7 @@ https://20_games_challenge.gitlab.io/
 ## ゲーム一覧
 
 - Pong
-- Flappy Bird
+- Flappy Glider
 
 ### Pongの操作
 
@@ -22,9 +22,14 @@ https://20_games_challenge.gitlab.io/
 - BGM: [蒲鉾さちこ](https://dova-s.jp/_contents/author/profile423.html)「Lazy night Loop」。
 - 上記の音源は各配布元の利用規約に従って使用しています。
 
-### Flappy Birdの操作
+### Flappy Gliderの操作
 
 - スペースキーまたはマウスクリックで鳥が羽ばたきます。
 - 土管の間を通過すると1点です。
 - 土管、画面上端、地面に当たるとゲームオーバーになります。
 - ゲームオーバー後にスペースキーまたはマウスクリックでリトライできます。
+
+### Flappy Gliderのアセット
+
+- ビジュアルアセットは、このプロジェクトのために作成したオリジナルのSVGです。
+- BGMと効果音の出典および利用条件は [flappy-bird/CREDITS.md](flappy-bird/CREDITS.md) を参照してください。

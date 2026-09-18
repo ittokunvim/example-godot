@@ -1,6 +1,6 @@
 extends Node2D
 
-const PIPE_TEXTURE := preload("res://assets/pipe.png")
+const PIPE_TEXTURE := preload("res://assets/coral-gate.svg")
 const PIPE_PAIR_SCRIPT := preload("res://pipe_pair.gd")
 
 var score := 0

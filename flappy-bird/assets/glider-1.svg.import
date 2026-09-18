@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bdryhftqp276f"
-path="res://.godot/imported/red-bird-1.png-b3e69326d4225aafcb81524620a530ed.ctex"
+uid="uid://cxtjifnuofmp2"
+path="res://.godot/imported/glider-1.svg-8ebbd8a75861bd99bda3ca247fef25e9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/red-bird-1.png"
-dest_files=["res://.godot/imported/red-bird-1.png-b3e69326d4225aafcb81524620a530ed.ctex"]
+source_file="res://assets/glider-1.svg"
+dest_files=["res://.godot/imported/glider-1.svg-8ebbd8a75861bd99bda3ca247fef25e9.ctex"]
 
 [params]
 
@@ -38,3 +38,6 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
+svg/scale=1.0
+editor/scale_with_editor_scale=false
+editor/convert_colors_with_editor_theme=false

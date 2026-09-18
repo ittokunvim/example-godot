@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dg2a1jsp1o102"
-path="res://.godot/imported/pipe.png-d1f75b14bde36399e8b8e081ce8a470c.ctex"
+uid="uid://ca5g4q3udcaba"
+path="res://.godot/imported/island.svg-e09d289820221828f73255b2ef99765b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/pipe.png"
-dest_files=["res://.godot/imported/pipe.png-d1f75b14bde36399e8b8e081ce8a470c.ctex"]
+source_file="res://assets/island.svg"
+dest_files=["res://.godot/imported/island.svg-e09d289820221828f73255b2ef99765b.ctex"]
 
 [params]
 
@@ -38,3 +38,6 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
+svg/scale=1.0
+editor/scale_with_editor_scale=false
+editor/convert_colors_with_editor_theme=false
