@@ -106,7 +106,7 @@ func _on_loss_zone_body_entered(body: Node2D) -> void:
 
 func _update_hud() -> void:
 	score_label.text = "スコア  %04d" % _score
-	lives_label.text = "残機  %d" % _lives
+	lives_label.text = "ライフ  %d" % _lives
 
 
 func _show_overlay(message: String) -> void:
