@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://bi6imj10v8tiq" path="res://game.gd" id="1_game"]
 [ext_resource type="Script" uid="uid://ce2ppdeijapvb" path="res://paddle.gd" id="2_paddle"]
 [ext_resource type="Script" uid="uid://mjb5g8hv4vse" path="res://ball.gd" id="3_ball"]
+[ext_resource type="AudioStream" uid="uid://cnhyf23kbn3yj" path="res://assets/NozomiMiura-Streets_of_Dawn.ogg" id="4_1bvp3"]
 
 [sub_resource type="RectangleShape2D" id="HorizontalWallShape"]
 size = Vector2(960, 24)
@@ -142,5 +143,9 @@ theme_override_font_sizes/font_size = 20
 text = "PRESS SPACE OR CLICK TO START"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="BGM" type="AudioStreamPlayer" parent="." unique_id=1916215650]
+stream = ExtResource("4_1bvp3")
+autoplay = true
 
 [connection signal="body_entered" from="LossZone" to="." method="_on_loss_zone_body_entered"]
