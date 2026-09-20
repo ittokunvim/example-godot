@@ -46,7 +46,7 @@ func _unhandled_input(event: InputEvent) -> void:
 func _start_or_restart() -> void:
 	if _lives <= 0 or _game_won:
 		_score = 0
-		_lives = 3
+		_lives = MAX_LIVES
 		_game_won = false
 		_create_bricks()
 		_restore_hearts()
