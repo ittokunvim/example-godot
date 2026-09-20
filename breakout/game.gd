@@ -27,7 +27,7 @@ var _game_won := false
 func _ready() -> void:
 	_create_bricks()
 	_update_hud()
-	_show_overlay("PRESS SPACE OR CLICK TO START")
+	_show_overlay("スペースキーまたはクリックで開始")
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -85,7 +85,7 @@ func _on_brick_destroyed() -> void:
 		_game_won = true
 		ball.stop()
 		paddle.set_active(false)
-		_show_overlay("YOU CLEARED THE BOARD! PRESS SPACE TO PLAY AGAIN")
+		_show_overlay("すべてのブロックを破壊！ スペースキーで再挑戦")
 
 
 func _on_loss_zone_body_entered(body: Node2D) -> void:
@@ -98,15 +98,15 @@ func _on_loss_zone_body_entered(body: Node2D) -> void:
 	if _lives <= 0:
 		_playing = false
 		paddle.set_active(false)
-		_show_overlay("GAME OVER - PRESS SPACE TO RETRY")
+		_show_overlay("ゲームオーバー - スペースキーでリトライ")
 		return
 
 	ball.launch()
 
 
 func _update_hud() -> void:
-	score_label.text = "SCORE  %04d" % _score
-	lives_label.text = "LIVES  %d" % _lives
+	score_label.text = "スコア  %04d" % _score
+	lives_label.text = "残機  %d" % _lives
 
 
 func _show_overlay(message: String) -> void:
