@@ -1,14 +1,14 @@
 extends Node2D
 
-const SCREEN_SIZE := Vector2(800.0, 600.0)
+const SCREEN_SIZE := Vector2(960.0, 540.0)
 const BALL_RADIUS := 9.0
 const BALL_SPEED := 430.0
 const PADDLE_SIZE := Vector2(120.0, 18.0)
-const PADDLE_Y := 550.0
+const PADDLE_Y := 500.0
 const PADDLE_SPEED := 620.0
-const BRICK_SIZE := Vector2(68.0, 24.0)
+const BRICK_SIZE := Vector2(80.0, 24.0)
 const BRICK_GAP := 8.0
-const BRICK_ORIGIN := Vector2(38.0, 100.0)
+const BRICK_ORIGIN := Vector2(40.0, 100.0)
 const BRICK_COLORS := [
 	Color("#ff5d73"), Color("#ff9f43"), Color("#ffe66d"),
 	Color("#52d273"), Color("#4dabf7"), Color("#b197fc")
