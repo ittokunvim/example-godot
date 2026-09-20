@@ -18,8 +18,8 @@ const MAX_LIVES := 3
 @onready var overlay: PanelContainer = $UI/HUD/Overlay
 @onready var message_label: Label = $UI/HUD/Overlay/Message
 @onready var hearts_container: HBoxContainer = $UI/HUD/Hearts
+@onready var hearts: Array[BreakoutHeart] = []
 
-var _hearts: Array[BreakoutHeart] = []
 var _lives := MAX_LIVES
 var _score := 0
 var _bricks_remaining := 0
@@ -49,6 +49,7 @@ func _start_or_restart() -> void:
 		_lives = 3
 		_game_won = false
 		_create_bricks()
+		_restore_hearts()
 
 	paddle.reset()
 	paddle.set_active(true)
@@ -57,7 +58,6 @@ func _start_or_restart() -> void:
 	_playing = true
 	overlay.hide()
 	_update_hud()
-	_restore_hearts()
 
 
 func _create_bricks() -> void:
@@ -76,6 +76,18 @@ func _create_bricks() -> void:
 			brick.destroyed.connect(_on_brick_destroyed)
 			bricks.add_child(brick)
 			_bricks_remaining += 1
+
+
+# ハートをMAX_LIVES分だけ生成する
+func _create_hearts() -> void:
+	for heart in hearts_container.get_children():
+		heart.queue_free()
+	hearts.clear()
+
+	for i in MAX_LIVES:
+		var heart := BreakoutHeart.new()
+		hearts_container.add_child(heart)
+		hearts.append(heart)
 
 
 func _on_brick_destroyed() -> void:
@@ -113,32 +125,20 @@ func _update_hud() -> void:
 	score_label.text = "スコア  %04d" % _score
 
 
-func _show_overlay(message: String) -> void:
-	message_label.text = message
-	overlay.show()
-
-
-# ハートをMAX_LIVES分だけ生成する
-func _create_hearts() -> void:
-	for heart in hearts_container.get_children():
-		heart.queue_free()
-	_hearts.clear()
-
-	for i in MAX_LIVES:
-		var heart := BreakoutHeart.new()
-		hearts_container.add_child(heart)
-		_hearts.append(heart)
-
-
 # ボールを落とした時にハートを1つ減らす
 func _lose_life() -> void:
 	_lives -= 1
 	if _lives >= 0:
-		_hearts[_lives].lose()
+		hearts[_lives].lose()
 
 
 # ゲーム開始・リスタート時にハートを全部戻す
 func _restore_hearts() -> void:
 	_lives = MAX_LIVES
-	for heart in _hearts:
+	for heart in hearts:
 		heart.restore()
+
+
+func _show_overlay(message: String) -> void:
+	message_label.text = message
+	overlay.show()
