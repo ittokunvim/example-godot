@@ -96,7 +96,6 @@ func _on_loss_zone_body_entered(body: Node2D) -> void:
 	if body != ball or not _playing:
 		return
 
-	failure_sound.play()
 	_lives -= 1
 	_update_hud()
 	ball.reset()
@@ -107,6 +106,7 @@ func _on_loss_zone_body_entered(body: Node2D) -> void:
 		_show_overlay("ゲームオーバー - スペースキーでリトライ")
 		return
 
+	failure_sound.play()
 	ball.launch()
 
 
