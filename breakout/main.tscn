@@ -3,6 +3,10 @@
 [ext_resource type="Script" uid="uid://bi6imj10v8tiq" path="res://game.gd" id="1_game"]
 [ext_resource type="Script" uid="uid://ce2ppdeijapvb" path="res://paddle.gd" id="2_paddle"]
 [ext_resource type="Script" uid="uid://mjb5g8hv4vse" path="res://ball.gd" id="3_ball"]
+[ext_resource type="AudioStream" uid="uid://chw1n2shbopfa" path="res://assets/効果音ラボ-ボタン決定音.wav" id="4_1bvp3"]
+[ext_resource type="AudioStream" uid="uid://c7eco07imxkrs" path="res://assets/効果音ラボ-ボタンシステム音.wav" id="4_272bh"]
+[ext_resource type="AudioStream" uid="uid://h2hto3m7crrv" path="res://assets/効果音ラボ-成功音.wav" id="6_5vw27"]
+[ext_resource type="AudioStream" uid="uid://dubdbs3ygjg4w" path="res://assets/効果音ラボ-落下音.wav" id="7_kek77"]
 
 [sub_resource type="RectangleShape2D" id="HorizontalWallShape"]
 size = Vector2(960, 24)
@@ -142,5 +146,17 @@ theme_override_font_sizes/font_size = 20
 text = "スペースキーまたはクリックで開始"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="GameOverSound" type="AudioStreamPlayer" parent="." unique_id=323555488]
+stream = ExtResource("4_272bh")
+
+[node name="BallBounceSound" type="AudioStreamPlayer" parent="." unique_id=1826632176]
+stream = ExtResource("4_1bvp3")
+
+[node name="GameClearSound" type="AudioStreamPlayer" parent="." unique_id=2058601677]
+stream = ExtResource("6_5vw27")
+
+[node name="FailureSound" type="AudioStreamPlayer" parent="." unique_id=1248645963]
+stream = ExtResource("7_kek77")
 
 [connection signal="body_entered" from="LossZone" to="." method="_on_loss_zone_body_entered"]
