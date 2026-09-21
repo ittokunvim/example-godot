@@ -49,7 +49,7 @@ _game_over = false
 
 
 func _start_or_restart() -> void:
-	if _lives <= 0:
+if _lives <= 0 or _bricks_remaining == 0:
 		_score = 0
 		_lives = 3
 		_create_bricks()
