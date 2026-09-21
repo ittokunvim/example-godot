@@ -80,6 +80,10 @@ polygon = PackedVector2Array(0, -9, 6.36396, -6.36396, 9, 0, 6.36396, 6.36396, 0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ball" unique_id=250215454]
 shape = SubResource("BallShape")
 
+[node name="BounceSound" type="AudioStreamPlayer" parent="Ball" unique_id=1826632176]
+stream = ExtResource("4_1bvp3")
+volume_db = -10.0
+
 [node name="Bricks" type="Node2D" parent="." unique_id=114386060]
 
 [node name="LossZone" type="Area2D" parent="." unique_id=1455721880]
@@ -149,9 +153,6 @@ vertical_alignment = 1
 
 [node name="GameOverSound" type="AudioStreamPlayer" parent="." unique_id=323555488]
 stream = ExtResource("4_272bh")
-
-[node name="BallBounceSound" type="AudioStreamPlayer" parent="." unique_id=1826632176]
-stream = ExtResource("4_1bvp3")
 
 [node name="GameClearSound" type="AudioStreamPlayer" parent="." unique_id=2058601677]
 stream = ExtResource("6_5vw27")

@@ -7,6 +7,7 @@ const PADDLE_WIDTH := 120.0
 
 var _velocity := Vector2.ZERO
 
+@onready var bounce_sound: AudioStreamPlayer = $BounceSound
 
 func _physics_process(delta: float) -> void:
 	if _velocity == Vector2.ZERO:
@@ -16,6 +17,7 @@ func _physics_process(delta: float) -> void:
 	if collision == null:
 		return
 
+	bounce_sound.play()
 	var collider := collision.get_collider()
 	if collider is BreakoutBrick:
 		collider.take_hit()

@@ -16,6 +16,9 @@ const BRICK_COLORS := [
 @onready var lives_label: Label = $UI/HUD/Lives
 @onready var overlay: PanelContainer = $UI/HUD/Overlay
 @onready var message_label: Label = $UI/HUD/Overlay/Message
+@onready var game_over_sound: AudioStreamPlayer = $GameOverSound
+@onready var game_clear_sound: AudioStreamPlayer = $GameClearSound
+@onready var failure_sound: AudioStreamPlayer = $FailureSound
 
 var _score := 0
 var _lives := 3
@@ -81,6 +84,7 @@ func _on_brick_destroyed() -> void:
 	_bricks_remaining -= 1
 	_update_hud()
 	if _bricks_remaining == 0:
+		game_clear_sound.play()
 		_playing = false
 		_game_won = true
 		ball.stop()
@@ -92,10 +96,12 @@ func _on_loss_zone_body_entered(body: Node2D) -> void:
 	if body != ball or not _playing:
 		return
 
+	failure_sound.play()
 	_lives -= 1
 	_update_hud()
 	ball.reset()
 	if _lives <= 0:
+		game_over_sound.play()
 		_playing = false
 		paddle.set_active(false)
 		_show_overlay("ゲームオーバー - スペースキーでリトライ")
