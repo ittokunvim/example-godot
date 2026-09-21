@@ -42,14 +42,14 @@ func _unhandled_input(event: InputEvent) -> void:
 	
 	if _game_over:
 		if event.is_action_pressed("ui_accept"):
-_game_over = false
+			_game_over = false
 			_awaiting_launch = true
 			paddle.set_active(true)
 			_show_overlay("スペースキーまたはクリックで開始")
 
 
 func _start_or_restart() -> void:
-if _lives <= 0 or _bricks_remaining == 0:
+	if _lives <= 0 or _bricks_remaining == 0:
 		_score = 0
 		_lives = 3
 		_create_bricks()
