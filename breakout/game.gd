@@ -45,6 +45,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			_game_over = false
 			_awaiting_launch = true
 			_create_bricks()
+			ball.reset()
 			paddle.set_active(true)
 			_show_overlay("スペースキーまたはクリックで開始")
 
@@ -112,6 +113,7 @@ func _on_loss_zone_body_entered(body: Node2D) -> void:
 	if _lives <= 0:
 		_awaiting_launch = false
 		_game_over = true
+		ball.stop()
 		paddle.set_active(false)
 		_show_overlay("ゲームオーバー - スペースキーでリトライ")
 		return
