@@ -10,11 +10,14 @@ const GUIDE_WIDTH := 12.0
 const AIM_SWEEP_SPEED := 1.0
 const INITIAL_DIRECTION := Vector2(1.0, -1.0)
 
-var _initial_position := position
+var _initial_position := Vector2.ZERO
 var _show_aim_sweep := true
 var _velocity := Vector2.ZERO
 var _launch_direction := INITIAL_DIRECTION.normalized()
 var _direction_x := INITIAL_DIRECTION.x
+
+func _ready() -> void:
+	_initial_position = position
 
 
 func _physics_process(delta: float) -> void:
