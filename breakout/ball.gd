@@ -7,20 +7,27 @@ const PADDLE_WIDTH := 120.0
 const GUIDE_LENGTH := Vector2(150.0, 150.0)
 const GUIDE_COLOR := Color8(255, 255, 255, 127)
 const GUIDE_WIDTH := 12.0
+const AIM_SWEEP_SPEED := 1.0
+const INITIAL_DIRECTION := Vector2(1.0, -1.0)
 
-var _show_launch_guide := true
+var _initial_position := position
+var _show_aim_sweep := true
 var _velocity := Vector2.ZERO
-var _launch_direction := Vector2(1.0, -1.0).normalized()
-var _direction_x := 1
+var _launch_direction := INITIAL_DIRECTION.normalized()
+var _direction_x := INITIAL_DIRECTION.x
+
 
 func _physics_process(delta: float) -> void:
 	if _velocity == Vector2.ZERO:
-		if _show_launch_guide:
-			_launch_direction.x += _direction_x * delta
-			if _launch_direction.x >= 1.0:
-				_direction_x = -1
-			elif _launch_direction.x <= -1.0:
-				_direction_x = 1
+		if not _show_aim_sweep:
+			return
+
+		_launch_direction.x += _direction_x * AIM_SWEEP_SPEED * delta
+		if _launch_direction.x >= 1.0:
+			_direction_x = -1
+		elif _launch_direction.x <= -1.0:
+			_direction_x = 1
+
 		queue_redraw()
 		return
 
@@ -45,27 +52,27 @@ func _physics_process(delta: float) -> void:
 
 
 func _draw() -> void:
-	if _show_launch_guide:
+	if _show_aim_sweep:
 		draw_line(
 			Vector2.ZERO,
-			_launch_direction * GUIDE_LENGTH,
+			_launch_direction.normalized() * GUIDE_LENGTH,
 			GUIDE_COLOR,
 			GUIDE_WIDTH
 		)
 
 
 func launch() -> void:
-	_show_launch_guide = false
+	_show_aim_sweep = false
 	_velocity = _launch_direction.normalized() * SPEED
 	queue_redraw()
 
 
 func reset() -> void:
-	_show_launch_guide = true
-	position = Vector2(get_viewport_rect().size.x / 2.0, 472.0)
+	_show_aim_sweep = true
+	position = _initial_position
 	_velocity = Vector2.ZERO
 
 
 func stop() -> void:
-	_show_launch_guide = false
+	_show_aim_sweep = false
 	_velocity = Vector2.ZERO
