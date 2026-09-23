@@ -17,8 +17,7 @@ func _physics_process(delta: float) -> void:
 	if collision == null:
 		return
 
-	if not bounce_sound.playing:
-		bounce_sound.play()
+	bounce_sound.play()
 	var collider := collision.get_collider()
 	if collider is BreakoutBrick:
 		collider.take_hit()
