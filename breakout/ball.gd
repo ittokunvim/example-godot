@@ -4,7 +4,7 @@ extends CharacterBody2D
 
 const SPEED := 430.0
 const PADDLE_WIDTH := 120.0
-const GUIDE_LENGTH := Vector2(150.0, 150.0)
+const GUIDE_LENGTH := 150.0
 const GUIDE_COLOR := Color8(255, 255, 255, 127)
 const GUIDE_WIDTH := 12.0
 const AIM_SWEEP_SPEED := 1.0
@@ -27,8 +27,10 @@ func _physics_process(delta: float) -> void:
 
 		_launch_direction.x += _direction_x * AIM_SWEEP_SPEED * delta
 		if _launch_direction.x >= 1.0:
+			_launch_direction.x = 1.0
 			_direction_x = -1
 		elif _launch_direction.x <= -1.0:
+			_launch_direction.x = -1.0
 			_direction_x = 1
 
 		queue_redraw()
@@ -72,6 +74,8 @@ func launch() -> void:
 
 func reset() -> void:
 	_show_aim_sweep = true
+	_launch_direction = INITIAL_DIRECTION.normalized()
+	_direction_x = INITIAL_DIRECTION.x
 	position = _initial_position
 	_velocity = Vector2.ZERO
 

@@ -57,7 +57,6 @@ func _start_or_restart() -> void:
 
 	paddle.reset()
 	paddle.set_active(true)
-	ball.reset()
 	ball.launch()
 	_awaiting_launch = false
 	_playing = true
