@@ -23,8 +23,9 @@ const BRICK_COLORS := [
 var _score := 0
 var _lives := 3
 var _bricks_remaining := 0
+var _awaiting_launch := true
 var _playing := false
-var _game_won := false
+var _game_over := false
 
 
 func _ready() -> void:
@@ -36,23 +37,31 @@ func _ready() -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if _playing:
 		return
-	if event.is_action_pressed("ui_accept"):
-		_start_or_restart()
-	elif event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-		_start_or_restart()
+	if _awaiting_launch:
+		if event.is_action_pressed("ui_accept"):
+			_start_or_restart()
+		elif event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+			_start_or_restart()
+	
+	if _game_over:
+		if event.is_action_pressed("ui_accept"):
+			_game_over = false
+			_awaiting_launch = true
+			_create_bricks()
+			paddle.set_active(true)
+			_show_overlay("スペースキーまたはクリックで開始")
 
 
 func _start_or_restart() -> void:
-	if _lives <= 0 or _game_won:
+	if _lives <= 0 or _bricks_remaining == 0:
 		_score = 0
 		_lives = 3
-		_game_won = false
-		_create_bricks()
 
 	paddle.reset()
 	paddle.set_active(true)
 	ball.reset()
 	ball.launch()
+	_awaiting_launch = false
 	_playing = true
 	overlay.hide()
 	_update_hud()
@@ -86,7 +95,7 @@ func _on_brick_destroyed() -> void:
 	if _bricks_remaining == 0:
 		game_clear_sound.play()
 		_playing = false
-		_game_won = true
+		_game_over = true
 		ball.stop()
 		paddle.set_active(false)
 		_show_overlay("すべてのブロックを破壊！ スペースキーで再挑戦")
@@ -96,12 +105,19 @@ func _on_loss_zone_body_entered(body: Node2D) -> void:
 	if body != ball or not _playing:
 		return
 
+	_playing = false
+	_awaiting_launch = true
 	_lives -= 1
 	_update_hud()
 	ball.reset()
+	paddle.reset()
+	paddle.set_active(false)
+	_show_overlay("スペースキーまたはクリックで開始")
 	if _lives <= 0:
 		game_over_sound.play()
 		_playing = false
+		_awaiting_launch = false
+		_game_over = true
 		paddle.set_active(false)
 		_show_overlay("ゲームオーバー - スペースキーでリトライ")
 		return
