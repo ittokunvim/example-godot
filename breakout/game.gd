@@ -53,7 +53,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			if _lives <= 0 or _bricks_remaining == 0:
 				_score = 0
 				_lives = MAX_LIVES
-        _restore_hearts()
+				_restore_hearts()
 			_game_over = false
 			_awaiting_launch = true
 			_create_bricks()
@@ -127,7 +127,6 @@ func _on_loss_zone_body_entered(body: Node2D) -> void:
 
 	_playing = false
 	_awaiting_launch = true
-	_lives -= 1
 	_lose_life()
 	_update_hud()
 	paddle.set_active(false)
