@@ -67,7 +67,6 @@ func _unhandled_input(event: InputEvent) -> void:
 func _start_or_restart() -> void:
 	paddle.reset()
 	paddle.set_active(true)
-	ball.reset()
 	ball.launch()
 	_awaiting_launch = false
 	_playing = true
@@ -136,6 +135,7 @@ func _on_loss_zone_body_entered(body: Node2D) -> void:
 		_awaiting_launch = false
 		_playing = false
 		_game_over = true
+		ball.stop()
 		paddle.set_active(false)
 		_show_overlay("ゲームオーバー - スペースキーでリトライ")
 		return
