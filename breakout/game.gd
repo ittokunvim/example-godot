@@ -8,6 +8,7 @@ const BRICK_COLORS := [
 	Color("#ff5d73"), Color("#ff9f43"), Color("#ffe66d"),
 	Color("#52d273"), Color("#4dabf7"), Color("#b197fc")
 ]
+const MAX_LIVES := 3
 
 @onready var paddle: BreakoutPaddle = $Paddle
 @onready var ball: BreakoutBall = $Ball
@@ -19,9 +20,11 @@ const BRICK_COLORS := [
 @onready var game_over_sound: AudioStreamPlayer = $GameOverSound
 @onready var game_clear_sound: AudioStreamPlayer = $GameClearSound
 @onready var failure_sound: AudioStreamPlayer = $FailureSound
+@onready var hearts_container: HBoxContainer = $UI/HUD/Hearts
+@onready var hearts: Array[BreakoutHeart] = []
 
+var _lives := MAX_LIVES
 var _score := 0
-var _lives := 3
 var _bricks_remaining := 0
 var _awaiting_launch := true
 var _playing := false
@@ -30,6 +33,7 @@ var _game_over := false
 
 func _ready() -> void:
 	_create_bricks()
+	_create_hearts()
 	_update_hud()
 	_show_overlay("スペースキーまたはクリックで開始")
 
@@ -48,7 +52,8 @@ func _unhandled_input(event: InputEvent) -> void:
 		if event.is_action_pressed("ui_accept"):
 			if _lives <= 0 or _bricks_remaining == 0:
 				_score = 0
-				_lives = 3
+				_lives = MAX_LIVES
+				_restore_hearts()
 			_game_over = false
 			_awaiting_launch = true
 			_create_bricks()
@@ -88,6 +93,18 @@ func _create_bricks() -> void:
 			_bricks_remaining += 1
 
 
+# ハートをMAX_LIVES分だけ生成する
+func _create_hearts() -> void:
+	for heart in hearts_container.get_children():
+		heart.queue_free()
+	hearts.clear()
+
+	for i in MAX_LIVES:
+		var heart := BreakoutHeart.new()
+		hearts_container.add_child(heart)
+		hearts.append(heart)
+
+
 func _on_brick_destroyed() -> void:
 	if not _playing:
 		return
@@ -110,7 +127,7 @@ func _on_loss_zone_body_entered(body: Node2D) -> void:
 
 	_playing = false
 	_awaiting_launch = true
-	_lives -= 1
+	_lose_life()
 	_update_hud()
 	paddle.set_active(false)
 	_show_overlay("スペースキーまたはクリックで開始")
@@ -130,7 +147,20 @@ func _on_loss_zone_body_entered(body: Node2D) -> void:
 
 func _update_hud() -> void:
 	score_label.text = "スコア  %04d" % _score
-	lives_label.text = "ライフ  %d" % _lives
+
+
+# ボールを落とした時にハートを1つ減らす
+func _lose_life() -> void:
+	_lives -= 1
+	if _lives >= 0:
+		hearts[_lives].lose()
+
+
+# ゲーム開始・リスタート時にハートを全部戻す
+func _restore_hearts() -> void:
+	_lives = MAX_LIVES
+	for heart in hearts:
+		heart.restore()
 
 
 func _show_overlay(message: String) -> void:
