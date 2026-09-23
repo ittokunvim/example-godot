@@ -3,6 +3,11 @@
 [ext_resource type="Script" uid="uid://bi6imj10v8tiq" path="res://game.gd" id="1_game"]
 [ext_resource type="Script" uid="uid://ce2ppdeijapvb" path="res://paddle.gd" id="2_paddle"]
 [ext_resource type="Script" uid="uid://mjb5g8hv4vse" path="res://ball.gd" id="3_ball"]
+[ext_resource type="AudioStream" uid="uid://cnhyf23kbn3yj" path="res://assets/NozomiMiura-Streets_of_Dawn.ogg" id="4_1bvp3"]
+[ext_resource type="AudioStream" uid="uid://chw1n2shbopfa" path="res://assets/効果音ラボ-ボタン決定音.wav" id="4_5vw27"]
+[ext_resource type="AudioStream" uid="uid://c7eco07imxkrs" path="res://assets/効果音ラボ-ボタンシステム音.wav" id="4_272bh"]
+[ext_resource type="AudioStream" uid="uid://h2hto3m7crrv" path="res://assets/効果音ラボ-成功音.wav" id="6_5vw27"]
+[ext_resource type="AudioStream" uid="uid://dubdbs3ygjg4w" path="res://assets/効果音ラボ-落下音.wav" id="7_kek77"]
 
 [sub_resource type="RectangleShape2D" id="HorizontalWallShape"]
 size = Vector2(960, 24)
@@ -76,6 +81,10 @@ polygon = PackedVector2Array(0, -9, 6.36396, -6.36396, 9, 0, 6.36396, 6.36396, 0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ball" unique_id=250215454]
 shape = SubResource("BallShape")
 
+[node name="BounceSound" type="AudioStreamPlayer" parent="Ball" unique_id=1826632176]
+stream = ExtResource("4_5vw27")
+volume_db = -10.0
+
 [node name="Bricks" type="Node2D" parent="." unique_id=114386060]
 
 [node name="LossZone" type="Area2D" parent="." unique_id=1455721880]
@@ -109,12 +118,19 @@ text = "スコア  0000"
 layout_mode = 0
 offset_left = 650.0
 offset_top = 18.0
-offset_right = 920.0
+offset_right = 727.0
 offset_bottom = 52.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 24
-text = "ライフ  3"
-horizontal_alignment = 2
+text = "ライフ"
+vertical_alignment = 1
+
+[node name="Hearts" type="HBoxContainer" parent="UI/HUD" unique_id=96220857]
+layout_mode = 0
+offset_left = 740.0
+offset_top = 18.0
+offset_right = 940.0
+offset_bottom = 52.0
 
 [node name="Controls" type="Label" parent="UI/HUD" unique_id=1099034850]
 layout_mode = 0
@@ -142,5 +158,18 @@ theme_override_font_sizes/font_size = 20
 text = "スペースキーまたはクリックで開始"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="GameOverSound" type="AudioStreamPlayer" parent="." unique_id=323555488]
+stream = ExtResource("4_272bh")
+
+[node name="GameClearSound" type="AudioStreamPlayer" parent="." unique_id=2058601677]
+stream = ExtResource("6_5vw27")
+
+[node name="FailureSound" type="AudioStreamPlayer" parent="." unique_id=1248645963]
+stream = ExtResource("7_kek77")
+
+[node name="BGM" type="AudioStreamPlayer" parent="." unique_id=1916215650]
+stream = ExtResource("4_1bvp3")
+autoplay = true
 
 [connection signal="body_entered" from="LossZone" to="." method="_on_loss_zone_body_entered"]

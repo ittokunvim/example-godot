@@ -16,6 +16,8 @@ const AIM_SWEEP_SPEED := 1.0
 # リセット時の初期発射方向。Y を負にすることで必ず上方向へ発射する。
 const INITIAL_DIRECTION := Vector2(1.0, -1.0)
 
+@onready var bounce_sound: AudioStreamPlayer = $BounceSound
+
 var _initial_position := Vector2.ZERO
 var _show_aim_sweep := true
 var _velocity := Vector2.ZERO
@@ -55,6 +57,7 @@ func _physics_process(delta: float) -> void:
 	if collision == null:
 		return
 
+	bounce_sound.play()
 	var collider := collision.get_collider()
 	if collider is BreakoutBrick:
 		collider.take_hit()
