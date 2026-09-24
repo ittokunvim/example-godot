@@ -3,17 +3,11 @@ extends CharacterBody2D
 
 
 const SPEED := 430.0
-const PADDLE_WIDTH := 120.0
 
-# 発射待機中に、ボールから伸ばすガイド線の見た目。
 const GUIDE_LENGTH := 150.0
 const GUIDE_COLOR := Color8(255, 255, 255, 127)
 const GUIDE_WIDTH := 12.0
-
-# 照準を左右へ往復させる速さ（方向ベクトルの X 成分/秒）。
 const AIM_SWEEP_SPEED := 1.0
-
-# リセット時の初期発射方向。Y を負にすることで必ず上方向へ発射する。
 const INITIAL_DIRECTION := Vector2(1.0, -1.0)
 const MARGIN: Vector2 = Vector2(0, 30.0)
 
@@ -22,12 +16,7 @@ const MARGIN: Vector2 = Vector2(0, 30.0)
 
 var _show_aim_sweep := true
 var _velocity := Vector2.ZERO
-
-# 発射ガイド用の未正規化ベクトル。
-# X 成分だけを変化させ、利用時に normalized() して方向として使う。
 var _launch_direction := INITIAL_DIRECTION.normalized()
-
-# 照準の横方向の移動向き。1.0 は右、-1.0 は左。
 var _direction_x := INITIAL_DIRECTION.x
 
 
@@ -35,9 +24,8 @@ func _physics_process(delta: float) -> void:
 	if _velocity == Vector2.ZERO:
 		if not _show_aim_sweep:
 			return
-		position = paddle.position - MARGIN
 
-		# 発射待機中は照準を左右に往復させる。
+		position = paddle.position - MARGIN
 		_launch_direction.x += _direction_x * AIM_SWEEP_SPEED * delta
 		if _launch_direction.x >= 1.0:
 			_launch_direction.x = 1.0
@@ -46,7 +34,6 @@ func _physics_process(delta: float) -> void:
 			_launch_direction.x = -1.0
 			_direction_x = 1.0
 
-		# 照準方向が変化したため、ガイド線を再描画する。
 		queue_redraw()
 		return
 
@@ -59,10 +46,10 @@ func _physics_process(delta: float) -> void:
 	if collider is BreakoutBrick:
 		collider.take_hit()
 		_velocity = _velocity.bounce(collision.get_normal())
-	elif collider is CharacterBody2D and collider.is_in_group("paddle"):
+	elif collider is BreakoutPaddle:
 		# パドル中心からのヒット位置に応じて、反射角を変える。
 		var hit_offset := clampf(
-			(global_position.x - collider.global_position.x) / (PADDLE_WIDTH / 2.0),
+			(global_position.x - collider.global_position.x) / BreakoutPaddle.HALF_WIDTH,
 			-1.0,
 			1.0
 		)
@@ -74,7 +61,6 @@ func _physics_process(delta: float) -> void:
 
 func _draw() -> void:
 	if _show_aim_sweep:
-		# ボールのローカル座標を始点に、現在の発射予定方向を描画する。
 		draw_line(
 			Vector2.ZERO,
 			_launch_direction.normalized() * GUIDE_LENGTH,
@@ -84,14 +70,12 @@ func _draw() -> void:
 
 
 func launch() -> void:
-	# ガイドが示していた方向へボールを発射し、ガイドは非表示にする。
 	_show_aim_sweep = false
 	_velocity = _launch_direction.normalized() * SPEED
 	queue_redraw()
 
 
 func reset() -> void:
-	# 次の発射では初期角度から再び照準を往復させる。
 	_show_aim_sweep = true
 	_launch_direction = INITIAL_DIRECTION.normalized()
 	_direction_x = INITIAL_DIRECTION.x
@@ -100,7 +84,6 @@ func reset() -> void:
 
 
 func stop() -> void:
-	# クリア・ゲームオーバー時は移動と照準ガイドを両方停止する。
 	_show_aim_sweep = false
 	_velocity = Vector2.ZERO
 	queue_redraw()
