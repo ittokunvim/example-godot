@@ -6,6 +6,7 @@
 [ext_resource type="AudioStream" uid="uid://cnhyf23kbn3yj" path="res://assets/NozomiMiura-Streets_of_Dawn.ogg" id="4_1bvp3"]
 [ext_resource type="AudioStream" uid="uid://chw1n2shbopfa" path="res://assets/効果音ラボ-ボタン決定音.wav" id="4_5vw27"]
 [ext_resource type="AudioStream" uid="uid://c7eco07imxkrs" path="res://assets/効果音ラボ-ボタンシステム音.wav" id="4_272bh"]
+[ext_resource type="Script" uid="uid://pnxng0p3bdn0" path="res://bricks.gd" id="5_kek77"]
 [ext_resource type="AudioStream" uid="uid://h2hto3m7crrv" path="res://assets/効果音ラボ-成功音.wav" id="6_5vw27"]
 [ext_resource type="AudioStream" uid="uid://dubdbs3ygjg4w" path="res://assets/効果音ラボ-落下音.wav" id="7_kek77"]
 
@@ -86,6 +87,7 @@ stream = ExtResource("4_5vw27")
 volume_db = -10.0
 
 [node name="Bricks" type="Node2D" parent="." unique_id=114386060]
+script = ExtResource("5_kek77")
 
 [node name="LossZone" type="Area2D" parent="." unique_id=1455721880]
 position = Vector2(480, 552)

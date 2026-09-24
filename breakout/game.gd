@@ -1,18 +1,11 @@
 extends Node2D
 
 
-const BRICK_SIZE := Vector2(80.0, 24.0)
-const BRICK_GAP := 8.0
-const BRICK_ORIGIN := Vector2(40.0, 100.0)
-const BRICK_COLORS := [
-	Color("#ff5d73"), Color("#ff9f43"), Color("#ffe66d"),
-	Color("#52d273"), Color("#4dabf7"), Color("#b197fc")
-]
 const MAX_LIVES := 3
 
 @onready var paddle: BreakoutPaddle = $Paddle
 @onready var ball: BreakoutBall = $Ball
-@onready var bricks: Node2D = $Bricks
+@onready var bricks: BreakoutBricks = $Bricks
 @onready var score_label: Label = $UI/HUD/Score
 @onready var lives_label: Label = $UI/HUD/Lives
 @onready var description: Label = $UI/HUD/Description
@@ -26,14 +19,14 @@ const MAX_LIVES := 3
 
 var _lives := MAX_LIVES
 var _score := 0
-var _bricks_remaining := 0
 var _awaiting_launch := true
 var _playing := false
 var _game_over := false
 
 
 func _ready() -> void:
-	_create_bricks()
+	bricks.reset()
+	bricks.brick_destroyed.connect(_on_brick_destroyed)
 	_create_hearts()
 	_update_hud()
 	_update_description("スペースキーで開始")
@@ -51,13 +44,13 @@ func _unhandled_input(event: InputEvent) -> void:
 
 	if _game_over:
 		if event.is_action_pressed("ui_accept"):
-			if _lives <= 0 or _bricks_remaining == 0:
+			if _lives <= 0 or bricks.remaining == 0:
 				_score = 0
 				_lives = MAX_LIVES
 				_restore_hearts()
 			_game_over = false
 			_awaiting_launch = true
-			_create_bricks()
+			bricks.reset()
 			ball.reset()
 			paddle.reset()
 			paddle.set_active(true)
@@ -74,24 +67,6 @@ func _start_or_restart() -> void:
 	overlay.hide()
 	_update_description("A/D、左右矢印で移動")
 	_update_hud()
-
-
-func _create_bricks() -> void:
-	for brick in bricks.get_children():
-		brick.queue_free()
-
-	_bricks_remaining = 0
-	for row in BRICK_COLORS.size():
-		for column in 10:
-			var brick := BreakoutBrick.new()
-			brick.position = BRICK_ORIGIN + Vector2(
-				BRICK_SIZE.x / 2.0 + column * (BRICK_SIZE.x + BRICK_GAP),
-				BRICK_SIZE.y / 2.0 + row * (BRICK_SIZE.y + BRICK_GAP)
-			)
-			brick.set_color(BRICK_COLORS[row])
-			brick.destroyed.connect(_on_brick_destroyed)
-			bricks.add_child(brick)
-			_bricks_remaining += 1
 
 
 # ハートをMAX_LIVES分だけ生成する
@@ -111,9 +86,8 @@ func _on_brick_destroyed() -> void:
 		return
 
 	_score += 10
-	_bricks_remaining -= 1
 	_update_hud()
-	if _bricks_remaining == 0:
+	if bricks.remaining == 0:
 		game_clear_sound.play()
 		_playing = false
 		_game_over = true
