@@ -72,7 +72,7 @@ func _prepare_launch() -> void:
 
 
 func _on_brick_destroyed() -> void:
-	if _state == GameState.PLAYING:
+	if _state != GameState.PLAYING:
 		return
 
 	_score += 10
