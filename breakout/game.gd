@@ -15,6 +15,7 @@ const MAX_LIVES := 3
 @onready var bricks: Node2D = $Bricks
 @onready var score_label: Label = $UI/HUD/Score
 @onready var lives_label: Label = $UI/HUD/Lives
+@onready var description: Label = $UI/HUD/Description
 @onready var overlay: PanelContainer = $UI/HUD/Overlay
 @onready var message_label: Label = $UI/HUD/Overlay/Message
 @onready var game_over_sound: AudioStreamPlayer = $GameOverSound
@@ -35,7 +36,7 @@ func _ready() -> void:
 	_create_bricks()
 	_create_hearts()
 	_update_hud()
-	_show_overlay("スペースキーまたはクリックで開始")
+	_update_description("スペースキーで開始")
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -61,7 +62,8 @@ func _unhandled_input(event: InputEvent) -> void:
 			paddle.reset()
 			paddle.set_active(true)
 			_update_hud()
-			_show_overlay("スペースキーまたはクリックで開始")
+			overlay.hide()
+			_update_description("スペースキーで開始")
 
 
 func _start_or_restart() -> void:
@@ -71,6 +73,7 @@ func _start_or_restart() -> void:
 	_awaiting_launch = false
 	_playing = true
 	overlay.hide()
+	_update_description("A/D、左右矢印で移動")
 	_update_hud()
 
 
@@ -129,7 +132,6 @@ func _on_loss_zone_body_entered(body: Node2D) -> void:
 	_lose_life()
 	_update_hud()
 	paddle.set_active(false)
-	_show_overlay("スペースキーまたはクリックで開始")
 	if _lives <= 0:
 		game_over_sound.play()
 		_awaiting_launch = false
@@ -166,3 +168,7 @@ func _restore_hearts() -> void:
 func _show_overlay(message: String) -> void:
 	message_label.text = message
 	overlay.show()
+
+
+func _update_description(message: String) -> void:
+	description.text = message
