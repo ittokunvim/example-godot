@@ -15,10 +15,11 @@ const AIM_SWEEP_SPEED := 1.0
 
 # リセット時の初期発射方向。Y を負にすることで必ず上方向へ発射する。
 const INITIAL_DIRECTION := Vector2(1.0, -1.0)
+const MARGIN: Vector2 = Vector2(0, 30.0)
 
 @onready var bounce_sound: AudioStreamPlayer = $BounceSound
+@onready var paddle: BreakoutPaddle = $"../Paddle"
 
-var _initial_position := Vector2.ZERO
 var _show_aim_sweep := true
 var _velocity := Vector2.ZERO
 
@@ -30,15 +31,11 @@ var _launch_direction := INITIAL_DIRECTION.normalized()
 var _direction_x := INITIAL_DIRECTION.x
 
 
-func _ready() -> void:
-	# シーンで設定した開始位置を、残機を失ったときの復帰位置として保存する。
-	_initial_position = position
-
-
 func _physics_process(delta: float) -> void:
 	if _velocity == Vector2.ZERO:
 		if not _show_aim_sweep:
 			return
+		position = paddle.position - MARGIN
 
 		# 発射待機中は照準を左右に往復させる。
 		_launch_direction.x += _direction_x * AIM_SWEEP_SPEED * delta
@@ -98,7 +95,6 @@ func reset() -> void:
 	_show_aim_sweep = true
 	_launch_direction = INITIAL_DIRECTION.normalized()
 	_direction_x = INITIAL_DIRECTION.x
-	position = _initial_position
 	_velocity = Vector2.ZERO
 	queue_redraw()
 

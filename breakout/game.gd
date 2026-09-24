@@ -67,7 +67,6 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _start_or_restart() -> void:
-	paddle.reset()
 	paddle.set_active(true)
 	ball.launch()
 	_awaiting_launch = false
@@ -131,7 +130,6 @@ func _on_loss_zone_body_entered(body: Node2D) -> void:
 	_awaiting_launch = true
 	_lose_life()
 	_update_hud()
-	paddle.set_active(false)
 	if _lives <= 0:
 		game_over_sound.play()
 		_awaiting_launch = false
@@ -143,7 +141,6 @@ func _on_loss_zone_body_entered(body: Node2D) -> void:
 		return
 
 	ball.reset()
-	paddle.reset()
 	failure_sound.play()
 
 
