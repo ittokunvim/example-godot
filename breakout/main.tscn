@@ -7,6 +7,7 @@
 [ext_resource type="AudioStream" uid="uid://chw1n2shbopfa" path="res://assets/効果音ラボ-ボタン決定音.wav" id="4_5vw27"]
 [ext_resource type="AudioStream" uid="uid://c7eco07imxkrs" path="res://assets/効果音ラボ-ボタンシステム音.wav" id="4_272bh"]
 [ext_resource type="Script" uid="uid://pnxng0p3bdn0" path="res://bricks.gd" id="5_kek77"]
+[ext_resource type="Script" uid="uid://b4ybgdjaw8dm6" path="res://hud.gd" id="6_4c57u"]
 [ext_resource type="AudioStream" uid="uid://h2hto3m7crrv" path="res://assets/効果音ラボ-成功音.wav" id="6_5vw27"]
 [ext_resource type="AudioStream" uid="uid://dubdbs3ygjg4w" path="res://assets/効果音ラボ-落下音.wav" id="7_kek77"]
 
@@ -97,7 +98,7 @@ shape = SubResource("LossShape")
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=918909656]
 
-[node name="HUD" type="Control" parent="UI" unique_id=648155715]
+[node name="HUD" type="Control" parent="UI" unique_id=2085420412]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -105,6 +106,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+script = ExtResource("6_4c57u")
 
 [node name="Score" type="Label" parent="UI/HUD" unique_id=1700093102]
 layout_mode = 0
@@ -162,13 +164,15 @@ text = "スペースキーまたはクリックで開始"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="GameOverSound" type="AudioStreamPlayer" parent="." unique_id=323555488]
+[node name="Sounds" type="Node" parent="." unique_id=1683115718]
+
+[node name="GameOver" type="AudioStreamPlayer" parent="Sounds" unique_id=323555488]
 stream = ExtResource("4_272bh")
 
-[node name="GameClearSound" type="AudioStreamPlayer" parent="." unique_id=2058601677]
+[node name="GameClear" type="AudioStreamPlayer" parent="Sounds" unique_id=2058601677]
 stream = ExtResource("6_5vw27")
 
-[node name="FailureSound" type="AudioStreamPlayer" parent="." unique_id=1248645963]
+[node name="Failure" type="AudioStreamPlayer" parent="Sounds" unique_id=1248645963]
 stream = ExtResource("7_kek77")
 
 [node name="BGM" type="AudioStreamPlayer" parent="." unique_id=1916215650]
