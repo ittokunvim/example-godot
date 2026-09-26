@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://pnxng0p3bdn0" path="res://bricks.gd" id="5_kek77"]
 [ext_resource type="Script" uid="uid://b4ybgdjaw8dm6" path="res://hud.gd" id="6_4c57u"]
 [ext_resource type="AudioStream" uid="uid://h2hto3m7crrv" path="res://assets/効果音ラボ-成功音.wav" id="6_5vw27"]
+[ext_resource type="FontFile" uid="uid://m2jtfmga7dyu" path="res://assets/misaki_gothic.ttf" id="6_efxa6"]
 [ext_resource type="AudioStream" uid="uid://dubdbs3ygjg4w" path="res://assets/効果音ラボ-落下音.wav" id="7_kek77"]
 
 [sub_resource type="RectangleShape2D" id="HorizontalWallShape"]
@@ -25,6 +26,10 @@ radius = 9.0
 
 [sub_resource type="RectangleShape2D" id="LossShape"]
 size = Vector2(960, 24)
+
+[sub_resource type="Theme" id="Theme_dg77c"]
+default_font = ExtResource("6_efxa6")
+default_font_size = 24
 
 [sub_resource type="StyleBoxFlat" id="OverlayStyle"]
 bg_color = Color(0, 0, 0, 0.7)
@@ -106,6 +111,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+theme = SubResource("Theme_dg77c")
 script = ExtResource("6_4c57u")
 
 [node name="Score" type="Label" parent="UI/HUD" unique_id=1700093102]
@@ -114,9 +120,8 @@ offset_left = 28.0
 offset_top = 18.0
 offset_right = 320.0
 offset_bottom = 52.0
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_font_sizes/font_size = 24
-text = "スコア  0000"
+theme_override_font_sizes/font_size = 32
+text = "スコア"
 
 [node name="Lives" type="Label" parent="UI/HUD" unique_id=944369859]
 layout_mode = 0
@@ -124,8 +129,6 @@ offset_left = 650.0
 offset_top = 18.0
 offset_right = 727.0
 offset_bottom = 52.0
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_font_sizes/font_size = 24
 text = "ライフ"
 vertical_alignment = 1
 
@@ -143,7 +146,6 @@ offset_top = 512.0
 offset_right = 730.0
 offset_bottom = 536.0
 theme_override_colors/font_color = Color(0.666667, 0.717647, 0.811765, 1)
-theme_override_font_sizes/font_size = 16
 text = "A/D、左右矢印で移動"
 horizontal_alignment = 1
 
@@ -158,8 +160,6 @@ theme_override_styles/panel = SubResource("OverlayStyle")
 
 [node name="Message" type="Label" parent="UI/HUD/Overlay" unique_id=1328214056]
 layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_font_sizes/font_size = 20
 text = "スペースキーまたはクリックで開始"
 horizontal_alignment = 1
 vertical_alignment = 1
