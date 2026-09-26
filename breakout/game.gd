@@ -30,7 +30,7 @@ func _ready() -> void:
 	hud.set_description("スペースキー、クリックで開始")
 
 
-func _unhandled_input(event: InputEvent) -> void:
+func _input(event: InputEvent) -> void:
 	if _state == GameState.PLAYING:
 		return
 
@@ -50,7 +50,7 @@ func _start_game() -> void:
 	ball.launch()
 	_state = GameState.PLAYING
 	hud.hide_overlay()
-	hud.set_description("A/D、左右矢印で移動")
+	hud.set_description("A/D、左右矢印、マウスで移動")
 
 
 func _restart_game() -> void:
@@ -88,7 +88,7 @@ func _on_loss_zone_body_entered(body: Node2D) -> void:
 	_lose_life()
 	hud.update_score(_score)
 	if _lives <= 0:
-		_finish_game("ゲームオーバー - スペースキー、クリックでリトライ", game_over_sound)
+		_finish_game("ゲームオーバー スペースキー、クリックでリトライ", game_over_sound)
 		return
 
 	ball.reset()

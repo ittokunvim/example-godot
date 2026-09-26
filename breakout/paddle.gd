@@ -5,7 +5,6 @@ extends CharacterBody2D
 const MOVE_SPEED := 620.0
 const HALF_WIDTH := 60.0
 const HORIZONTAL_MARGIN := 16.0
-const MOUSE_LERP_SPEED := 20.0
 
 var _active := true
 var _using_keyboard := false
