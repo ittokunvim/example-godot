@@ -27,7 +27,7 @@ func _ready() -> void:
 	bricks.brick_destroyed.connect(_on_brick_destroyed)
 	hud.setup_hearts(MAX_LIVES)
 	hud.update_score(_score)
-	hud.set_description("スペースキーで開始")
+	hud.set_description("スペースキー、クリックで開始")
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -36,7 +36,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 	if _state == GameState.WAITING_TO_LAUNCH and _is_launch_requested(event):
 		_start_game()
-	elif _state == GameState.GAME_OVER and event.is_action_pressed("ui_accept"):
+	elif _state == GameState.GAME_OVER and _is_launch_requested(event):
 		_restart_game()
 
 
@@ -68,7 +68,7 @@ func _prepare_launch() -> void:
 	paddle.set_active(true)
 	hud.update_score(_score)
 	hud.hide_overlay()
-	hud.set_description("スペースキーで開始")
+	hud.set_description("スペースキー、クリックで開始")
 
 
 func _on_brick_destroyed() -> void:
@@ -78,7 +78,7 @@ func _on_brick_destroyed() -> void:
 	_score += 10
 	hud.update_score(_score)
 	if bricks.remaining == 0:
-		_finish_game("すべてのブロックを破壊！ スペースキーで再挑戦", game_clear_sound)
+		_finish_game("すべてのブロックを破壊！ スペースキー、クリックで再挑戦", game_clear_sound)
 
 
 func _on_loss_zone_body_entered(body: Node2D) -> void:
@@ -88,7 +88,7 @@ func _on_loss_zone_body_entered(body: Node2D) -> void:
 	_lose_life()
 	hud.update_score(_score)
 	if _lives <= 0:
-		_finish_game("ゲームオーバー - スペースキーでリトライ", game_over_sound)
+		_finish_game("ゲームオーバー - スペースキー、クリックでリトライ", game_over_sound)
 		return
 
 	ball.reset()
