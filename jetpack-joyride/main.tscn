@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://daela07lxntq1"]
+
+[ext_resource type="Script" uid="uid://bqmhrrph36imp" path="res://main.gd" id="1_lquwl"]
+[ext_resource type="Texture2D" uid="uid://bj4mewga2dgvj" path="res://assets/planeGreen1.png" id="6_7mycd"]
+[ext_resource type="Script" uid="uid://8l2edsb4bh6k" path="res://plane.gd" id="6_kek77"]
+[ext_resource type="Texture2D" uid="uid://bphvj35i3y0a0" path="res://assets/planeGreen2.png" id="7_5vw27"]
+[ext_resource type="Texture2D" uid="uid://bjb05qvrlndl5" path="res://assets/planeGreen3.png" id="8_kek77"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4c57u"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_7mycd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_5vw27")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_kek77")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5vw27"]
+radius = 32.0
+height = 87.0
+
+[node name="JetpackJoyride" type="Node2D" unique_id=1740445738]
+script = ExtResource("1_lquwl")
+
+[node name="Plane" type="CharacterBody2D" parent="." unique_id=416098746]
+z_index = 1
+position = Vector2(160, 280)
+scale = Vector2(0.8, 0.8)
+script = ExtResource("6_kek77")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Plane" unique_id=861957338]
+sprite_frames = SubResource("SpriteFrames_4c57u")
+frame_progress = 0.0032386316
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Plane" unique_id=744486314]
+rotation = -1.5707964
+shape = SubResource("CapsuleShape2D_5vw27")
