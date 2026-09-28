@@ -1,0 +1,42 @@
+name: 機能の提案
+description: ゲームへの追加・変更を提案する
+title: "[機能提案] "
+labels: ["enhancement"]
+body:
+  - type: dropdown
+    id: game
+    attributes:
+      label: 対象のゲーム
+      options:
+        - Pong
+        - Flappy Bird
+        - Breakout
+        - Jetpack Joyride
+        - その他・共通
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: 解決したい課題
+      description: どんな不便や課題を解決したいか記入してください。
+      placeholder: "例）キーボード操作だけでは遊びにくい"
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: 希望する機能・動作
+      description: どのような変更を希望するか記入してください。
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: 代替案や補足
+      description: ほかに考えた方法や参考画像などがあれば記入してください。
+    validations:
+      required: false

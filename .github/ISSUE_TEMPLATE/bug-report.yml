@@ -1,0 +1,72 @@
+name: 不具合の報告
+description: ゲーム内で見つけた不具合を報告する
+title: "[不具合] "
+labels: ["bug"]
+body:
+  - type: dropdown
+    id: game
+    attributes:
+      label: 対象のゲーム
+      options:
+        - Pong
+        - Flappy Bird
+        - Breakout
+        - Jetpack Joyride
+        - その他・共通
+    validations:
+      required: true
+
+  - type: input
+    id: godot_version
+    attributes:
+      label: Godotのバージョン
+      description: 例）4.4.1
+      placeholder: "4.x.x"
+    validations:
+      required: false
+
+  - type: textarea
+    id: description
+    attributes:
+      label: 不具合の内容
+      description: 何が起きたかを具体的に記入してください。
+      placeholder: "例）ボールが画面外に出てもライフが減らない"
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: 再現手順
+      description: 不具合を再現するための操作を記入してください。
+      placeholder: |
+        1. ゲームを起動する
+        2. ...
+        3. ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: 期待する動作
+      placeholder: "本来どう動くのが正しいかを記入してください。"
+    validations:
+      required: false
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: 実際の動作
+      placeholder: "実際に起きたことを記入してください。"
+    validations:
+      required: false
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: 補足情報
+      description: エラーログやスクリーンショットなどがあれば記入してください。
+    validations:
+      required: false
+
