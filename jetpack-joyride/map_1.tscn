@@ -6,6 +6,9 @@
 [ext_resource type="Texture2D" uid="uid://b606o3pkw4c0p" path="res://assets/ground_grass.png" id="4_il6ja"]
 [ext_resource type="Texture2D" uid="uid://cp105028t2p3" path="res://assets/starGold.png" id="5_2421v"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fpksy"]
+size = Vector2(960, 20)
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_nhuiu"]
 radius = 16.0
 
@@ -15,7 +18,13 @@ radius = 16.0
 texture = ExtResource("1_fpksy")
 centered = false
 
-[node name="RockGrass" type="StaticBody2D" parent="." unique_id=133597681 groups=["rocks"]]
+[node name="Ceiling" type="StaticBody2D" parent="." unique_id=1772041102]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ceiling" unique_id=722383774]
+position = Vector2(480, -10)
+shape = SubResource("RectangleShape2D_fpksy")
+
+[node name="RockGrass" type="StaticBody2D" parent="." unique_id=133597681 groups=["obstacle"]]
 position = Vector2(323, 398)
 
 [node name="Sprite2D" type="Sprite2D" parent="RockGrass" unique_id=1455273001]
@@ -24,7 +33,7 @@ texture = ExtResource("2_bhpv2")
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RockGrass" unique_id=767761686]
 polygon = PackedVector2Array(12, -115, 45, 100, -45, 100)
 
-[node name="RockGrassDown" type="StaticBody2D" parent="." unique_id=1384064863 groups=["rocks"]]
+[node name="RockGrassDown" type="StaticBody2D" parent="." unique_id=1384064863 groups=["obstacle"]]
 position = Vector2(589, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="RockGrassDown" unique_id=923033938]

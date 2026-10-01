@@ -3,11 +3,20 @@
 [ext_resource type="Texture2D" uid="uid://c5cimoek6680u" path="res://assets/background.png" id="1_udyf7"]
 [ext_resource type="Texture2D" uid="uid://b606o3pkw4c0p" path="res://assets/ground_grass.png" id="2_e7fvt"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_udyf7"]
+size = Vector2(960, 20)
+
 [node name="Map0" type="Node2D" unique_id=847352468]
 
 [node name="Background" type="Sprite2D" parent="." unique_id=246997148]
 texture = ExtResource("1_udyf7")
 centered = false
+
+[node name="Ceiling" type="StaticBody2D" parent="." unique_id=185965715]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ceiling" unique_id=185780904]
+position = Vector2(480, -10)
+shape = SubResource("RectangleShape2D_udyf7")
 
 [node name="GroundGrass" type="StaticBody2D" parent="." unique_id=314175118]
 position = Vector2(0, 456)
