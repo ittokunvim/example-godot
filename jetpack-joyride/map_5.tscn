@@ -1,0 +1,110 @@
+[gd_scene format=3 uid="uid://brath2k6dwiwy"]
+
+[ext_resource type="Texture2D" uid="uid://c5cimoek6680u" path="res://assets/background.png" id="1_fm2dq"]
+[ext_resource type="Texture2D" uid="uid://b606o3pkw4c0p" path="res://assets/ground_grass.png" id="2_ae20f"]
+[ext_resource type="Texture2D" uid="uid://bwnf27mij1bdr" path="res://assets/rockGrass.png" id="3_tud23"]
+[ext_resource type="Texture2D" uid="uid://bnn8mcpsesny8" path="res://assets/rockGrassDown.png" id="4_o5g0d"]
+[ext_resource type="Texture2D" uid="uid://cp105028t2p3" path="res://assets/starGold.png" id="5_3lf7l"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_udyf7"]
+size = Vector2(960, 20)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_aca6x"]
+radius = 16.0
+
+[node name="Map0" type="Node2D" unique_id=847352468]
+
+[node name="Background" type="Sprite2D" parent="." unique_id=246997148]
+texture = ExtResource("1_fm2dq")
+centered = false
+
+[node name="Ceiling" type="StaticBody2D" parent="." unique_id=185965715]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ceiling" unique_id=185780904]
+position = Vector2(480, -10)
+shape = SubResource("RectangleShape2D_udyf7")
+
+[node name="GroundGrass" type="StaticBody2D" parent="." unique_id=314175118]
+z_index = 1
+position = Vector2(0, 456)
+
+[node name="Sprite2D" type="Sprite2D" parent="GroundGrass" unique_id=1329029737]
+texture = ExtResource("2_ae20f")
+centered = false
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="GroundGrass" unique_id=286269619]
+polygon = PackedVector2Array(1, 82, 2, 45, 37, 44, 48, 55, 106, 58, 161, 44, 190, 14, 296, 11, 368, 37, 418, 38, 447, 19, 519, 20, 556, 57, 605, 57, 632, 69, 682, 69, 714, 37, 756, 33, 784, 9, 882, 5, 904, 36, 959, 49, 959, 83)
+
+[node name="RockGrass" type="StaticBody2D" parent="." unique_id=1627080684 groups=["obstacle"]]
+position = Vector2(170, 404)
+
+[node name="Sprite2D" type="Sprite2D" parent="RockGrass" unique_id=814213132]
+texture = ExtResource("3_tud23")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RockGrass" unique_id=964660655]
+polygon = PackedVector2Array(12, -115, 45, 100, -45, 100)
+
+[node name="RockGrassDown" type="StaticBody2D" parent="." unique_id=1448351033 groups=["obstacle"]]
+position = Vector2(284, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="RockGrassDown" unique_id=1075872799]
+texture = ExtResource("4_o5g0d")
+centered = false
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RockGrassDown" unique_id=1596629582]
+polygon = PackedVector2Array(64, 230, 105, 0, 0, 0)
+
+[node name="RockGrass2" type="StaticBody2D" parent="." unique_id=1094196797 groups=["obstacle"]]
+position = Vector2(547, 404)
+
+[node name="Sprite2D" type="Sprite2D" parent="RockGrass2" unique_id=1559363701]
+texture = ExtResource("3_tud23")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RockGrass2" unique_id=363705142]
+polygon = PackedVector2Array(12, -115, 45, 100, -45, 100)
+
+[node name="RockGrassDown2" type="StaticBody2D" parent="." unique_id=968723654 groups=["obstacle"]]
+position = Vector2(689, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="RockGrassDown2" unique_id=542476360]
+texture = ExtResource("4_o5g0d")
+centered = false
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RockGrassDown2" unique_id=663162607]
+polygon = PackedVector2Array(64, 230, 105, 0, 0, 0)
+
+[node name="StarGold" type="Area2D" parent="." unique_id=223142152]
+position = Vector2(182, 143)
+
+[node name="Sprite2D" type="Sprite2D" parent="StarGold" unique_id=169337723]
+texture = ExtResource("5_3lf7l")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StarGold" unique_id=397408242]
+shape = SubResource("CircleShape2D_aca6x")
+
+[node name="StarGold2" type="Area2D" parent="." unique_id=708626269]
+position = Vector2(354, 357)
+
+[node name="Sprite2D" type="Sprite2D" parent="StarGold2" unique_id=478341602]
+texture = ExtResource("5_3lf7l")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StarGold2" unique_id=868894611]
+shape = SubResource("CircleShape2D_aca6x")
+
+[node name="StarGold3" type="Area2D" parent="." unique_id=551775285]
+position = Vector2(555, 143)
+
+[node name="Sprite2D" type="Sprite2D" parent="StarGold3" unique_id=1071337905]
+texture = ExtResource("5_3lf7l")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StarGold3" unique_id=2065513346]
+shape = SubResource("CircleShape2D_aca6x")
+
+[node name="StarGold4" type="Area2D" parent="." unique_id=1088866387]
+position = Vector2(755, 357)
+
+[node name="Sprite2D" type="Sprite2D" parent="StarGold4" unique_id=1154917493]
+texture = ExtResource("5_3lf7l")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StarGold4" unique_id=1127036316]
+shape = SubResource("CircleShape2D_aca6x")

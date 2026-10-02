@@ -1,0 +1,91 @@
+[gd_scene format=3 uid="uid://6br74t6o3myx"]
+
+[ext_resource type="Texture2D" uid="uid://c5cimoek6680u" path="res://assets/background.png" id="1_0nuxv"]
+[ext_resource type="Texture2D" uid="uid://b606o3pkw4c0p" path="res://assets/ground_grass.png" id="2_5wxai"]
+[ext_resource type="Texture2D" uid="uid://bwnf27mij1bdr" path="res://assets/rockGrass.png" id="3_frbht"]
+[ext_resource type="Texture2D" uid="uid://bnn8mcpsesny8" path="res://assets/rockGrassDown.png" id="4_rcsii"]
+[ext_resource type="Texture2D" uid="uid://cp105028t2p3" path="res://assets/starGold.png" id="5_s123t"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_udyf7"]
+size = Vector2(960, 20)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_luiv8"]
+radius = 16.0
+
+[node name="Map0" type="Node2D" unique_id=847352468]
+
+[node name="Background" type="Sprite2D" parent="." unique_id=246997148]
+texture = ExtResource("1_0nuxv")
+centered = false
+
+[node name="Ceiling" type="StaticBody2D" parent="." unique_id=185965715]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ceiling" unique_id=185780904]
+position = Vector2(480, -10)
+shape = SubResource("RectangleShape2D_udyf7")
+
+[node name="GroundGrass" type="StaticBody2D" parent="." unique_id=314175118]
+z_index = 1
+position = Vector2(0, 456)
+
+[node name="Sprite2D" type="Sprite2D" parent="GroundGrass" unique_id=1329029737]
+texture = ExtResource("2_5wxai")
+centered = false
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="GroundGrass" unique_id=286269619]
+polygon = PackedVector2Array(1, 82, 2, 45, 37, 44, 48, 55, 106, 58, 161, 44, 190, 14, 296, 11, 368, 37, 418, 38, 447, 19, 519, 20, 556, 57, 605, 57, 632, 69, 682, 69, 714, 37, 756, 33, 784, 9, 882, 5, 904, 36, 959, 49, 959, 83)
+
+[node name="RockGrass" type="StaticBody2D" parent="." unique_id=1490112074 groups=["obstacle"]]
+position = Vector2(224, 402)
+
+[node name="Sprite2D" type="Sprite2D" parent="RockGrass" unique_id=1657275683]
+texture = ExtResource("3_frbht")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RockGrass" unique_id=486802102]
+polygon = PackedVector2Array(12, -115, 45, 100, -45, 100)
+
+[node name="RockGrassDown" type="StaticBody2D" parent="." unique_id=459334104 groups=["obstacle"]]
+position = Vector2(430, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="RockGrassDown" unique_id=1031084738]
+texture = ExtResource("4_rcsii")
+centered = false
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RockGrassDown" unique_id=1711665121]
+polygon = PackedVector2Array(64, 230, 105, 0, 0, 0)
+
+[node name="RockGrass2" type="StaticBody2D" parent="." unique_id=2044369082 groups=["obstacle"]]
+position = Vector2(739, 402)
+
+[node name="Sprite2D" type="Sprite2D" parent="RockGrass2" unique_id=674700981]
+texture = ExtResource("3_frbht")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RockGrass2" unique_id=2007540684]
+polygon = PackedVector2Array(12, -115, 45, 100, -45, 100)
+
+[node name="StarGold" type="Area2D" parent="." unique_id=1762522495]
+position = Vector2(224, 143)
+
+[node name="Sprite2D" type="Sprite2D" parent="StarGold" unique_id=732984214]
+texture = ExtResource("5_s123t")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StarGold" unique_id=1538195978]
+shape = SubResource("CircleShape2D_luiv8")
+
+[node name="StarGold2" type="Area2D" parent="." unique_id=1677479025]
+position = Vector2(493, 355)
+
+[node name="Sprite2D" type="Sprite2D" parent="StarGold2" unique_id=1228632035]
+texture = ExtResource("5_s123t")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StarGold2" unique_id=1764855820]
+shape = SubResource("CircleShape2D_luiv8")
+
+[node name="StarGold3" type="Area2D" parent="." unique_id=1465942474]
+position = Vector2(739, 143)
+
+[node name="Sprite2D" type="Sprite2D" parent="StarGold3" unique_id=822181927]
+texture = ExtResource("5_s123t")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StarGold3" unique_id=191565862]
+shape = SubResource("CircleShape2D_luiv8")
