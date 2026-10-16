@@ -1,0 +1,192 @@
+[gd_scene format=3 uid="uid://drt3pvriyia0l"]
+
+[ext_resource type="Texture2D" uid="uid://c5cimoek6680u" path="res://assets/background.png" id="1_cmhrf"]
+[ext_resource type="Script" uid="uid://cpo4r1q46qauv" path="res://mainmenu.gd" id="1_y5i8j"]
+[ext_resource type="FontFile" uid="uid://63e7uiwemxs3" path="res://assets/misaki_gothic.ttf" id="2_d2nv2"]
+[ext_resource type="Texture2D" uid="uid://d0558o2j3451t" path="res://assets/Letters/letterJ.png" id="3_qy7ti"]
+[ext_resource type="Texture2D" uid="uid://h6kde4ch61dc" path="res://assets/Letters/letterE.png" id="4_y5i8j"]
+[ext_resource type="Texture2D" uid="uid://ccrbkeioy52y5" path="res://assets/Letters/letterT.png" id="5_f0ka0"]
+[ext_resource type="Texture2D" uid="uid://bfm02jtoc6c4n" path="res://assets/Letters/letterP.png" id="6_lqdfc"]
+[ext_resource type="Texture2D" uid="uid://ssvg3tbcxr3t" path="res://assets/Letters/letterA.png" id="7_cpamr"]
+[ext_resource type="Texture2D" uid="uid://b4rdxo63qcr" path="res://assets/Letters/letterC.png" id="8_mn2x1"]
+[ext_resource type="Texture2D" uid="uid://cqp26gh03quo6" path="res://assets/Letters/letterK.png" id="9_hr4ih"]
+[ext_resource type="Texture2D" uid="uid://7023c2ac1axp" path="res://assets/Letters/letterO.png" id="10_xcgji"]
+[ext_resource type="Texture2D" uid="uid://bdq1say4ipfco" path="res://assets/Letters/letterY.png" id="11_f1hcs"]
+[ext_resource type="Texture2D" uid="uid://cbulsfrkw0lwf" path="res://assets/Letters/letterR.png" id="12_pg2s2"]
+[ext_resource type="Texture2D" uid="uid://bbs8vokd6tnqo" path="res://assets/Letters/letterI.png" id="13_xmgyx"]
+[ext_resource type="Texture2D" uid="uid://dp6igmvya02il" path="res://assets/Letters/letterD.png" id="14_blghb"]
+[ext_resource type="Texture2D" uid="uid://bj4mewga2dgvj" path="res://assets/planeGreen1.png" id="16_f0ka0"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qy7ti"]
+bg_color = Color(0, 0, 0, 0.6666667)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[node name="Mainmenu" type="Node2D" unique_id=75733053]
+script = ExtResource("1_y5i8j")
+
+[node name="Background" type="Sprite2D" parent="." unique_id=992987474]
+texture = ExtResource("1_cmhrf")
+centered = false
+
+[node name="Letters" type="Node2D" parent="." unique_id=1691155943]
+position = Vector2(-30, 0)
+
+[node name="LetterJ" type="Sprite2D" parent="Letters" unique_id=335709788]
+position = Vector2(200, 100)
+rotation = 0.17453292
+texture = ExtResource("3_qy7ti")
+
+[node name="LetterE" type="Sprite2D" parent="Letters" unique_id=774708533]
+position = Vector2(300, 100)
+rotation = -0.08726646
+texture = ExtResource("4_y5i8j")
+
+[node name="LetterT" type="Sprite2D" parent="Letters" unique_id=642368629]
+position = Vector2(400, 100)
+rotation = 0.08726646
+texture = ExtResource("5_f0ka0")
+
+[node name="LetterP" type="Sprite2D" parent="Letters" unique_id=1132563517]
+position = Vector2(500, 100)
+texture = ExtResource("6_lqdfc")
+
+[node name="LetterA" type="Sprite2D" parent="Letters" unique_id=1498891]
+position = Vector2(600, 100)
+rotation = -0.17453292
+texture = ExtResource("7_cpamr")
+
+[node name="LetterC" type="Sprite2D" parent="Letters" unique_id=1072438172]
+position = Vector2(700, 100)
+rotation = -0.17453292
+texture = ExtResource("8_mn2x1")
+
+[node name="LetterK" type="Sprite2D" parent="Letters" unique_id=1390415261]
+position = Vector2(800, 100)
+rotation = 0.17453292
+texture = ExtResource("9_hr4ih")
+
+[node name="LetterJ2" type="Sprite2D" parent="Letters" unique_id=1022571922]
+position = Vector2(200, 200)
+rotation = -0.17453292
+texture = ExtResource("3_qy7ti")
+
+[node name="LetterO" type="Sprite2D" parent="Letters" unique_id=447499224]
+position = Vector2(300, 200)
+rotation = 0.17453292
+texture = ExtResource("10_xcgji")
+
+[node name="LetterY" type="Sprite2D" parent="Letters" unique_id=1117669673]
+position = Vector2(400, 200)
+rotation = -0.08726646
+texture = ExtResource("11_f1hcs")
+
+[node name="LetterR" type="Sprite2D" parent="Letters" unique_id=1303564408]
+position = Vector2(500, 200)
+rotation = 0.08726646
+texture = ExtResource("12_pg2s2")
+
+[node name="LetterI" type="Sprite2D" parent="Letters" unique_id=2035568830]
+position = Vector2(600, 200)
+rotation = -0.17453292
+texture = ExtResource("13_xmgyx")
+
+[node name="LetterD" type="Sprite2D" parent="Letters" unique_id=1399985484]
+position = Vector2(700, 200)
+rotation = 0.17453292
+texture = ExtResource("14_blghb")
+
+[node name="LetterE2" type="Sprite2D" parent="Letters" unique_id=1679503188]
+position = Vector2(800, 200)
+rotation = 0.17453292
+texture = ExtResource("4_y5i8j")
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=1215493482]
+
+[node name="Buttons" type="Control" parent="UI" unique_id=439850059]
+layout_mode = 3
+anchors_preset = 0
+offset_top = 270.0
+offset_right = 960.0
+offset_bottom = 540.0
+
+[node name="StartButton" type="Button" parent="UI/Buttons" unique_id=765405621]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 130.0
+offset_top = -60.0
+offset_right = 350.0
+offset_bottom = -10.0
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_d2nv2")
+theme_override_font_sizes/font_size = 24
+text = "ゲームを始める"
+
+[node name="ExitButton" type="Button" parent="UI/Buttons" unique_id=1015503474]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -350.0
+offset_top = -60.0
+offset_right = -130.0
+offset_bottom = -10.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_d2nv2")
+theme_override_font_sizes/font_size = 24
+text = "ゲームを終了する"
+
+[node name="CreditButton" type="Button" parent="UI/Buttons" unique_id=1602149115]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -74.0
+offset_top = -100.0
+offset_right = 76.0
+offset_bottom = -50.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("2_d2nv2")
+theme_override_font_sizes/font_size = 24
+text = "クレジット"
+
+[node name="PlaneGreen1" type="Sprite2D" parent="UI/Buttons" unique_id=1992094191]
+position = Vector2(480, 25)
+rotation = -0.38397244
+texture = ExtResource("16_f0ka0")
+
+[node name="OverRay" type="PanelContainer" parent="UI" unique_id=514734006]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -240.0
+offset_top = -135.0
+offset_right = 240.0
+offset_bottom = 135.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_qy7ti")
+
+[node name="Message" type="Label" parent="UI/OverRay" unique_id=950412936]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_d2nv2")
+theme_override_font_sizes/font_size = 24
+text = "アセット - Tappy Plane"
+horizontal_alignment = 1
+
+[connection signal="pressed" from="UI/Buttons/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="UI/Buttons/ExitButton" to="." method="_on_exit_button_pressed"]
+[connection signal="pressed" from="UI/Buttons/CreditButton" to="." method="_on_credit_button_pressed"]
