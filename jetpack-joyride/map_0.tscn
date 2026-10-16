@@ -19,6 +19,7 @@ position = Vector2(480, -10)
 shape = SubResource("RectangleShape2D_udyf7")
 
 [node name="GroundGrass" type="StaticBody2D" parent="." unique_id=314175118]
+z_index = 1
 position = Vector2(0, 456)
 
 [node name="Sprite2D" type="Sprite2D" parent="GroundGrass" unique_id=1329029737]
