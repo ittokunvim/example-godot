@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://drt3pvriyia0l"]
 
 [ext_resource type="Texture2D" uid="uid://c5cimoek6680u" path="res://assets/background.png" id="1_cmhrf"]
+[ext_resource type="Script" uid="uid://cpo4r1q46qauv" path="res://mainmenu.gd" id="1_y5i8j"]
 [ext_resource type="FontFile" uid="uid://63e7uiwemxs3" path="res://assets/misaki_gothic.ttf" id="2_d2nv2"]
 [ext_resource type="Texture2D" uid="uid://d0558o2j3451t" path="res://assets/Letters/letterJ.png" id="3_qy7ti"]
 [ext_resource type="Texture2D" uid="uid://h6kde4ch61dc" path="res://assets/Letters/letterE.png" id="4_y5i8j"]
@@ -14,6 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://cbulsfrkw0lwf" path="res://assets/Letters/letterR.png" id="12_pg2s2"]
 [ext_resource type="Texture2D" uid="uid://bbs8vokd6tnqo" path="res://assets/Letters/letterI.png" id="13_xmgyx"]
 [ext_resource type="Texture2D" uid="uid://dp6igmvya02il" path="res://assets/Letters/letterD.png" id="14_blghb"]
+[ext_resource type="Texture2D" uid="uid://bj4mewga2dgvj" path="res://assets/planeGreen1.png" id="16_f0ka0"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qy7ti"]
 bg_color = Color(0, 0, 0, 0.6666667)
@@ -23,6 +25,7 @@ corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
 [node name="Mainmenu" type="Node2D" unique_id=75733053]
+script = ExtResource("1_y5i8j")
 
 [node name="Background" type="Sprite2D" parent="." unique_id=992987474]
 texture = ExtResource("1_cmhrf")
@@ -157,7 +160,13 @@ theme_override_fonts/font = ExtResource("2_d2nv2")
 theme_override_font_sizes/font_size = 24
 text = "クレジット"
 
+[node name="PlaneGreen1" type="Sprite2D" parent="UI/Buttons" unique_id=1992094191]
+position = Vector2(480, 25)
+rotation = -0.38397244
+texture = ExtResource("16_f0ka0")
+
 [node name="OverRay" type="PanelContainer" parent="UI" unique_id=514734006]
+visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -177,3 +186,7 @@ theme_override_fonts/font = ExtResource("2_d2nv2")
 theme_override_font_sizes/font_size = 24
 text = "アセット - Tappy Plane"
 horizontal_alignment = 1
+
+[connection signal="pressed" from="UI/Buttons/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="UI/Buttons/ExitButton" to="." method="_on_exit_button_pressed"]
+[connection signal="pressed" from="UI/Buttons/CreditButton" to="." method="_on_credit_button_pressed"]

@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="jetpack-joyride"
-run/main_scene="uid://daela07lxntq1"
+run/main_scene="uid://drt3pvriyia0l"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
