@@ -19,7 +19,7 @@ func _on_body_entered(body: Node2D) -> void:
 		return
 
 	is_collected = true
-	monitoring = false
+	set_deferred("monitoring", false)
 	collected.emit()
 
 	var tween := create_tween()

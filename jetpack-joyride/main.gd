@@ -9,6 +9,7 @@ enum GameState {
 const MAP_WIDTH := 960.0
 const SCROLL_SPEED := 250.0
 const ACTIVE_MAP_COUNT := 2
+const STAR_SCORE := 10
 
 const MAP_SCENES: Array[PackedScene] = [
 	preload("res://map_0.tscn"),
@@ -27,13 +28,16 @@ const MAP_SCENES: Array[PackedScene] = [
 var state := GameState.STANDBY
 var active_maps: Array[Node2D] = []
 var should_spawn_map_zero := true
+var score := 0
 
 @onready var plane: CharacterBody2D = $Plane
+@onready var score_label: Label = $UI/Score/Number
 @onready var star_pickup_sound: AudioStreamPlayer = $StarPickupSound
 
 
 func _ready() -> void:
 	plane.crashed.connect(_on_plane_crashed)
+	_update_score()
 	_enter_standby()
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -100,6 +104,8 @@ func _replace_map(map_index: int, map_position_x: float) -> void:
 
 func _enter_standby() -> void:
 	state = GameState.STANDBY
+	score = 0
+	_update_score()
 	_create_maps([0, 0])
 	plane.reset()
 
@@ -140,4 +146,10 @@ func _on_star_collected() -> void:
 	if state != GameState.PLAYING:
 		return
 
+	score += STAR_SCORE
+	_update_score()
 	star_pickup_sound.play()
+
+
+func _update_score() -> void:
+	score_label.text = "%08d" % score
