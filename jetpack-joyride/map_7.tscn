@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bs61qt625nfcs"]
 
 [ext_resource type="Texture2D" uid="uid://c5cimoek6680u" path="res://assets/background.png" id="1_gbnt8"]
+[ext_resource type="Script" uid="uid://boh3tp1nh5iv6" path="res://star.gd" id="1_gkcva"]
 [ext_resource type="Texture2D" uid="uid://b606o3pkw4c0p" path="res://assets/ground_grass.png" id="2_083m3"]
 [ext_resource type="Texture2D" uid="uid://bwnf27mij1bdr" path="res://assets/rockGrass.png" id="3_d1j30"]
 [ext_resource type="Texture2D" uid="uid://bnn8mcpsesny8" path="res://assets/rockGrassDown.png" id="4_gkcva"]
@@ -12,7 +13,7 @@ size = Vector2(960, 20)
 [sub_resource type="CircleShape2D" id="CircleShape2D_4e11v"]
 radius = 16.0
 
-[node name="Map0" type="Node2D" unique_id=847352468]
+[node name="Map7" type="Node2D" unique_id=847352468]
 
 [node name="Background" type="Sprite2D" parent="." unique_id=246997148]
 texture = ExtResource("1_gbnt8")
@@ -84,6 +85,7 @@ polygon = PackedVector2Array(12, -115, 45, 100, -45, 100)
 
 [node name="StarGold" type="Area2D" parent="." unique_id=1710101609]
 position = Vector2(202, 162)
+script = ExtResource("1_gkcva")
 
 [node name="Sprite2D" type="Sprite2D" parent="StarGold" unique_id=1846963432]
 texture = ExtResource("5_c20e7")
@@ -93,6 +95,7 @@ shape = SubResource("CircleShape2D_4e11v")
 
 [node name="StarGold2" type="Area2D" parent="." unique_id=1745128779]
 position = Vector2(354, 404)
+script = ExtResource("1_gkcva")
 
 [node name="Sprite2D" type="Sprite2D" parent="StarGold2" unique_id=858577600]
 texture = ExtResource("5_c20e7")
@@ -102,6 +105,7 @@ shape = SubResource("CircleShape2D_4e11v")
 
 [node name="StarGold3" type="Area2D" parent="." unique_id=1293088233]
 position = Vector2(504, 101)
+script = ExtResource("1_gkcva")
 
 [node name="Sprite2D" type="Sprite2D" parent="StarGold3" unique_id=1555574204]
 texture = ExtResource("5_c20e7")
@@ -111,6 +115,7 @@ shape = SubResource("CircleShape2D_4e11v")
 
 [node name="StarGold4" type="Area2D" parent="." unique_id=1518814470]
 position = Vector2(660, 385)
+script = ExtResource("1_gkcva")
 
 [node name="Sprite2D" type="Sprite2D" parent="StarGold4" unique_id=886340585]
 texture = ExtResource("5_c20e7")
@@ -120,6 +125,7 @@ shape = SubResource("CircleShape2D_4e11v")
 
 [node name="StarGold5" type="Area2D" parent="." unique_id=1392766636]
 position = Vector2(826, 143)
+script = ExtResource("1_gkcva")
 
 [node name="Sprite2D" type="Sprite2D" parent="StarGold5" unique_id=732100860]
 texture = ExtResource("5_c20e7")
