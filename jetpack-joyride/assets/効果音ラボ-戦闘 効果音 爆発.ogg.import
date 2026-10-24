@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://j2w5vmd37yhp"
+path="res://.godot/imported/効果音ラボ-戦闘 効果音 爆発.ogg-fd3c19a681942f187c7d4f1899ad5fa2.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/効果音ラボ-戦闘 効果音 爆発.ogg"
+dest_files=["res://.godot/imported/効果音ラボ-戦闘 効果音 爆発.ogg-fd3c19a681942f187c7d4f1899ad5fa2.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
