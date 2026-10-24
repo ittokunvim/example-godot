@@ -20,7 +20,7 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	if crashed_state:
+	if not flying or crashed_state:
 		return
 
 	var vertical_acceleration := GRAVITY
