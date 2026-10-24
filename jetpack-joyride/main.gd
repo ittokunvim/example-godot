@@ -29,6 +29,7 @@ var active_maps: Array[Node2D] = []
 var should_spawn_map_zero := true
 
 @onready var plane: CharacterBody2D = $Plane
+@onready var star_pickup_sound: AudioStreamPlayer = $StarPickupSound
 
 
 func _ready() -> void:
@@ -68,6 +69,7 @@ func _add_map(map_index: int, map_position_x: float) -> void:
 	add_child(map_instance)
 	move_child(map_instance, 0)
 	active_maps.append(map_instance)
+	_connect_star(map_instance)
 
 
 func _scroll_maps(delta: float) -> void:
@@ -93,6 +95,7 @@ func _replace_map(map_index: int, map_position_x: float) -> void:
 	add_child(next_map)
 	move_child(next_map, 0)
 	active_maps[map_index] = next_map
+	_connect_star(next_map)
 
 
 func _enter_standby() -> void:
@@ -125,3 +128,16 @@ func _on_plane_crashed() -> void:
 		return
 
 	state = GameState.GAMEOVER
+
+
+func _connect_star(map_instance: Node2D) -> void:
+	for child in map_instance.get_children():
+		if child is JetpackStar:
+			child.collected.connect(_on_star_collected)
+
+
+func _on_star_collected() -> void:
+	if state != GameState.PLAYING:
+		return
+
+	star_pickup_sound.play()

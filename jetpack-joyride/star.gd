@@ -1,5 +1,8 @@
+class_name JetpackStar
 extends Area2D
 
+
+signal collected
 
 const COLLECTION_HEIGHT := 48.0
 const COLLECTION_DURATION := 0.25
@@ -17,6 +20,7 @@ func _on_body_entered(body: Node2D) -> void:
 
 	is_collected = true
 	monitoring = false
+	collected.emit()
 
 	var tween := create_tween()
 	tween.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
