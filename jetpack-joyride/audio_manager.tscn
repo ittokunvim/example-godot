@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://be7853vp70mma"]
+
+[ext_resource type="Script" uid="uid://clyknxmgbkx5d" path="res://audio_manager.gd" id="1_6jj5d"]
+[ext_resource type="AudioStream" uid="uid://3ue4mutiyldl" path="res://assets/田中芳典-いつもの居酒屋.ogg" id="1_bq1v2"]
+[ext_resource type="AudioStream" uid="uid://c8xdqiq34ia3y" path="res://assets/効果音ラボ-ボタン決定音.ogg" id="2_6jj5d"]
+
+[node name="AudioManager" type="Node" unique_id=307466448]
+script = ExtResource("1_6jj5d")
+
+[node name="BGM" type="AudioStreamPlayer" parent="." unique_id=1490287751]
+stream = ExtResource("1_bq1v2")
+volume_db = -4.0
+
+[node name="SelectionSound" type="AudioStreamPlayer" parent="." unique_id=1687170179]
+stream = ExtResource("2_6jj5d")
