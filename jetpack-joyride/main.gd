@@ -29,6 +29,7 @@ var active_maps: Array[Node2D] = []
 var should_spawn_map_zero := true
 
 @onready var plane: CharacterBody2D = $Plane
+@onready var crash_sound: AudioStreamPlayer = $CrashSound
 
 
 func _ready() -> void:
@@ -97,6 +98,7 @@ func _replace_map(map_index: int, map_position_x: float) -> void:
 
 func _enter_standby() -> void:
 	state = GameState.STANDBY
+	crash_sound.stop()
 	_create_maps([0, 0])
 	plane.reset()
 
@@ -125,3 +127,4 @@ func _on_plane_crashed() -> void:
 		return
 
 	state = GameState.GAMEOVER
+	crash_sound.play()
