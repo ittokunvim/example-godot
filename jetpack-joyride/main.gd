@@ -126,7 +126,7 @@ func _start_playing() -> void:
 
 func _enter_gameover() -> void:
 	state = GameState.GAMEOVER
-  crash_sound.play()
+	crash_sound.play()
 	status_message_timer.stop()
 	_show_status_message(GAMEOVER_MESSAGE)
 
