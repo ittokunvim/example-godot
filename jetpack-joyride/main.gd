@@ -25,20 +25,31 @@ const MAP_SCENES: Array[PackedScene] = [
 	preload("res://map_10.tscn"),
 ]
 
+const STATUS_MESSAGE_DURATION := 2.0
+
+const STANDBY_MESSAGE := "スペース、クリックを押してスタート"
+const PLAYING_MESSAGE := "スタート！"
+const GAMEOVER_MESSAGE := "ゲームオーバー"
+
 var state := GameState.STANDBY
 var active_maps: Array[Node2D] = []
 var should_spawn_map_zero := true
 var score := 0
 
 @onready var plane: CharacterBody2D = $Plane
+@onready var status_message: Label = $UI/StatusMessage
+@onready var status_message_timer: Timer = $StatusMessageTimer
 @onready var score_label: Label = $UI/Score/Number
 @onready var star_pickup_sound: AudioStreamPlayer = $StarPickupSound
+@onready var crash_sound: AudioStreamPlayer = $CrashSound
 
 
 func _ready() -> void:
 	plane.crashed.connect(_on_plane_crashed)
+	status_message_timer.timeout.connect(_hide_status_message)
 	_update_score()
 	_enter_standby()
+
 
 func _unhandled_input(event: InputEvent) -> void:
 	if not event.is_action_pressed("fly"):
@@ -106,6 +117,9 @@ func _enter_standby() -> void:
 	state = GameState.STANDBY
 	score = 0
 	_update_score()
+	crash_sound.stop()
+	status_message_timer.stop()
+	_show_status_message(STANDBY_MESSAGE)
 	_create_maps([0, 0])
 	plane.reset()
 
@@ -113,8 +127,17 @@ func _enter_standby() -> void:
 func _start_playing() -> void:
 	state = GameState.PLAYING
 	should_spawn_map_zero = false
+	_show_status_message(PLAYING_MESSAGE)
+	status_message_timer.start(STATUS_MESSAGE_DURATION)
 	_create_maps([0, _get_next_map_index()])
 	plane.start_flying()
+
+
+func _enter_gameover() -> void:
+	state = GameState.GAMEOVER
+	crash_sound.play()
+	status_message_timer.stop()
+	_show_status_message(GAMEOVER_MESSAGE)
 
 
 func _get_next_map_index() -> int:
@@ -133,7 +156,7 @@ func _on_plane_crashed() -> void:
 	if state != GameState.PLAYING:
 		return
 
-	state = GameState.GAMEOVER
+	_enter_gameover()
 
 
 func _connect_star(map_instance: Node2D) -> void:
@@ -149,6 +172,15 @@ func _on_star_collected() -> void:
 	score += STAR_SCORE
 	_update_score()
 	star_pickup_sound.play()
+
+
+func _show_status_message(message: String) -> void:
+	status_message.text = message
+	status_message.show()
+
+
+func _hide_status_message() -> void:
+	status_message.hide()
 
 
 func _update_score() -> void:

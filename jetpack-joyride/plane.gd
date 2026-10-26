@@ -13,6 +13,7 @@ var crashed_state := false
 var start_position := Vector2.ZERO
 
 @onready var collision: CollisionShape2D = $CollisionShape2D
+@onready var rising_sound: AudioStreamPlayer = $RisingSound
 
 
 func _ready() -> void:
@@ -20,13 +21,15 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	if crashed_state:
+	if not flying or crashed_state:
 		return
 
 	var vertical_acceleration := GRAVITY
-	if Input.is_action_pressed("fly"):
+	var is_rising := Input.is_action_pressed("fly")
+	if is_rising:
 		vertical_acceleration -= FLY_THRUST
 
+	_update_rising_sound(is_rising)
 	velocity.y = clampf(
 		velocity.y + vertical_acceleration * delta,
 		MAX_RISE_SPEED,
@@ -49,14 +52,10 @@ func start_flying() -> void:
 	crashed_state = false
 
 
-func fly() -> void:
-	if flying and not crashed_state:
-		velocity.y = FLY_THRUST
-
-
 func reset() -> void:
 	flying = false
 	crashed_state = false
+	rising_sound.stop()
 	velocity = Vector2.ZERO
 	position = start_position
 	rotation = 0.0
@@ -65,6 +64,15 @@ func reset() -> void:
 func _crash() -> void:
 	crashed_state = true
 	flying = false
+	rising_sound.stop()
 	velocity = Vector2.ZERO
 	rotation = 0.0
 	crashed.emit()
+
+
+func _update_rising_sound(is_rising: bool) -> void:
+	if is_rising:
+		if not rising_sound.playing:
+			rising_sound.play()
+	else:
+		rising_sound.stop()
