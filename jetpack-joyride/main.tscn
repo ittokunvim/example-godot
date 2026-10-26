@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bqmhrrph36imp" path="res://main.gd" id="1_lquwl"]
 [ext_resource type="Texture2D" uid="uid://bj4mewga2dgvj" path="res://assets/planeGreen1.png" id="6_7mycd"]
+[ext_resource type="FontFile" uid="uid://63e7uiwemxs3" path="res://assets/misaki_gothic.ttf" id="6_272bh"]
 [ext_resource type="Script" uid="uid://8l2edsb4bh6k" path="res://plane.gd" id="6_kek77"]
 [ext_resource type="Texture2D" uid="uid://bphvj35i3y0a0" path="res://assets/planeGreen2.png" id="7_5vw27"]
 [ext_resource type="AudioStream" uid="uid://j2w5vmd37yhp" path="res://assets/効果音ラボ-戦闘 効果音 爆発.ogg" id="7_kek77"]
@@ -63,3 +64,24 @@ volume_db = 4.0
 
 [node name="CrashSound" type="AudioStreamPlayer" parent="." unique_id=420871524]
 stream = ExtResource("7_kek77")
+[node name="UI" type="CanvasLayer" parent="." unique_id=1543811269]
+
+[node name="StatusMessage" type="Label" parent="UI" unique_id=2063198674]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -134.0
+offset_top = -145.5
+offset_right = 134.0
+offset_bottom = -122.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_272bh")
+theme_override_font_sizes/font_size = 24
+text = "スペース、クリックを押してスタート"
+horizontal_alignment = 1
+
+[node name="StatusMessageTimer" type="Timer" parent="." unique_id=1783231]
