@@ -9,6 +9,7 @@ enum GameState {
 const MAP_WIDTH := 960.0
 const SCROLL_SPEED := 250.0
 const ACTIVE_MAP_COUNT := 2
+const STAR_SCORE := 10
 
 const MAP_SCENES: Array[PackedScene] = [
 	preload("res://map_0.tscn"),
@@ -33,16 +34,20 @@ const GAMEOVER_MESSAGE := "ゲームオーバー"
 var state := GameState.STANDBY
 var active_maps: Array[Node2D] = []
 var should_spawn_map_zero := true
+var score := 0
 
 @onready var plane: CharacterBody2D = $Plane
 @onready var status_message: Label = $UI/StatusMessage
 @onready var status_message_timer: Timer = $StatusMessageTimer
+@onready var score_label: Label = $UI/Score/Number
+@onready var star_pickup_sound: AudioStreamPlayer = $StarPickupSound
 @onready var crash_sound: AudioStreamPlayer = $CrashSound
 
 
 func _ready() -> void:
 	plane.crashed.connect(_on_plane_crashed)
 	status_message_timer.timeout.connect(_hide_status_message)
+	_update_score()
 	_enter_standby()
 
 
@@ -79,6 +84,7 @@ func _add_map(map_index: int, map_position_x: float) -> void:
 	add_child(map_instance)
 	move_child(map_instance, 0)
 	active_maps.append(map_instance)
+	_connect_star(map_instance)
 
 
 func _scroll_maps(delta: float) -> void:
@@ -104,10 +110,13 @@ func _replace_map(map_index: int, map_position_x: float) -> void:
 	add_child(next_map)
 	move_child(next_map, 0)
 	active_maps[map_index] = next_map
+	_connect_star(next_map)
 
 
 func _enter_standby() -> void:
 	state = GameState.STANDBY
+	score = 0
+	_update_score()
 	crash_sound.stop()
 	status_message_timer.stop()
 	_show_status_message(STANDBY_MESSAGE)
@@ -150,6 +159,21 @@ func _on_plane_crashed() -> void:
 	_enter_gameover()
 
 
+func _connect_star(map_instance: Node2D) -> void:
+	for child in map_instance.get_children():
+		if child is JetpackStar:
+			child.collected.connect(_on_star_collected)
+
+
+func _on_star_collected() -> void:
+	if state != GameState.PLAYING:
+		return
+
+	score += STAR_SCORE
+	_update_score()
+	star_pickup_sound.play()
+
+
 func _show_status_message(message: String) -> void:
 	status_message.text = message
 	status_message.show()
@@ -157,3 +181,7 @@ func _show_status_message(message: String) -> void:
 
 func _hide_status_message() -> void:
 	status_message.hide()
+
+
+func _update_score() -> void:
+	score_label.text = "%08d" % score

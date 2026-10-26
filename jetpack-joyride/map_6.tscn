@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://jrlgnmg063ub"]
 
 [ext_resource type="Texture2D" uid="uid://c5cimoek6680u" path="res://assets/background.png" id="1_5k43a"]
+[ext_resource type="Script" uid="uid://boh3tp1nh5iv6" path="res://star.gd" id="1_paun1"]
 [ext_resource type="Texture2D" uid="uid://b606o3pkw4c0p" path="res://assets/ground_grass.png" id="2_5ynpd"]
 [ext_resource type="Texture2D" uid="uid://bnn8mcpsesny8" path="res://assets/rockGrassDown.png" id="3_uloh5"]
 [ext_resource type="Texture2D" uid="uid://bwnf27mij1bdr" path="res://assets/rockGrass.png" id="4_paun1"]
@@ -12,7 +13,7 @@ size = Vector2(960, 20)
 [sub_resource type="CircleShape2D" id="CircleShape2D_iex8g"]
 radius = 16.0
 
-[node name="Map0" type="Node2D" unique_id=847352468]
+[node name="Map6" type="Node2D" unique_id=847352468]
 
 [node name="Background" type="Sprite2D" parent="." unique_id=246997148]
 texture = ExtResource("1_5k43a")
@@ -75,6 +76,7 @@ polygon = PackedVector2Array(12, -115, 45, 100, -45, 100)
 
 [node name="StarGold" type="Area2D" parent="." unique_id=399354223]
 position = Vector2(182, 299)
+script = ExtResource("1_paun1")
 
 [node name="Sprite2D" type="Sprite2D" parent="StarGold" unique_id=1313738239]
 texture = ExtResource("5_3kdvo")
@@ -84,6 +86,7 @@ shape = SubResource("CircleShape2D_iex8g")
 
 [node name="StarGold2" type="Area2D" parent="." unique_id=1791567520]
 position = Vector2(354, 162)
+script = ExtResource("1_paun1")
 
 [node name="Sprite2D" type="Sprite2D" parent="StarGold2" unique_id=2135164549]
 texture = ExtResource("5_3kdvo")
@@ -93,6 +96,7 @@ shape = SubResource("CircleShape2D_iex8g")
 
 [node name="StarGold3" type="Area2D" parent="." unique_id=1132971166]
 position = Vector2(555, 299)
+script = ExtResource("1_paun1")
 
 [node name="Sprite2D" type="Sprite2D" parent="StarGold3" unique_id=27188393]
 texture = ExtResource("5_3kdvo")
@@ -102,6 +106,7 @@ shape = SubResource("CircleShape2D_iex8g")
 
 [node name="StarGold4" type="Area2D" parent="." unique_id=287286324]
 position = Vector2(736, 162)
+script = ExtResource("1_paun1")
 
 [node name="Sprite2D" type="Sprite2D" parent="StarGold4" unique_id=427542586]
 texture = ExtResource("5_3kdvo")
