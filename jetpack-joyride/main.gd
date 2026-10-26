@@ -37,6 +37,7 @@ var should_spawn_map_zero := true
 @onready var plane: CharacterBody2D = $Plane
 @onready var status_message: Label = $UI/StatusMessage
 @onready var status_message_timer: Timer = $StatusMessageTimer
+@onready var crash_sound: AudioStreamPlayer = $CrashSound
 
 
 func _ready() -> void:
@@ -107,6 +108,7 @@ func _replace_map(map_index: int, map_position_x: float) -> void:
 
 func _enter_standby() -> void:
 	state = GameState.STANDBY
+	crash_sound.stop()
 	status_message_timer.stop()
 	_show_status_message(STANDBY_MESSAGE)
 	_create_maps([0, 0])
@@ -124,6 +126,7 @@ func _start_playing() -> void:
 
 func _enter_gameover() -> void:
 	state = GameState.GAMEOVER
+	crash_sound.play()
 	status_message_timer.stop()
 	_show_status_message(GAMEOVER_MESSAGE)
 
