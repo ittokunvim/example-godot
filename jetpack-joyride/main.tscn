@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://bj4mewga2dgvj" path="res://assets/planeGreen1.png" id="6_7mycd"]
 [ext_resource type="AudioStream" uid="uid://bescvn5epgq4t" path="res://assets/効果音ラボ-ボタン決定音41.ogg" id="6_272bh"]
 [ext_resource type="Script" uid="uid://8l2edsb4bh6k" path="res://plane.gd" id="6_kek77"]
+[ext_resource type="AudioStream" uid="uid://c6hrwkat0hain" path="res://assets/効果音ラボ- 車のアイドリング 効果音.mp3" id="7_4c57u"]
 [ext_resource type="Texture2D" uid="uid://bphvj35i3y0a0" path="res://assets/planeGreen2.png" id="7_5vw27"]
 [ext_resource type="FontFile" uid="uid://63e7uiwemxs3" path="res://assets/misaki_gothic.ttf" id="7_272bh"]
 [ext_resource type="AudioStream" uid="uid://j2w5vmd37yhp" path="res://assets/効果音ラボ-戦闘 効果音 爆発.ogg" id="7_kek77"]
@@ -52,6 +53,9 @@ shape = SubResource("CapsuleShape2D_5vw27")
 [node name="RisingSound" type="AudioStreamPlayer" parent="Plane" unique_id=1078830132]
 stream = ExtResource("6_4c57u")
 volume_db = 4.0
+
+[node name="GroundRunningSound" type="AudioStreamPlayer" parent="Plane" unique_id=1731883255]
+stream = ExtResource("7_4c57u")
 
 [node name="CrashSound" type="AudioStreamPlayer" parent="." unique_id=420871524]
 stream = ExtResource("7_kek77")
