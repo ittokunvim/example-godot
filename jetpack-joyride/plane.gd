@@ -14,10 +14,12 @@ var start_position := Vector2.ZERO
 
 @onready var collision: CollisionShape2D = $CollisionShape2D
 @onready var rising_sound: AudioStreamPlayer = $RisingSound
+@onready var ground_running_sound: AudioStreamPlayer = $GroundRunningSound
 
 
 func _ready() -> void:
 	start_position = position
+	ground_running_sound.finished.connect(_on_ground_running_sound_finished)
 
 
 func _physics_process(delta: float) -> void:
@@ -25,11 +27,9 @@ func _physics_process(delta: float) -> void:
 		return
 
 	var vertical_acceleration := GRAVITY
-	var is_rising := Input.is_action_pressed("fly")
-	if is_rising:
+	if Input.is_action_pressed("fly"):
 		vertical_acceleration -= FLY_THRUST
 
-	_update_rising_sound(is_rising)
 	velocity.y = clampf(
 		velocity.y + vertical_acceleration * delta,
 		MAX_RISE_SPEED,
@@ -44,8 +44,9 @@ func _physics_process(delta: float) -> void:
 		var collider := slide_collision.get_collider()
 		if collider is Node and collider.is_in_group("obstacle"):
 			_crash()
-			break
+			return
 
+	_update_engine_sounds()
 
 func start_flying() -> void:
 	flying = true
@@ -55,7 +56,7 @@ func start_flying() -> void:
 func reset() -> void:
 	flying = false
 	crashed_state = false
-	rising_sound.stop()
+	_stop_engine_sounds()
 	velocity = Vector2.ZERO
 	position = start_position
 	rotation = 0.0
@@ -64,15 +65,31 @@ func reset() -> void:
 func _crash() -> void:
 	crashed_state = true
 	flying = false
-	rising_sound.stop()
+	_stop_engine_sounds()
 	velocity = Vector2.ZERO
 	rotation = 0.0
 	crashed.emit()
 
 
-func _update_rising_sound(is_rising: bool) -> void:
-	if is_rising:
+func _update_engine_sounds() -> void:
+	if is_on_floor():
+		rising_sound.stop()
+		if not ground_running_sound.playing:
+			ground_running_sound.play()
+	elif rotation <= 0.2:
+		ground_running_sound.stop()
 		if not rising_sound.playing:
 			rising_sound.play()
 	else:
 		rising_sound.stop()
+		ground_running_sound.stop()
+
+
+func _stop_engine_sounds() -> void:
+	rising_sound.stop()
+	ground_running_sound.stop()
+
+
+func _on_ground_running_sound_finished() -> void:
+	if flying and not crashed_state and is_on_floor():
+		ground_running_sound.play()
