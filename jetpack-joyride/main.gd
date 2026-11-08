@@ -12,6 +12,8 @@ const SCROLL_SPEED_INCREMENT := 25.0
 const DIFFICULTY_DISTANCE_STEP := 2000.0
 const ACTIVE_MAP_COUNT := 2
 const STAR_SCORE := 10
+const BIRD_SPAWN_INTERVAL := 5
+const BIRD_SCENE := preload("res://bird.tscn")
 
 const MAP_INDICES_BY_DIFFICULTY := [
 	[1, 2],
@@ -46,8 +48,11 @@ var active_maps: Array[Node2D] = []
 var should_spawn_map_zero := true
 var score := 0
 var distance_travelled := 0.0
+var obstacles_cleared := 0
+var next_bird_spawn_at := BIRD_SPAWN_INTERVAL
 
 @onready var plane: CharacterBody2D = $Plane
+@onready var birds: Node2D = $Birds
 @onready var status_message: Label = $UI/StatusMessage
 @onready var status_message_timer: Timer = $StatusMessageTimer
 @onready var score_label: Label = $UI/Score/Number
@@ -103,6 +108,7 @@ func _scroll_maps(delta: float) -> void:
 	if state == GameState.PLAYING:
 		distance_travelled += scroll_speed * delta
 
+	_set_birds_scroll_speed(scroll_speed)
 	for map_index in active_maps.size():
 		var map_instance := active_maps[map_index]
 		map_instance.position.x -= scroll_speed * delta
@@ -116,6 +122,7 @@ func _scroll_maps(delta: float) -> void:
 
 func _replace_map(map_index: int, map_position_x: float) -> void:
 	var old_map := active_maps[map_index]
+	_count_cleared_obstacles(old_map)
 	old_map.queue_free()
 
 	var next_map_index := _get_next_map_index()
@@ -132,11 +139,17 @@ func _enter_standby() -> void:
 	state = GameState.STANDBY
 	score = 0
 	distance_travelled = 0.0
+	obstacles_cleared = 0
+	next_bird_spawn_at = BIRD_SPAWN_INTERVAL
 	_update_score()
 	crash_sound.stop()
 	status_message_timer.stop()
 	_show_status_message(STANDBY_MESSAGE)
 	_create_maps([0, 0])
+	for child in birds.get_children():
+		var bird := child as JetpackBird
+		if bird != null:
+			bird.queue_free()
 	plane.reset()
 
 
@@ -151,6 +164,10 @@ func _start_playing() -> void:
 
 func _enter_gameover() -> void:
 	state = GameState.GAMEOVER
+	for child in birds.get_children():
+		var bird := child as JetpackBird
+		if bird != null:
+			bird.set_active(false)
 	crash_sound.play()
 	status_message_timer.stop()
 	_show_status_message(GAMEOVER_MESSAGE)
@@ -191,6 +208,34 @@ func _connect_star(map_instance: Node2D) -> void:
 	for child in map_instance.get_children():
 		if child is JetpackStar:
 			child.collected.connect(_on_star_collected)
+
+
+func _count_cleared_obstacles(map_instance: Node2D) -> void:
+	for child in map_instance.get_children():
+		if child.is_in_group("obstacle"):
+			obstacles_cleared += 1
+
+	while obstacles_cleared >= next_bird_spawn_at:
+		_spawn_bird()
+		next_bird_spawn_at += BIRD_SPAWN_INTERVAL
+
+
+func _spawn_bird() -> void:
+	var bird := BIRD_SCENE.instantiate() as JetpackBird
+	bird.global_position = Vector2(
+		get_viewport_rect().size.x + JetpackBird.DESPAWN_MARGIN,
+		plane.global_position.y,
+	)
+	birds.add_child(bird)
+	bird.setup(plane)
+	bird.set_scroll_speed(_get_scroll_speed())
+
+
+func _set_birds_scroll_speed(scroll_speed: float) -> void:
+	for child in birds.get_children():
+		var bird := child as JetpackBird
+		if bird != null:
+			bird.set_scroll_speed(scroll_speed)
 
 
 func _on_star_collected() -> void:
