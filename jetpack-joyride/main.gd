@@ -8,8 +8,18 @@ enum GameState {
 
 const MAP_WIDTH := 960.0
 const SCROLL_SPEED := 250.0
+const SCROLL_SPEED_INCREMENT := 25.0
+const DIFFICULTY_DISTANCE_STEP := 2000.0
 const ACTIVE_MAP_COUNT := 2
 const STAR_SCORE := 10
+
+const MAP_INDICES_BY_DIFFICULTY := [
+	[1, 2],
+	[1, 2, 3, 4],
+	[1, 2, 3, 4, 5, 6],
+	[1, 2, 3, 4, 5, 6, 7, 8],
+	[1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+]
 
 const MAP_SCENES: Array[PackedScene] = [
 	preload("res://map_0.tscn"),
@@ -35,6 +45,7 @@ var state := GameState.STANDBY
 var active_maps: Array[Node2D] = []
 var should_spawn_map_zero := true
 var score := 0
+var distance_travelled := 0.0
 
 @onready var plane: CharacterBody2D = $Plane
 @onready var status_message: Label = $UI/StatusMessage
@@ -88,9 +99,13 @@ func _add_map(map_index: int, map_position_x: float) -> void:
 
 
 func _scroll_maps(delta: float) -> void:
+	var scroll_speed := _get_scroll_speed()
+	if state == GameState.PLAYING:
+		distance_travelled += scroll_speed * delta
+
 	for map_index in active_maps.size():
 		var map_instance := active_maps[map_index]
-		map_instance.position.x -= SCROLL_SPEED * delta
+		map_instance.position.x -= scroll_speed * delta
 
 		if map_instance.position.x <= -MAP_WIDTH:
 			_replace_map(
@@ -116,6 +131,7 @@ func _replace_map(map_index: int, map_position_x: float) -> void:
 func _enter_standby() -> void:
 	state = GameState.STANDBY
 	score = 0
+	distance_travelled = 0.0
 	_update_score()
 	crash_sound.stop()
 	status_message_timer.stop()
@@ -149,7 +165,19 @@ func _get_next_map_index() -> int:
 		return 0
 
 	should_spawn_map_zero = true
-	return randi_range(1, MAP_SCENES.size() - 1)
+	var map_indices: Array = MAP_INDICES_BY_DIFFICULTY[_get_difficulty_level()]
+	return int(map_indices.pick_random())
+
+
+func _get_scroll_speed() -> float:
+	return SCROLL_SPEED + SCROLL_SPEED_INCREMENT * _get_difficulty_level()
+
+
+func _get_difficulty_level() -> int:
+	return mini(
+		int(distance_travelled / DIFFICULTY_DISTANCE_STEP),
+		MAP_INDICES_BY_DIFFICULTY.size() - 1,
+	)
 
 
 func _on_plane_crashed() -> void:
