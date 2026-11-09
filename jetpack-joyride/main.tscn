@@ -63,15 +63,15 @@ stream = ExtResource("7_4c57u")
 [node name="CrashSound" type="AudioStreamPlayer" parent="Plane" unique_id=420871524]
 stream = ExtResource("7_kek77")
 
-[node name="StarPickupSound" type="AudioStreamPlayer" parent="." unique_id=571952975]
-stream = ExtResource("6_272bh")
-volume_db = -8.0
-
 [node name="BirdManager" type="Node2D" parent="." unique_id=83273756]
 script = ExtResource("10_ycdy4")
 
 [node name="MapManager" type="Node2D" parent="." unique_id=1724807379]
 script = ExtResource("10_dg77c")
+
+[node name="StarPickupSound" type="AudioStreamPlayer" parent="MapManager" unique_id=571952975]
+stream = ExtResource("6_272bh")
+volume_db = -8.0
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=823264880]
 script = ExtResource("10_efxa6")

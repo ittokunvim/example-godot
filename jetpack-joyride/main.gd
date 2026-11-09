@@ -21,7 +21,6 @@ var distance_travelled := 0.0
 
 @onready var plane: CharacterBody2D = $Plane
 @onready var bird_manager: JetpackBirdManager = $BirdManager
-@onready var star_pickup_sound: AudioStreamPlayer = $StarPickupSound
 @onready var map_manager: JetpackMapManager = $MapManager
 @onready var ui: JetpackUI = $UI
 
@@ -48,7 +47,6 @@ func _unhandled_input(event: InputEvent) -> void:
 func _process(delta: float) -> void:
 	if state == GameState.GAMEOVER:
 		return
-
 
 	var scroll_speed := _get_scroll_speed()
 	var is_playing := state == GameState.PLAYING
@@ -117,4 +115,4 @@ func _on_star_collected() -> void:
 
 	score += STAR_SCORE
 	ui.set_score(score)
-	star_pickup_sound.play()
+	map_manager.play_star_sound()

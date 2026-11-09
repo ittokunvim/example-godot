@@ -32,6 +32,7 @@ const MAP_SCENES: Array[PackedScene] = [
 var active_maps: Array[Node2D] = []
 var should_spawn_map_zero := true
 
+@onready var star_pickup_sound: AudioStreamPlayer = $StarPickupSound
 
 func reset() -> void:
 	_create_maps([0, 0])
@@ -63,6 +64,10 @@ func scroll(
 
 func get_max_difficulty_level() -> int:
 	return MAP_INDICES_BY_DIFFICULTY.size() - 1
+
+
+func play_star_sound() -> void:
+	star_pickup_sound.play()
 
 
 func _create_maps(map_indices: Array[int]) -> void:
