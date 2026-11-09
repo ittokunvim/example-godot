@@ -76,7 +76,7 @@ func _update_engine_sounds() -> void:
 		rising_sound.stop()
 		if not ground_running_sound.playing:
 			ground_running_sound.play()
-	elif rotation <= 0.2:
+	elif rotation < 0.25:
 		ground_running_sound.stop()
 		if not rising_sound.playing:
 			rising_sound.play()
