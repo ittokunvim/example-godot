@@ -15,6 +15,7 @@ var start_position := Vector2.ZERO
 @onready var collision: CollisionShape2D = $CollisionShape2D
 @onready var rising_sound: AudioStreamPlayer = $RisingSound
 @onready var ground_running_sound: AudioStreamPlayer = $GroundRunningSound
+@onready var crash_sound: AudioStreamPlayer = $CrashSound
 
 
 func _ready() -> void:
@@ -56,6 +57,7 @@ func start_flying() -> void:
 func reset() -> void:
 	flying = false
 	crashed_state = false
+	crash_sound.stop()
 	_stop_engine_sounds()
 	velocity = Vector2.ZERO
 	position = start_position
@@ -65,6 +67,7 @@ func reset() -> void:
 func _crash() -> void:
 	crashed_state = true
 	flying = false
+	crash_sound.play()
 	_stop_engine_sounds()
 	velocity = Vector2.ZERO
 	rotation = 0.0

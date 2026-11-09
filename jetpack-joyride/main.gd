@@ -37,8 +37,6 @@ const MAP_SCENES: Array[PackedScene] = [
 	preload("res://scenes/maps/segment_10.tscn"),
 ]
 
-const STATUS_MESSAGE_DURATION := 2.0
-
 const STANDBY_MESSAGE := "スペース、クリックを押してスタート"
 const PLAYING_MESSAGE := "スタート！"
 const GAMEOVER_MESSAGE := "ゲームオーバー"
@@ -53,17 +51,13 @@ var next_bird_spawn_at := BIRD_SPAWN_INTERVAL
 
 @onready var plane: CharacterBody2D = $Plane
 @onready var birds: Node2D = $Birds
-@onready var status_message: Label = $UI/StatusMessage
-@onready var status_message_timer: Timer = $StatusMessageTimer
-@onready var score_label: Label = $UI/Score/Number
 @onready var star_pickup_sound: AudioStreamPlayer = $StarPickupSound
-@onready var crash_sound: AudioStreamPlayer = $CrashSound
+@onready var ui: JetpackUI = $UI
 
 
 func _ready() -> void:
 	plane.crashed.connect(_on_plane_crashed)
-	status_message_timer.timeout.connect(_hide_status_message)
-	_update_score()
+	ui.set_score(score)
 	_enter_standby()
 
 
@@ -141,10 +135,9 @@ func _enter_standby() -> void:
 	distance_travelled = 0.0
 	obstacles_cleared = 0
 	next_bird_spawn_at = BIRD_SPAWN_INTERVAL
-	_update_score()
-	crash_sound.stop()
-	status_message_timer.stop()
-	_show_status_message(STANDBY_MESSAGE)
+	ui.set_score(score)
+	ui.stop_status_message_timer()
+	ui.show_status_message(STANDBY_MESSAGE)
 	_create_maps([0, 0])
 	for child in birds.get_children():
 		var bird := child as JetpackBird
@@ -156,8 +149,7 @@ func _enter_standby() -> void:
 func _start_playing() -> void:
 	state = GameState.PLAYING
 	should_spawn_map_zero = false
-	_show_status_message(PLAYING_MESSAGE)
-	status_message_timer.start(STATUS_MESSAGE_DURATION)
+	ui.show_temporary_status_message(PLAYING_MESSAGE)
 	_create_maps([0, _get_next_map_index()])
 	plane.start_flying()
 
@@ -168,9 +160,8 @@ func _enter_gameover() -> void:
 		var bird := child as JetpackBird
 		if bird != null:
 			bird.set_active(false)
-	crash_sound.play()
-	status_message_timer.stop()
-	_show_status_message(GAMEOVER_MESSAGE)
+	ui.stop_status_message_timer()
+	ui.show_status_message(GAMEOVER_MESSAGE)
 
 
 func _get_next_map_index() -> int:
@@ -243,18 +234,5 @@ func _on_star_collected() -> void:
 		return
 
 	score += STAR_SCORE
-	_update_score()
+	ui.set_score(score)
 	star_pickup_sound.play()
-
-
-func _show_status_message(message: String) -> void:
-	status_message.text = message
-	status_message.show()
-
-
-func _hide_status_message() -> void:
-	status_message.hide()
-
-
-func _update_score() -> void:
-	score_label.text = "%08d" % score

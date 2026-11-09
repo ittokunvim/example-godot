@@ -10,6 +10,7 @@
 [ext_resource type="FontFile" uid="uid://63e7uiwemxs3" path="res://assets/fonts/misaki_gothic.ttf" id="7_272bh"]
 [ext_resource type="AudioStream" uid="uid://j2w5vmd37yhp" path="res://assets/audio/sfx/効果音ラボ-戦闘 効果音 爆発.ogg" id="7_kek77"]
 [ext_resource type="Texture2D" uid="uid://bjb05qvrlndl5" path="res://assets/images/planes/planeGreen3.png" id="8_kek77"]
+[ext_resource type="Script" uid="uid://cstd6ba7la1gy" path="res://scripts/ui.gd" id="10_efxa6"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_4c57u"]
 animations = [{
@@ -57,7 +58,7 @@ volume_db = 4.0
 [node name="GroundRunningSound" type="AudioStreamPlayer" parent="Plane" unique_id=1731883255]
 stream = ExtResource("7_4c57u")
 
-[node name="CrashSound" type="AudioStreamPlayer" parent="." unique_id=420871524]
+[node name="CrashSound" type="AudioStreamPlayer" parent="Plane" unique_id=420871524]
 stream = ExtResource("7_kek77")
 
 [node name="StarPickupSound" type="AudioStreamPlayer" parent="." unique_id=571952975]
@@ -67,6 +68,7 @@ volume_db = -8.0
 [node name="Birds" type="Node2D" parent="." unique_id=83273756]
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=823264880]
+script = ExtResource("10_efxa6")
 
 [node name="StatusMessage" type="Label" parent="UI" unique_id=2063198674]
 anchors_preset = 5
@@ -83,6 +85,8 @@ theme_override_font_sizes/font_size = 24
 text = "スペース、クリックを押してスタート"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="StatusMessageTimer" type="Timer" parent="UI" unique_id=1783231]
 
 [node name="Score" type="Control" parent="UI" unique_id=698065198]
 layout_mode = 3
@@ -121,5 +125,3 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("7_272bh")
 theme_override_font_sizes/font_size = 32
 text = "00000000"
-
-[node name="StatusMessageTimer" type="Timer" parent="." unique_id=1783231]
