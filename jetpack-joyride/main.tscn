@@ -1,15 +1,15 @@
 [gd_scene format=3 uid="uid://daela07lxntq1"]
 
 [ext_resource type="Script" uid="uid://bqmhrrph36imp" path="res://main.gd" id="1_lquwl"]
-[ext_resource type="AudioStream" uid="uid://caejep2ja75uq" path="res://assets/効果音ラボ-ヘリコプター着陸 効果音.ogg" id="6_4c57u"]
-[ext_resource type="Texture2D" uid="uid://bj4mewga2dgvj" path="res://assets/planeGreen1.png" id="6_7mycd"]
-[ext_resource type="AudioStream" uid="uid://bescvn5epgq4t" path="res://assets/効果音ラボ-ボタン決定音41.ogg" id="6_272bh"]
+[ext_resource type="AudioStream" uid="uid://caejep2ja75uq" path="res://assets/audio/sfx/効果音ラボ-ヘリコプター着陸 効果音.ogg" id="6_4c57u"]
+[ext_resource type="Texture2D" uid="uid://bj4mewga2dgvj" path="res://assets/images/planes/planeGreen1.png" id="6_7mycd"]
+[ext_resource type="AudioStream" uid="uid://bescvn5epgq4t" path="res://assets/audio/sfx/効果音ラボ-ボタン決定音41.ogg" id="6_272bh"]
 [ext_resource type="Script" uid="uid://8l2edsb4bh6k" path="res://plane.gd" id="6_kek77"]
-[ext_resource type="AudioStream" uid="uid://c6hrwkat0hain" path="res://assets/効果音ラボ- 車のアイドリング 効果音.mp3" id="7_4c57u"]
-[ext_resource type="Texture2D" uid="uid://bphvj35i3y0a0" path="res://assets/planeGreen2.png" id="7_5vw27"]
-[ext_resource type="FontFile" uid="uid://63e7uiwemxs3" path="res://assets/misaki_gothic.ttf" id="7_272bh"]
-[ext_resource type="AudioStream" uid="uid://j2w5vmd37yhp" path="res://assets/効果音ラボ-戦闘 効果音 爆発.ogg" id="7_kek77"]
-[ext_resource type="Texture2D" uid="uid://bjb05qvrlndl5" path="res://assets/planeGreen3.png" id="8_kek77"]
+[ext_resource type="AudioStream" uid="uid://c6hrwkat0hain" path="res://assets/audio/sfx/効果音ラボ- 車のアイドリング 効果音.mp3" id="7_4c57u"]
+[ext_resource type="Texture2D" uid="uid://bphvj35i3y0a0" path="res://assets/images/planes/planeGreen2.png" id="7_5vw27"]
+[ext_resource type="FontFile" uid="uid://63e7uiwemxs3" path="res://assets/fonts/misaki_gothic.ttf" id="7_272bh"]
+[ext_resource type="AudioStream" uid="uid://j2w5vmd37yhp" path="res://assets/audio/sfx/効果音ラボ-戦闘 効果音 爆発.ogg" id="7_kek77"]
+[ext_resource type="Texture2D" uid="uid://bjb05qvrlndl5" path="res://assets/images/planes/planeGreen3.png" id="8_kek77"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_4c57u"]
 animations = [{

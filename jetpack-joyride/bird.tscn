@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://de7yjbp5ulc5r"]
 
 [ext_resource type="Script" uid="uid://cp55ocxbqcpu7" path="res://bird.gd" id="1_script"]
-[ext_resource type="Texture2D" uid="uid://dkb0wveeijt81" path="res://assets/red-bird-1.png" id="2_bird1"]
-[ext_resource type="Texture2D" uid="uid://dpkaxqm0wh64e" path="res://assets/red-bird-2.png" id="3_bird2"]
-[ext_resource type="Texture2D" uid="uid://bpexx278w71p" path="res://assets/red-bird-3.png" id="4_bird3"]
+[ext_resource type="Texture2D" uid="uid://dkb0wveeijt81" path="res://assets/images/obstacles/red-bird-1.png" id="2_bird1"]
+[ext_resource type="Texture2D" uid="uid://dpkaxqm0wh64e" path="res://assets/images/obstacles/red-bird-2.png" id="3_bird2"]
+[ext_resource type="Texture2D" uid="uid://bpexx278w71p" path="res://assets/images/obstacles/red-bird-3.png" id="4_bird3"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_bird"]
 animations = [{

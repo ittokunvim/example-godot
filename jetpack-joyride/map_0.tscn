@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://of0k3bftebux"]
 
-[ext_resource type="Texture2D" uid="uid://c5cimoek6680u" path="res://assets/background.png" id="1_udyf7"]
-[ext_resource type="Texture2D" uid="uid://b606o3pkw4c0p" path="res://assets/ground_grass.png" id="2_e7fvt"]
+[ext_resource type="Texture2D" uid="uid://c5cimoek6680u" path="res://assets/images/backgrounds/background.png" id="1_udyf7"]
+[ext_resource type="Texture2D" uid="uid://b606o3pkw4c0p" path="res://assets/images/terrain/ground_grass.png" id="2_e7fvt"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_udyf7"]
 size = Vector2(960, 20)
