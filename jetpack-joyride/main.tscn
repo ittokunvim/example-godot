@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://bjb05qvrlndl5" path="res://assets/images/planes/planeGreen3.png" id="8_kek77"]
 [ext_resource type="Script" uid="uid://ipd0ok3v4ef7" path="res://scripts/map_manager.gd" id="10_dg77c"]
 [ext_resource type="Script" uid="uid://cstd6ba7la1gy" path="res://scripts/ui.gd" id="10_efxa6"]
+[ext_resource type="Script" uid="uid://dk86vhkw124u8" path="res://scripts/bird_manager.gd" id="10_ycdy4"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_4c57u"]
 animations = [{
@@ -66,7 +67,8 @@ stream = ExtResource("7_kek77")
 stream = ExtResource("6_272bh")
 volume_db = -8.0
 
-[node name="Birds" type="Node2D" parent="." unique_id=83273756]
+[node name="BirdManager" type="Node2D" parent="." unique_id=83273756]
+script = ExtResource("10_ycdy4")
 
 [node name="MapManager" type="Node2D" parent="." unique_id=1724807379]
 script = ExtResource("10_dg77c")
