@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://c6hrwkat0hain"
+path="res://.godot/imported/効果音ラボ- 車のアイドリング 効果音.mp3-bc35f15690b40cd65c481b983f208bb7.mp3str"
+
+[deps]
+
+source_file="res://assets/効果音ラボ- 車のアイドリング 効果音.mp3"
+dest_files=["res://.godot/imported/効果音ラボ- 車のアイドリング 効果音.mp3-bc35f15690b40cd65c481b983f208bb7.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
