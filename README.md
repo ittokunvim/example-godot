@@ -18,7 +18,7 @@ https://20_games_challenge.gitlab.io/
 - プレイヤーのパドルは `W` / `S` または上下矢印キーで操作します。
 - 先に5点取った側が勝者です。
 
-### アセットの帰属
+#### アセットの帰属
 
 - 効果音: [効果音ラボ](https://soundeffect-lab.info/)。卓球の跳ね返り音と決定音を使用しています。
 - BGM: [蒲鉾さちこ](https://dova-s.jp/_contents/author/profile423.html)「Lazy night Loop」。
@@ -44,4 +44,11 @@ https://20_games_challenge.gitlab.io/
 - プレイ中はスペースキーまたはマウスクリックで上昇して、星を獲得してスコアを伸ばします。
 - プレイ中に障害物に当たるとゲームオーバーです。
 ゲームオーバー後にスペースキーまたはマウスクリックでリトライできます。
+
+#### アセットの帰属
+
+- アセット - ToppyPlane
+- サウンド - 効果音ラボ
+- BGM - 田中芳典-いつもの居酒屋
+- フォント - misaki_gothic
 
