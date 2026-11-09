@@ -6,44 +6,18 @@ enum GameState {
 	GAMEOVER,
 }
 
-const MAP_WIDTH := 960.0
 const SCROLL_SPEED := 250.0
 const SCROLL_SPEED_INCREMENT := 25.0
 const DIFFICULTY_DISTANCE_STEP := 2000.0
-const ACTIVE_MAP_COUNT := 2
 const STAR_SCORE := 10
 const BIRD_SPAWN_INTERVAL := 5
 const BIRD_SCENE := preload("res://scenes/obstacles/bird.tscn")
-
-const MAP_INDICES_BY_DIFFICULTY := [
-	[1, 2],
-	[1, 2, 3, 4],
-	[1, 2, 3, 4, 5, 6],
-	[1, 2, 3, 4, 5, 6, 7, 8],
-	[1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-]
-
-const MAP_SCENES: Array[PackedScene] = [
-	preload("res://scenes/maps/segment_00.tscn"),
-	preload("res://scenes/maps/segment_01.tscn"),
-	preload("res://scenes/maps/segment_02.tscn"),
-	preload("res://scenes/maps/segment_03.tscn"),
-	preload("res://scenes/maps/segment_04.tscn"),
-	preload("res://scenes/maps/segment_05.tscn"),
-	preload("res://scenes/maps/segment_06.tscn"),
-	preload("res://scenes/maps/segment_07.tscn"),
-	preload("res://scenes/maps/segment_08.tscn"),
-	preload("res://scenes/maps/segment_09.tscn"),
-	preload("res://scenes/maps/segment_10.tscn"),
-]
 
 const STANDBY_MESSAGE := "スペース、クリックを押してスタート"
 const PLAYING_MESSAGE := "スタート！"
 const GAMEOVER_MESSAGE := "ゲームオーバー"
 
 var state := GameState.STANDBY
-var active_maps: Array[Node2D] = []
-var should_spawn_map_zero := true
 var score := 0
 var distance_travelled := 0.0
 var obstacles_cleared := 0
@@ -52,11 +26,14 @@ var next_bird_spawn_at := BIRD_SPAWN_INTERVAL
 @onready var plane: CharacterBody2D = $Plane
 @onready var birds: Node2D = $Birds
 @onready var star_pickup_sound: AudioStreamPlayer = $StarPickupSound
+@onready var map_manager: JetpackMapManager = $MapManager
 @onready var ui: JetpackUI = $UI
 
 
 func _ready() -> void:
 	plane.crashed.connect(_on_plane_crashed)
+	map_manager.star_collected.connect(_on_star_collected)
+	map_manager.obstacles_cleared.connect(_on_obstacles_cleared)
 	ui.set_score(score)
 	_enter_standby()
 
@@ -76,57 +53,18 @@ func _process(delta: float) -> void:
 	if state == GameState.GAMEOVER:
 		return
 
-	_scroll_maps(delta)
 
-
-func _create_maps(map_indices: Array[int]) -> void:
-	for map_instance in active_maps:
-		map_instance.queue_free()
-	active_maps.clear()
-
-	for slot in map_indices.size():
-		_add_map(map_indices[slot], slot * MAP_WIDTH)
-
-
-func _add_map(map_index: int, map_position_x: float) -> void:
-	var map_instance := MAP_SCENES[map_index].instantiate() as Node2D
-	map_instance.position.x = map_position_x
-	add_child(map_instance)
-	move_child(map_instance, 0)
-	active_maps.append(map_instance)
-	_connect_star(map_instance)
-
-
-func _scroll_maps(delta: float) -> void:
 	var scroll_speed := _get_scroll_speed()
-	if state == GameState.PLAYING:
+	var is_playing := state == GameState.PLAYING
+	if is_playing:
 		distance_travelled += scroll_speed * delta
-
-	_set_birds_scroll_speed(scroll_speed)
-	for map_index in active_maps.size():
-		var map_instance := active_maps[map_index]
-		map_instance.position.x -= scroll_speed * delta
-
-		if map_instance.position.x <= -MAP_WIDTH:
-			_replace_map(
-				map_index,
-				map_instance.position.x + MAP_WIDTH * ACTIVE_MAP_COUNT
-			)
-
-
-func _replace_map(map_index: int, map_position_x: float) -> void:
-	var old_map := active_maps[map_index]
-	_count_cleared_obstacles(old_map)
-	old_map.queue_free()
-
-	var next_map_index := _get_next_map_index()
-	var next_map := MAP_SCENES[next_map_index].instantiate() as Node2D
-	next_map.position.x = map_position_x
-
-	add_child(next_map)
-	move_child(next_map, 0)
-	active_maps[map_index] = next_map
-	_connect_star(next_map)
+		
+	map_manager.scroll(
+		delta,
+		scroll_speed,
+		_get_difficulty_level(),
+		is_playing,
+	)
 
 
 func _enter_standby() -> void:
@@ -138,19 +76,16 @@ func _enter_standby() -> void:
 	ui.set_score(score)
 	ui.stop_status_message_timer()
 	ui.show_status_message(STANDBY_MESSAGE)
-	_create_maps([0, 0])
+	map_manager.reset()
 	for child in birds.get_children():
-		var bird := child as JetpackBird
-		if bird != null:
-			bird.queue_free()
+		child.queue_free()
 	plane.reset()
 
 
 func _start_playing() -> void:
 	state = GameState.PLAYING
-	should_spawn_map_zero = false
 	ui.show_temporary_status_message(PLAYING_MESSAGE)
-	_create_maps([0, _get_next_map_index()])
+	map_manager.start(_get_difficulty_level())
 	plane.start_flying()
 
 
@@ -164,19 +99,6 @@ func _enter_gameover() -> void:
 	ui.show_status_message(GAMEOVER_MESSAGE)
 
 
-func _get_next_map_index() -> int:
-	if state == GameState.STANDBY:
-		return 0
-	
-	if should_spawn_map_zero:
-		should_spawn_map_zero = false
-		return 0
-
-	should_spawn_map_zero = true
-	var map_indices: Array = MAP_INDICES_BY_DIFFICULTY[_get_difficulty_level()]
-	return int(map_indices.pick_random())
-
-
 func _get_scroll_speed() -> float:
 	return SCROLL_SPEED + SCROLL_SPEED_INCREMENT * _get_difficulty_level()
 
@@ -184,27 +106,11 @@ func _get_scroll_speed() -> float:
 func _get_difficulty_level() -> int:
 	return mini(
 		int(distance_travelled / DIFFICULTY_DISTANCE_STEP),
-		MAP_INDICES_BY_DIFFICULTY.size() - 1,
+		map_manager.get_max_difficulty_level(),
 	)
 
-
-func _on_plane_crashed() -> void:
-	if state != GameState.PLAYING:
-		return
-
-	_enter_gameover()
-
-
-func _connect_star(map_instance: Node2D) -> void:
-	for child in map_instance.get_children():
-		if child is JetpackStar:
-			child.collected.connect(_on_star_collected)
-
-
-func _count_cleared_obstacles(map_instance: Node2D) -> void:
-	for child in map_instance.get_children():
-		if child.is_in_group("obstacle"):
-			obstacles_cleared += 1
+func _on_obstacles_cleared(count: int) -> void:
+	obstacles_cleared += count
 
 	while obstacles_cleared >= next_bird_spawn_at:
 		_spawn_bird()
@@ -227,6 +133,13 @@ func _set_birds_scroll_speed(scroll_speed: float) -> void:
 		var bird := child as JetpackBird
 		if bird != null:
 			bird.set_scroll_speed(scroll_speed)
+
+
+func _on_plane_crashed() -> void:
+	if state != GameState.PLAYING:
+		return
+
+	_enter_gameover()
 
 
 func _on_star_collected() -> void:
