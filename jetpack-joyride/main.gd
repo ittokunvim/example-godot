@@ -23,14 +23,6 @@ const MAP_INDICES_BY_DIFFICULTY := [
 	[1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
 ]
 
-const MAP_INDICES_BY_DIFFICULTY := [
-	[1, 2],
-	[1, 2, 3, 4],
-	[1, 2, 3, 4, 5, 6],
-	[1, 2, 3, 4, 5, 6, 7, 8],
-	[1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-]
-
 const MAP_SCENES: Array[PackedScene] = [
 	preload("res://map_0.tscn"),
 	preload("res://map_1.tscn"),
