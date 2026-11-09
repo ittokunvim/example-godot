@@ -182,10 +182,16 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_qy7ti")
 
 [node name="Message" type="Label" parent="UI/OverRay" unique_id=950412936]
 layout_mode = 2
+size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("2_d2nv2")
 theme_override_font_sizes/font_size = 24
-text = "アセット - Tappy Plane"
-horizontal_alignment = 1
+text = "アセット - ToppyPlane
+
+サウンド - 効果音ラボ
+
+BGM - 田中芳典-いつもの居酒屋
+
+フォント - misaki_gothic"
 
 [connection signal="pressed" from="UI/Buttons/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="UI/Buttons/ExitButton" to="." method="_on_exit_button_pressed"]
