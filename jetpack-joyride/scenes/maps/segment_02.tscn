@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cnx7a2h0wndul"]
 
 [ext_resource type="Texture2D" uid="uid://c5cimoek6680u" path="res://assets/images/backgrounds/background.png" id="1_0nuxv"]
-[ext_resource type="Script" uid="uid://boh3tp1nh5iv6" path="res://star.gd" id="1_rcsii"]
+[ext_resource type="Script" uid="uid://boh3tp1nh5iv6" path="res://scripts/star.gd" id="1_rcsii"]
 [ext_resource type="Texture2D" uid="uid://b606o3pkw4c0p" path="res://assets/images/terrain/ground_grass.png" id="2_5wxai"]
 [ext_resource type="Texture2D" uid="uid://bwnf27mij1bdr" path="res://assets/images/terrain/rockGrass.png" id="3_frbht"]
 [ext_resource type="Texture2D" uid="uid://bnn8mcpsesny8" path="res://assets/images/terrain/rockGrassDown.png" id="4_rcsii"]

@@ -13,7 +13,7 @@ const DIFFICULTY_DISTANCE_STEP := 2000.0
 const ACTIVE_MAP_COUNT := 2
 const STAR_SCORE := 10
 const BIRD_SPAWN_INTERVAL := 5
-const BIRD_SCENE := preload("res://bird.tscn")
+const BIRD_SCENE := preload("res://scenes/obstacles/bird.tscn")
 
 const MAP_INDICES_BY_DIFFICULTY := [
 	[1, 2],
@@ -24,17 +24,17 @@ const MAP_INDICES_BY_DIFFICULTY := [
 ]
 
 const MAP_SCENES: Array[PackedScene] = [
-	preload("res://map_0.tscn"),
-	preload("res://map_1.tscn"),
-	preload("res://map_2.tscn"),
-	preload("res://map_3.tscn"),
-	preload("res://map_4.tscn"),
-	preload("res://map_5.tscn"),
-	preload("res://map_6.tscn"),
-	preload("res://map_7.tscn"),
-	preload("res://map_8.tscn"),
-	preload("res://map_9.tscn"),
-	preload("res://map_10.tscn"),
+	preload("res://scenes/maps/segment_00.tscn"),
+	preload("res://scenes/maps/segment_01.tscn"),
+	preload("res://scenes/maps/segment_02.tscn"),
+	preload("res://scenes/maps/segment_03.tscn"),
+	preload("res://scenes/maps/segment_04.tscn"),
+	preload("res://scenes/maps/segment_05.tscn"),
+	preload("res://scenes/maps/segment_06.tscn"),
+	preload("res://scenes/maps/segment_07.tscn"),
+	preload("res://scenes/maps/segment_08.tscn"),
+	preload("res://scenes/maps/segment_09.tscn"),
+	preload("res://scenes/maps/segment_10.tscn"),
 ]
 
 const STATUS_MESSAGE_DURATION := 2.0
