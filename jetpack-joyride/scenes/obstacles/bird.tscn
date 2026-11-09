@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://de7yjbp5ulc5r"]
+
+[ext_resource type="Script" uid="uid://cp55ocxbqcpu7" path="res://scripts/bird.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://dkb0wveeijt81" path="res://assets/images/obstacles/red-bird-1.png" id="2_bird1"]
+[ext_resource type="Texture2D" uid="uid://dpkaxqm0wh64e" path="res://assets/images/obstacles/red-bird-2.png" id="3_bird2"]
+[ext_resource type="Texture2D" uid="uid://bpexx278w71p" path="res://assets/images/obstacles/red-bird-3.png" id="4_bird3"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bird"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_bird1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_bird2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_bird3")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cchwj"]
+radius = 16.0
+height = 64.0
+
+[node name="Bird" type="CharacterBody2D" unique_id=340489101 groups=["obstacle"]]
+z_index = 1
+script = ExtResource("1_script")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=813680021]
+scale = Vector2(0.25, 0.25)
+sprite_frames = SubResource("SpriteFrames_bird")
+autoplay = "default"
+flip_h = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=34359155]
+position = Vector2(0, -8)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_cchwj")

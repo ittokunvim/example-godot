@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://caejep2ja75uq"
+path="res://.godot/imported/効果音ラボ-ヘリコプター着陸 効果音.ogg-fc852468c191ee2c616ce00c3108fd2d.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/audio/sfx/効果音ラボ-ヘリコプター着陸 効果音.ogg"
+dest_files=["res://.godot/imported/効果音ラボ-ヘリコプター着陸 効果音.ogg-fc852468c191ee2c616ce00c3108fd2d.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
