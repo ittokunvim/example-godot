@@ -4,6 +4,10 @@ extends Node2D
 @onready var overray: PanelContainer = $UI/OverRay
 
 
+func _ready() -> void:
+	AudioManager.play_bgm()
+
+
 func _on_start_button_pressed() -> void:
 	AudioManager.play_selection_sound()
 	get_tree().change_scene_to_file("res://main.tscn")

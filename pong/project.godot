@@ -17,7 +17,7 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-MusicPlayer="*uid://cgh3e4nb56xb8"
+AudioManager="*uid://gjqpi0a4b42y"
 
 [display]
 

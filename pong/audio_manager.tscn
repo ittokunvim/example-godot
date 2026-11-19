@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://gjqpi0a4b42y"]
+
+[ext_resource type="Script" uid="uid://dpycdj676x3v5" path="res://audio_manager.gd" id="1_jisk1"]
+
+[node name="AudioManager" type="Node" unique_id=76515081]
+script = ExtResource("1_jisk1")
+
+[node name="BGM" type="AudioStreamPlayer" parent="." unique_id=958696730]
