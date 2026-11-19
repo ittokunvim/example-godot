@@ -5,6 +5,10 @@ signal crashed
 const GRAVITY := 2750.0
 const FLAP_VELOCITY := -800.0
 const MAX_FALL_SPEED := 1500.0
+# 落ちる速さに合わせて鳥を傾ける（ラジアン。下向きが正）
+const ROTATION_SPEED_SCALE := 900.0
+const MIN_ROTATION := -0.5
+const MAX_ROTATION := 1.2
 
 var active := false
 var dead := false
@@ -36,7 +40,7 @@ func _physics_process(delta: float) -> void:
 
 	velocity.y = minf(velocity.y + GRAVITY * delta, MAX_FALL_SPEED)
 	move_and_slide()
-	rotation = clampf(velocity.y / 900.0, -0.5, 1.2)
+	rotation = clampf(velocity.y / ROTATION_SPEED_SCALE, MIN_ROTATION, MAX_ROTATION)
 
 	if get_slide_collision_count() > 0 or position.y < 0.0 or position.y > screen_size_y:
 		crash()

@@ -29,7 +29,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("7_bird3")
 }],
-"loop": true,
+"loop": 1,
 "name": &"flap",
 "speed": 10.0
 }]
@@ -97,7 +97,6 @@ position = Vector2(8, -12)
 shape = SubResource("CapsuleShape2D_ycdy4")
 
 [node name="PipeSpawner" type="Timer" parent="." unique_id=1864828437]
-wait_time = 2.0
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=414536970]
 

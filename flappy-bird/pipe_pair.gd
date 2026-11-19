@@ -3,7 +3,8 @@ extends Node2D
 signal passed
 
 const PIPE_TEXTURE := preload("res://assets/pipe.png")
-const GAP_SIZE := 300.0
+# スコアを数える当たり判定の幅
+const SCORE_AREA_WIDTH := 8.0
 
 var scrolling := true
 var pipe_size := Vector2(PIPE_TEXTURE.get_size())
@@ -11,8 +12,8 @@ var has_passed := false
 
 
 func setup(gap_center_y: float) -> void:
-	_create_pipe("TopPipe", gap_center_y - GAP_SIZE / 2.0, true)
-	_create_pipe("BottomPipe", gap_center_y + GAP_SIZE / 2.0, false)
+	_create_pipe("TopPipe", gap_center_y - Global.PIPE_GAP_SIZE / 2.0, true)
+	_create_pipe("BottomPipe", gap_center_y + Global.PIPE_GAP_SIZE / 2.0, false)
 
 	var score_area := Area2D.new()
 	score_area.name = "ScoreArea"
@@ -21,7 +22,7 @@ func setup(gap_center_y: float) -> void:
 	score_area.collision_mask = 2
 	var score_shape := CollisionShape2D.new()
 	var shape := RectangleShape2D.new()
-	shape.size = Vector2(8.0, GAP_SIZE)
+	shape.size = Vector2(SCORE_AREA_WIDTH, Global.PIPE_GAP_SIZE)
 	score_shape.shape = shape
 	score_area.add_child(score_shape)
 	score_area.body_entered.connect(_on_score_area_body_entered)

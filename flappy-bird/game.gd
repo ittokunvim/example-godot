@@ -1,6 +1,5 @@
 extends Node2D
 
-const PIPE_TEXTURE := preload("res://assets/pipe.png")
 const PIPE_PAIR_SCRIPT := preload("res://pipe_pair.gd")
 
 var score := 0
@@ -22,6 +21,7 @@ var game_over := false
 
 
 func _ready() -> void:
+	pipe_spawner.wait_time = Global.PIPE_SPAWN_INTERVAL
 	bird.crashed.connect(_on_bird_crashed)
 	bird.reset()
 	_update_score()
@@ -42,13 +42,12 @@ func _on_pipe_spawner_timeout() -> void:
 
 	var pipe := PIPE_PAIR_SCRIPT.new()
 	pipe.position = Vector2(
-		screen_size_x + PIPE_TEXTURE.get_width() / 2.0,
+		screen_size_x + pipe.pipe_size.x / 2.0,
 		 0.0
 	)
-	var ground_y = ground_loop.get_ground_top_y()
-	var gap_margin := pipe.GAP_SIZE
+	var ground_y: float = ground_loop.get_ground_top_y()
 	pipe.setup(
-		randf_range(gap_margin, ground_y - gap_margin)
+		randf_range(Global.PIPE_GAP_MARGIN, ground_y - Global.PIPE_GAP_MARGIN)
 	)
 	pipe.passed.connect(_on_pipe_passed)
 	pipes.add_child(pipe)
