@@ -1,0 +1,54 @@
+name: Godot load check
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  # project.godot の config/features（4.7）に合わせる
+  GODOT_VERSION: 4.7.2
+  GODOT_SHA256: cadd3204e728a35d3f13adb7fd0d7902636b79f6b95c40c265eb73b6c35329e4
+
+jobs:
+  load-check:
+    name: ${{ matrix.project }}
+    runs-on: ubuntu-latest
+    strategy:
+      # 1つのゲームが失敗しても、ほかのゲームのチェックは最後まで続ける
+      fail-fast: false
+      matrix:
+        project: [pong, flappy-bird, breakout, jetpack-joyride]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Godot
+        run: |
+          zip="Godot_v${GODOT_VERSION}-stable_linux.x86_64.zip"
+          curl -fsSL -o "$zip" \
+            "https://github.com/godotengine/godot/releases/download/${GODOT_VERSION}-stable/$zip"
+          echo "${GODOT_SHA256}  $zip" | sha256sum -c -
+          unzip -q "$zip"
+          sudo mv "Godot_v${GODOT_VERSION}-stable_linux.x86_64" /usr/local/bin/godot
+          godot --version
+
+      - name: Import assets
+        run: godot --headless --path "${{ matrix.project }}" --import 2>&1 | tee import.log
+
+      - name: Load scripts and scenes
+        run: |
+          cp .github/godot/check_load.gd "${{ matrix.project }}/ci_check_load.gd"
+          godot --headless --path "${{ matrix.project }}" -s res://ci_check_load.gd 2>&1 | tee load.log
+
+      # Godot はエラーを出しても終了コード 0 で終わることがあるため、ログも確認する
+      - name: Fail on errors in log
+        run: |
+          if grep -E "SCRIPT ERROR|Parse Error|^ERROR:" import.log load.log; then
+            echo "::error::Godot reported errors while loading ${{ matrix.project }}"
+            exit 1
+          fi

@@ -83,6 +83,23 @@ macOS で `godot` コマンドがない場合は、`/Applications/Godot.app/Cont
 - BGM - [田中芳典-いつもの居酒屋](https://www.youtube.com/watch?v=iSIS_T2VPMQ)
 - フォント - [misaki_gothic](https://littlelimit.net/misaki.htm)
 
+## 読み込みチェック（CI）
+
+PR と `main` への push のたびに、
+GitHub Actions（`.github/workflows/godot-load-check.yml`）が
+Godot 4.7.2 で各ゲームを読み込み、スクリプトの構文エラーやシーンの参照切れがないか確かめます。
+
+手元で同じチェックをするには、リポジトリのルートで次のように実行します。
+
+```
+cp .github/godot/check_load.gd pong/ci_check_load.gd
+godot --headless --path pong --import
+godot --headless --path pong -s res://ci_check_load.gd
+rm pong/ci_check_load.gd pong/ci_check_load.gd.uid
+```
+
+最後に `Checked N files` と出て、`LOAD FAILED` や `ERROR` が出ていなければ成功です。
+
 ## Web 向けにエクスポートする
 
 ### エクスポートテンプレートを入れる
@@ -116,5 +133,4 @@ python3 -m http.server 8000
 ```
 
 ブラウザで http://localhost:8000 を開きます。
-
 
