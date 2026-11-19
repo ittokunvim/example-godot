@@ -21,7 +21,7 @@ func _ready() -> void:
 
 	# 地面画像の幅を取得し、2枚目の地面を右側に配置する。
 	image_width = ground_sprite.texture.get_width()
-	var next_ground := $Ground.duplicate() as StaticBody2D
+	var next_ground := ground.duplicate() as StaticBody2D
 	next_ground.name = NEXT_GROUND
 	next_ground.set_script(null)
 	next_ground.position.x += image_width
